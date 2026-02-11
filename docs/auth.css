@@ -12,7 +12,7 @@ body {
     align-items: center;
     background: 
         linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.35)),
-        url('../assets/images/1305.jpg') center/cover no-repeat;
+        url('docs/1305.jpg') center/cover no-repeat;
     background-attachment: fixed;
 }
 
