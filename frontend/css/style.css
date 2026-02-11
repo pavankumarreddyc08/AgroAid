@@ -1,0 +1,82 @@
+body {
+    background-color: #F1F8E9;
+    padding-top: 80px;
+}
+
+.hero-section {
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+    url('https://images.unsplash.com/photo-1501004318641-b39e6451bec6') center/cover no-repeat;
+    height: 80vh;
+}
+
+
+.card {
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.btn-primary {
+    background-color: #1976D2;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #125aa3;
+}
+
+.login-bg {
+    min-height: 100vh;
+    background: 
+        linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+        url('../assets/images/1305.jpg') center/cover no-repeat;
+}
+
+
+.login-card {
+    width: 400px;
+    border-radius: 15px;
+}
+
+.navbar .btn-light {
+    border-radius: 12px;
+    transition: 0.3s;
+}
+
+.navbar .btn-light:hover {
+    background-color: #e8f5e9;
+    transform: scale(1.05);
+}
+
+.navbar {
+    backdrop-filter: blur(10px);
+}
+
+.upload-box {
+    border: 2px dashed #2E7D32;
+    border-radius: 15px;
+    background-color: #f1f8e9;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.upload-box:hover {
+    background-color: #e8f5e9;
+}
+
+.progress-bar {
+    transition: width 1s ease-in-out;
+}
+
+.dashboard-card {
+    padding: 25px;
+    border-radius: 15px;
+    transition: 0.3s;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+}

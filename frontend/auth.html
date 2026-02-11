@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AgroAid Authentication</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+
+<div class="auth-container">
+
+    <div class="auth-card">
+
+        <!-- LOGIN -->
+        <div class="form login active">
+            <h2>🌿 Welcome Back</h2>
+
+            <input type="email" id="loginEmail" placeholder="Email">
+            <input type="password" id="loginPassword" placeholder="Password">
+
+            <button onclick="login()">Login</button>
+
+            <p>Don't have an account?
+                <span onclick="toggleForm()">Register</span>
+            </p>
+        </div>
+
+        <!-- REGISTER -->
+        <div class="form register">
+            <h2>🌱 Create Account</h2>
+
+            <input type="text" id="registerName" placeholder="Full Name">
+            <input type="email" id="registerEmail" placeholder="Email">
+            <input type="password" id="registerPassword" placeholder="Password">
+
+            <button onclick="register()">Register</button>
+
+            <p>Already have an account?
+                <span onclick="toggleForm()">Login</span>
+            </p>
+        </div>
+
+    </div>
+
+</div>
+
+<script src="js/auth.js"></script>
+</body>
+</html>
