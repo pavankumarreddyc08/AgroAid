@@ -1,0 +1,103 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: 
+        linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.35)),
+        url('1305.jpg') center/cover no-repeat;
+    background-attachment: fixed;
+}
+
+/* Container */
+.auth-container {
+    width: 420px;
+}
+
+/* Card */
+.auth-card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    border-radius: 25px;
+    padding: 40px 35px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+/* Forms */
+.form {
+    display: none;
+    flex-direction: column;
+    gap: 18px;
+    animation: fadeSlide 0.4s ease;
+}
+
+.form.active {
+    display: flex;
+}
+
+@keyframes fadeSlide {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* Heading */
+h2 {
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+/* Inputs */
+input {
+    padding: 13px;
+    border-radius: 12px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+input:focus {
+    box-shadow: 0 0 0 2px #C8E6C9;
+}
+
+/* Button */
+button {
+    padding: 13px;
+    border-radius: 12px;
+    border: none;
+    background: #2E7D32;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #1B5E20;
+    transform: translateY(-2px);
+}
+
+/* Text */
+p {
+    text-align: center;
+    font-size: 14px;
+    color: white;
+}
+
+span {
+    color: #C8E6C9;
+    cursor: pointer;
+    font-weight: bold;
+}
