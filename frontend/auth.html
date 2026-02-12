@@ -4,46 +4,101 @@
     <meta charset="UTF-8">
     <title>AgroAid Authentication</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <link rel="stylesheet" href="css/auth.css">
 </head>
 <body>
 
 <div class="auth-container">
-
     <div class="auth-card">
 
         <!-- LOGIN -->
         <div class="form login active">
-            <h2>🌿 Welcome Back</h2>
+            <div class="form-header">
+                <div class="icon-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                        <path d="M2 17l10 5 10-5"/>
+                        <path d="M2 12l10 5 10-5"/>
+                    </svg>
+                </div>
+                <h2>Welcome Back</h2>
+                <p class="subtitle">Sign in to continue to AgroAid</p>
+            </div>
 
-            <input type="email" id="loginEmail" placeholder="Email">
-            <input type="password" id="loginPassword" placeholder="Password">
+            <div class="input-group">
+                <label>Email Address</label>
+                <input type="email" id="loginEmail" placeholder="Enter your email">
+            </div>
 
-            <button onclick="login()">Login</button>
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" id="loginPassword" placeholder="Enter your password">
+            </div>
 
-            <p>Don't have an account?
-                <span onclick="toggleForm()">Register</span>
+            <button class="btn-primary" onclick="login()">
+                <span>Sign In</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"/>
+                    <polyline points="12 5 19 12 12 19"/>
+                </svg>
+            </button>
+
+            <p class="switch-form">
+                Don't have an account?
+                <span onclick="toggleForm()">Create one</span>
             </p>
         </div>
 
         <!-- REGISTER -->
         <div class="form register">
-            <h2>🌱 Create Account</h2>
+            <div class="form-header">
+                <div class="icon-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <line x1="19" y1="8" x2="19" y2="14"/>
+                        <line x1="22" y1="11" x2="16" y2="11"/>
+                    </svg>
+                </div>
+                <h2>Create Account</h2>
+                <p class="subtitle">Join AgroAid today</p>
+            </div>
 
-            <input type="text" id="registerName" placeholder="Full Name">
-            <input type="email" id="registerEmail" placeholder="Email">
-            <input type="password" id="registerPassword" placeholder="Password">
+            <div class="input-group">
+                <label>Full Name</label>
+                <input type="text" id="registerName" placeholder="Enter your full name">
+            </div>
 
-            <button onclick="register()">Register</button>
+            <div class="input-group">
+                <label>Email Address</label>
+                <input type="email" id="registerEmail" placeholder="Enter your email">
+            </div>
 
-            <p>Already have an account?
-                <span onclick="toggleForm()">Login</span>
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" id="registerPassword" placeholder="Create a password">
+            </div>
+
+            <button class="btn-primary" onclick="register()">
+                <span>Create Account</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"/>
+                    <polyline points="12 5 19 12 12 19"/>
+                </svg>
+            </button>
+
+            <p class="switch-form">
+                Already have an account?
+                <span onclick="toggleForm()">Sign in</span>
             </p>
         </div>
 
     </div>
 
+    <!-- Decorative Elements -->
+    <div class="floating-element element-1"></div>
+    <div class="floating-element element-2"></div>
+    <div class="floating-element element-3"></div>
 </div>
 
 <script src="js/auth.js"></script>

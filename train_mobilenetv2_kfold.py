@@ -40,8 +40,34 @@ for cls in class_names:
 image_paths = np.array(image_paths)
 labels = np.array(labels)
 
+# Save class names automatically
 with open("class_names.json", "w") as f:
     json.dump(class_names, f, indent=2)
+
+print("✅ class_names.json updated:", class_names)
+
+# ================== BACKGROUND REMOVAL ==================
+
+def remove_background_tf(image):
+    image = tf.cast(image, tf.float32)
+
+    hsv = tf.image.rgb_to_hsv(image / 255.0)
+
+    h = hsv[:, :, 0]
+    s = hsv[:, :, 1]
+    v = hsv[:, :, 2]
+
+    green_mask = (
+        (h > 0.20) & (h < 0.45) &
+        (s > 0.2) &
+        (v > 0.2)
+    )
+
+    green_mask = tf.expand_dims(tf.cast(green_mask, tf.float32), axis=-1)
+
+    image = image * green_mask
+
+    return image
 
 # ================== DATA PIPELINE ==================
 
@@ -49,19 +75,21 @@ def load_img(path, label):
     img = tf.io.read_file(path)
     img = tf.image.decode_image(img, channels=3, expand_animations=False)
     img.set_shape([None, None, 3])
+
+    # 🔥 Remove background BEFORE resize
+    img = remove_background_tf(img)
+
     img = tf.image.resize(img, (IMG_SIZE, IMG_SIZE))
     img = preprocess_input(img)
+
     return img, label
 
 
-# 🔥 Proper augmentation (only for training)
 def augment_image(image, label):
     image = tf.image.random_flip_left_right(image)
     image = tf.image.random_flip_up_down(image)
     image = tf.image.random_brightness(image, max_delta=0.3)
     image = tf.image.random_contrast(image, lower=0.7, upper=1.3)
-    image = tf.image.random_saturation(image, lower=0.7, upper=1.3)
-    image = tf.image.random_hue(image, max_delta=0.05)
     return image, label
 
 
@@ -82,7 +110,7 @@ def make_ds(paths, labels, train=True):
     return ds
 
 
-# ================== MODEL BUILDER ==================
+# ================== MODEL ==================
 
 def build_model(num_classes):
     base = MobileNetV2(
@@ -91,21 +119,20 @@ def build_model(num_classes):
         input_shape=(IMG_SIZE, IMG_SIZE, 3)
     )
 
-    base.trainable = False  # Phase 1
+    base.trainable = False
 
     x = GlobalAveragePooling2D()(base.output)
     x = Dropout(0.5)(x)
-    out = Dense(num_classes, activation="softmax")(x)
+    output = Dense(num_classes, activation="softmax")(x)
 
-    model = Model(base.input, out)
+    model = Model(base.input, output)
     return model, base
 
 
-# ================== K-FOLD TRAINING ==================
+# ================== K-FOLD ==================
 
 kf = KFold(n_splits=NUM_FOLDS, shuffle=True, random_state=SEED)
 best_acc = 0.0
-results = []
 
 checkpoint = ModelCheckpoint(
     "best_model.keras",
@@ -127,7 +154,6 @@ for fold, (train_idx, val_idx) in enumerate(kf.split(image_paths), 1):
     )
     cw = dict(enumerate(cw))
 
-    # -------- PHASE 1 --------
     model, base_model = build_model(len(class_names))
 
     model.compile(
@@ -136,15 +162,9 @@ for fold, (train_idx, val_idx) in enumerate(kf.split(image_paths), 1):
         metrics=["accuracy"]
     )
 
-    model.fit(
-        train_ds,
-        validation_data=val_ds,
-        epochs=EPOCHS_P1,
-        class_weight=cw,
-        verbose=1
-    )
+    model.fit(train_ds, validation_data=val_ds,
+              epochs=EPOCHS_P1, class_weight=cw)
 
-    # -------- PHASE 2 (LIMITED FINE-TUNING) --------
     base_model.trainable = True
     for layer in base_model.layers[:-10]:
         layer.trainable = False
@@ -155,27 +175,15 @@ for fold, (train_idx, val_idx) in enumerate(kf.split(image_paths), 1):
         metrics=["accuracy"]
     )
 
-    hist = model.fit(
-        train_ds,
-        validation_data=val_ds,
-        epochs=EPOCHS_P2,
-        class_weight=cw,
-        callbacks=[checkpoint],
-        verbose=1
-    )
+    history = model.fit(train_ds,
+                        validation_data=val_ds,
+                        epochs=EPOCHS_P2,
+                        class_weight=cw,
+                        callbacks=[checkpoint])
 
-    fold_acc = max(hist.history["val_accuracy"])
-    results.append({"fold": fold, "val_accuracy": float(fold_acc)})
-
-    if fold_acc > best_acc:
-        best_acc = fold_acc
-        print(f"✅ NEW BEST MODEL (val_acc={fold_acc:.4f})")
-
-# ================== SAVE RESULTS ==================
-
-with open("kfold_results.json", "w") as f:
-    json.dump(results, f, indent=2)
+    fold_acc = max(history.history["val_accuracy"])
+    best_acc = max(best_acc, fold_acc)
 
 print("\n🎯 TRAINING COMPLETE")
-print(f"🏆 BEST VALIDATION ACCURACY: {best_acc:.4f}")
-print("📦 FINAL MODEL: best_model.keras")
+print(f"🏆 BEST VAL ACC: {best_acc:.4f}")
+print("📦 Saved as best_model.keras")
