@@ -40,34 +40,8 @@ for cls in class_names:
 image_paths = np.array(image_paths)
 labels = np.array(labels)
 
-# Save class names automatically
 with open("class_names.json", "w") as f:
     json.dump(class_names, f, indent=2)
-
-print("✅ class_names.json updated:", class_names)
-
-# ================== BACKGROUND REMOVAL ==================
-
-def remove_background_tf(image):
-    image = tf.cast(image, tf.float32)
-
-    hsv = tf.image.rgb_to_hsv(image / 255.0)
-
-    h = hsv[:, :, 0]
-    s = hsv[:, :, 1]
-    v = hsv[:, :, 2]
-
-    green_mask = (
-        (h > 0.20) & (h < 0.45) &
-        (s > 0.2) &
-        (v > 0.2)
-    )
-
-    green_mask = tf.expand_dims(tf.cast(green_mask, tf.float32), axis=-1)
-
-    image = image * green_mask
-
-    return image
 
 # ================== DATA PIPELINE ==================
 
@@ -75,13 +49,8 @@ def load_img(path, label):
     img = tf.io.read_file(path)
     img = tf.image.decode_image(img, channels=3, expand_animations=False)
     img.set_shape([None, None, 3])
-
-    # 🔥 Remove background BEFORE resize
-    img = remove_background_tf(img)
-
     img = tf.image.resize(img, (IMG_SIZE, IMG_SIZE))
-    img = preprocess_input(img)
-
+    img = preprocess_input(img)   # 🔥 important
     return img, label
 
 
@@ -165,6 +134,7 @@ for fold, (train_idx, val_idx) in enumerate(kf.split(image_paths), 1):
     model.fit(train_ds, validation_data=val_ds,
               epochs=EPOCHS_P1, class_weight=cw)
 
+    # Fine-tune last 10 layers
     base_model.trainable = True
     for layer in base_model.layers[:-10]:
         layer.trainable = False

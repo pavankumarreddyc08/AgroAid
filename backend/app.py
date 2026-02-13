@@ -5,11 +5,8 @@ import numpy as np
 from PIL import Image
 import json
 import io
-import cv2
 import os
 from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
-
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 app = Flask(__name__)
 CORS(app)
@@ -17,55 +14,60 @@ CORS(app)
 IMG_SIZE = 224
 CONFIDENCE_THRESHOLD = 70
 
-# Load class names
-with open("../class_names.json", "r") as f:
-    guava_classes = json.load(f)
+# ---------------------------------------------------
+# PATH SETUP
+# ---------------------------------------------------
 
-# Load model
-guava_model = tf.keras.models.load_model("model/best_model.keras")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_DIR = os.path.join(BASE_DIR, "model")
+ROOT_DIR = os.path.join(BASE_DIR, "..")
 
-print("✅ Model loaded successfully")
+# ---------------------------------------------------
+# LOAD MODELS & CLASS FILES
+# ---------------------------------------------------
+
+def load_model_and_classes(model_name, class_file):
+    model_path = os.path.join(MODEL_DIR, model_name)
+    class_path = os.path.join(ROOT_DIR, class_file)
+
+    model = tf.keras.models.load_model(model_path)
+
+    with open(class_path, "r") as f:
+        classes = json.load(f)
+
+    return model, classes
 
 
-# ================= BACKGROUND REMOVAL =================
+print("🔄 Loading Models...")
 
-def remove_background_np(image_np):
-    hsv = cv2.cvtColor(image_np, cv2.COLOR_RGB2HSV)
+guava_model, guava_classes = load_model_and_classes(
+    "Guavamodel7.keras",
+    "Guava_Classes.json"
+)
 
-    lower_green = np.array([35, 40, 40])
-    upper_green = np.array([85, 255, 255])
+mango_model, mango_classes = load_model_and_classes(
+    "Mangomodel1.keras",
+    "Mango_Classes.json"
+)
 
-    mask = cv2.inRange(hsv, lower_green, upper_green)
+print("✅ All Models Loaded Successfully")
 
-    green_pixels = np.sum(mask > 0)
-    total_pixels = mask.size
-    green_ratio = green_pixels / total_pixels
 
-    if green_ratio < 0.15:
-        return None
-
-    image_np = cv2.bitwise_and(image_np, image_np, mask=mask)
-
-    return image_np
-
+# ---------------------------------------------------
+# IMAGE PREPROCESSING
+# ---------------------------------------------------
 
 def preprocess_image(image):
-    image_np = np.array(image).astype(np.uint8)
-
-    image_np = remove_background_np(image_np)
-
-    if image_np is None:
-        return None
-
-    image_np = cv2.resize(image_np, (IMG_SIZE, IMG_SIZE))
-    image_np = image_np.astype(np.float32)
-    image_np = preprocess_input(image_np)
-    image_np = np.expand_dims(image_np, axis=0)
-
-    return image_np
+    image = image.resize((IMG_SIZE, IMG_SIZE))
+    image = np.array(image).astype(np.float32)
+    image = preprocess_input(image)
+    image = np.expand_dims(image, axis=0)
+    return image
 
 
-# ================= PREDICTION ROUTE =================
+# ---------------------------------------------------
+# PREDICTION ROUTE
+# ---------------------------------------------------
 
 @app.route("/predict", methods=["POST"])
 def predict():
@@ -73,41 +75,51 @@ def predict():
     if "file" not in request.files or "fruit" not in request.form:
         return jsonify({"error": "Missing file or fruit selection"}), 400
 
-    fruit = request.form["fruit"]
-
-    if fruit != "guava":
-        return jsonify({"error": "Model not available"}), 400
-
+    fruit = request.form["fruit"].lower()
     file = request.files["file"]
-    image = Image.open(io.BytesIO(file.read())).convert("RGB")
+
+    try:
+        image = Image.open(io.BytesIO(file.read())).convert("RGB")
+    except:
+        return jsonify({"error": "Invalid image"}), 400
 
     processed = preprocess_image(image)
 
-    if processed is None:
-        return jsonify({
-            "disease": "Irrelevant Image",
-            "confidence": 0,
-            "message": "Please upload a valid leaf image"
-        })
+    # 🔥 Select model dynamically
+    if fruit == "guava":
+        model = guava_model
+        classes = guava_classes
 
-    predictions = guava_model.predict(processed)
-    predicted_index = np.argmax(predictions)
+    elif fruit == "mango":
+        model = mango_model
+        classes = mango_classes
+
+    else:
+        return jsonify({"error": "Selected fruit model not available"}), 400
+
+    predictions = model.predict(processed)
+    predicted_index = int(np.argmax(predictions))
     confidence = float(np.max(predictions)) * 100
 
     if confidence < CONFIDENCE_THRESHOLD:
         return jsonify({
             "disease": "Unclear Image",
             "confidence": round(confidence, 2),
-            "message": "Please capture a clear leaf image"
+            "message": "Please capture a clearer leaf image"
         })
 
-    disease = guava_classes[predicted_index]
+    disease = classes[predicted_index]
 
     return jsonify({
+        "fruit": fruit,
         "disease": disease,
         "confidence": round(confidence, 2)
     })
 
+
+# ---------------------------------------------------
+# RUN SERVER
+# ---------------------------------------------------
 
 if __name__ == "__main__":
     print("🚀 Starting AgroAid Backend...")
