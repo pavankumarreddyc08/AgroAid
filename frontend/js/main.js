@@ -62,3 +62,32 @@ function logout() {
     alert("Logged out successfully 👋");
     window.location.href = "index.html";
 }
+
+async function changeLanguage(lang) {
+
+    if (lang === "en") {
+        location.reload();
+        return;
+    }
+
+    const texts = {
+        title: document.querySelector("h1").innerText,
+        subtitle: document.querySelector(".subtitle").innerText,
+        selectFruit: document.querySelector(".select-fruit").innerText
+    };
+
+    const response = await fetch("http://localhost:5000/translate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            text: texts,
+            target_lang: lang
+        })
+    });
+
+    const data = await response.json();
+
+    document.querySelector("h1").innerText = data.title;
+    document.querySelector(".subtitle").innerText = data.subtitle;
+    document.querySelector(".select-fruit").innerText = data.selectFruit;
+}

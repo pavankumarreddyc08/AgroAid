@@ -19,6 +19,8 @@ CORS(app)
 
 load_dotenv()
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
+SARVAM_API_KEY = os.getenv("SARVAM_API_KEY")
+
 
 IMG_SIZE = 224
 CONFIDENCE_THRESHOLD = 70
@@ -167,6 +169,51 @@ def chat():
     except Exception as e:
         print("AI Error:", str(e))
         return jsonify({"error": "AI request failed"}), 500
+    
+# ---------------------------------------------------
+# LANGUAGE TRANSLATION ROUTE (SARVAM API)
+# ---------------------------------------------------
+
+@app.route("/translate", methods=["POST"])
+def translate():
+    try:
+        data = request.json
+        text_dict = data.get("text")
+        target_lang = data.get("target_lang")
+
+        if not text_dict or not target_lang:
+            return jsonify({"error": "Missing text or language"}), 400
+
+        translated_texts = {}
+
+        for key, value in text_dict.items():
+
+            response = requests.post(
+                "https://api.sarvam.ai/translate",
+                headers={
+                    "Authorization": f"Bearer {SARVAM_API_KEY}",
+                    "Content-Type": "application/json"
+                },
+                json={
+                    "input": value,
+                    "source_language_code": "en-IN",
+                    "target_language_code": f"{target_lang}-IN"
+                }
+            )
+
+            result = response.json()
+
+            if "translated_text" in result:
+                translated_texts[key] = result["translated_text"]
+            else:
+                translated_texts[key] = value  # fallback
+
+        return jsonify(translated_texts)
+
+    except Exception as e:
+        print("Translation Error:", str(e))
+        return jsonify({"error": "Translation failed"}), 500
+
 
 # ---------------------------------------------------
 # RUN SERVER
