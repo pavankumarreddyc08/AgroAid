@@ -1,26 +1,32 @@
 document.addEventListener("DOMContentLoaded", function () {
+  // ✅ PAGE PROTECTION (ADD THIS)
+  const user = localStorage.getItem("loggedInUser");
+  if (!user) {
+    window.location.replace("auth.html");
+    return;
+  }
 
-    // ================= USER NAME =================
-    const userName = localStorage.getItem("loggedInUser");
-    if (userName) {
-        document.getElementById("userName").innerText = userName;
-    }
+  // ================= USER NAME =================
+  const userName = localStorage.getItem("loggedInUser");
+  if (userName) {
+    document.getElementById("userName").innerText = userName;
+  }
 
-    // ================= LOAD PREDICTIONS =================
-    const predictions = JSON.parse(localStorage.getItem("predictions")) || [];
+  // ================= LOAD PREDICTIONS =================
+  const predictions = JSON.parse(localStorage.getItem("predictions")) || [];
 
-    const table = document.getElementById("predictionTable");
+  const table = document.getElementById("predictionTable");
 
-    let high = 0;
-    let medium = 0;
-    let low = 0;
+  let high = 0;
+  let medium = 0;
+  let low = 0;
 
-    // Clear table first (important to avoid duplication)
-    table.innerHTML = "";
+  // Clear table first (important to avoid duplication)
+  table.innerHTML = "";
 
-    if (predictions.length === 0) {
-        // Modern empty state
-        table.innerHTML = `
+  if (predictions.length === 0) {
+    // Modern empty state
+    table.innerHTML = `
             <tr>
                 <td colspan="5" style="padding: 60px 40px;">
                     <div class="empty-state">
@@ -42,22 +48,23 @@ document.addEventListener("DOMContentLoaded", function () {
                 </td>
             </tr>
         `;
-    } else {
+  } else {
+    // Show latest first
+    predictions
+      .slice()
+      .reverse()
+      .forEach((p, index) => {
+        if (p.risk === "High") high++;
+        else if (p.risk === "Medium") medium++;
+        else low++;
 
-        // Show latest first
-        predictions.slice().reverse().forEach((p, index) => {
+        // Format date to be more readable
+        const formattedDate = formatDate(p.date);
 
-            if (p.risk === "High") high++;
-            else if (p.risk === "Medium") medium++;
-            else low++;
+        // Capitalize fruit name
+        const fruitName = capitalizeFirst(p.fruit);
 
-            // Format date to be more readable
-            const formattedDate = formatDate(p.date);
-
-            // Capitalize fruit name
-            const fruitName = capitalizeFirst(p.fruit);
-
-            const row = `
+        const row = `
                 <tr style="animation: fadeInRow 0.5s ease ${index * 0.05}s both;">
                     <td>${formattedDate}</td>
                     <td>${fruitName}</td>
@@ -72,123 +79,129 @@ document.addEventListener("DOMContentLoaded", function () {
                     </td>
                     <td>
                         <span class="badge 
-                            ${p.risk === "High" ? "bg-danger" :
-                              p.risk === "Medium" ? "bg-warning text-dark" :
-                              "bg-success"}">
+                            ${
+                              p.risk === "High"
+                                ? "bg-danger"
+                                : p.risk === "Medium"
+                                  ? "bg-warning text-dark"
+                                  : "bg-success"
+                            }">
                             ${p.risk}
                         </span>
                     </td>
                 </tr>
             `;
 
-            table.innerHTML += row;
-        });
-    }
+        table.innerHTML += row;
+      });
+  }
 
-    // ================= UPDATE SUMMARY CARDS WITH ANIMATION =================
-    animateCounter("totalScans", predictions.length);
-    animateCounter("highRisk", high);
-    animateCounter("mediumRisk", medium);
-    animateCounter("healthyCount", low);
+  // ================= UPDATE SUMMARY CARDS WITH ANIMATION =================
+  animateCounter("totalScans", predictions.length);
+  animateCounter("highRisk", high);
+  animateCounter("mediumRisk", medium);
+  animateCounter("healthyCount", low);
 
-    // ================= FILTER FUNCTIONALITY =================
-    setupFilters();
+  // ================= FILTER FUNCTIONALITY =================
+  setupFilters();
 });
 
 // Helper function to format date
 function formatDate(dateString) {
-    const date = new Date(dateString);
-    const options = { month: 'short', day: 'numeric', year: 'numeric' };
-    return date.toLocaleDateString('en-US', options);
+  const date = new Date(dateString);
+  const options = { month: "short", day: "numeric", year: "numeric" };
+  return date.toLocaleDateString("en-US", options);
 }
 
 // Helper function to capitalize first letter
 function capitalizeFirst(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1);
+  return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
 // Animate counter function
 function animateCounter(elementId, targetValue) {
-    const element = document.getElementById(elementId);
-    if (!element) return;
+  const element = document.getElementById(elementId);
+  if (!element) return;
 
-    let current = 0;
-    const increment = targetValue / 30; // 30 steps
-    const duration = 1000; // 1 second
-    const stepTime = duration / 30;
+  let current = 0;
+  const increment = targetValue / 30; // 30 steps
+  const duration = 1000; // 1 second
+  const stepTime = duration / 30;
 
-    const timer = setInterval(() => {
-        current += increment;
-        if (current >= targetValue) {
-            element.innerText = targetValue;
-            clearInterval(timer);
-        } else {
-            element.innerText = Math.floor(current);
-        }
-    }, stepTime);
+  const timer = setInterval(() => {
+    current += increment;
+    if (current >= targetValue) {
+      element.innerText = targetValue;
+      clearInterval(timer);
+    } else {
+      element.innerText = Math.floor(current);
+    }
+  }, stepTime);
 }
 
 // Setup filter buttons
 function setupFilters() {
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const tableRows = document.querySelectorAll('#predictionTable tr');
+  const filterButtons = document.querySelectorAll(".filter-btn");
+  const tableRows = document.querySelectorAll("#predictionTable tr");
 
-    if (filterButtons.length === 0) return;
+  if (filterButtons.length === 0) return;
 
-    filterButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            // Remove active class from all buttons
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            
-            // Add active class to clicked button
-            this.classList.add('active');
+  filterButtons.forEach((button) => {
+    button.addEventListener("click", function () {
+      // Remove active class from all buttons
+      filterButtons.forEach((btn) => btn.classList.remove("active"));
 
-            const filterText = this.textContent.trim();
+      // Add active class to clicked button
+      this.classList.add("active");
 
-            // Show/hide rows based on filter
-            tableRows.forEach(row => {
-                const riskBadge = row.querySelector('.badge');
-                
-                if (!riskBadge) {
-                    // Empty state row
-                    row.style.display = '';
-                    return;
-                }
+      const filterText = this.textContent.trim();
 
-                const riskText = riskBadge.textContent.trim();
+      // Show/hide rows based on filter
+      tableRows.forEach((row) => {
+        const riskBadge = row.querySelector(".badge");
 
-                if (filterText === 'All') {
-                    row.style.display = '';
-                } else if (filterText === 'High Risk' && riskText === 'High') {
-                    row.style.display = '';
-                } else if (filterText === 'Medium' && riskText === 'Medium') {
-                    row.style.display = '';
-                } else if (filterText === 'Low' && riskText === 'Low') {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            });
+        if (!riskBadge) {
+          // Empty state row
+          row.style.display = "";
+          return;
+        }
 
-            // Check if all rows are hidden
-            const visibleRows = Array.from(tableRows).filter(row => row.style.display !== 'none');
-            const tbody = document.getElementById('predictionTable');
-            
-            if (visibleRows.length === 0) {
-                tbody.innerHTML = `
+        const riskText = riskBadge.textContent.trim();
+
+        if (filterText === "All") {
+          row.style.display = "";
+        } else if (filterText === "High Risk" && riskText === "High") {
+          row.style.display = "";
+        } else if (filterText === "Medium" && riskText === "Medium") {
+          row.style.display = "";
+        } else if (filterText === "Low" && riskText === "Low") {
+          row.style.display = "";
+        } else {
+          row.style.display = "none";
+        }
+      });
+
+      // Check if all rows are hidden
+      const visibleRows = Array.from(tableRows).filter(
+        (row) => row.style.display !== "none",
+      );
+      const tbody = document.getElementById("predictionTable");
+
+      if (visibleRows.length === 0) {
+        tbody.innerHTML = `
                     <tr>
                         <td colspan="5" style="padding: 40px; text-align: center; color: rgba(255, 255, 255, 0.6);">
                             No predictions found for this filter
                         </td>
                     </tr>
                 `;
-            }
-        });
+      }
     });
+  });
 }
 
 // Add CSS animation for row fade-in
-const style = document.createElement('style');
+const style = document.createElement("style");
 style.textContent = `
     @keyframes fadeInRow {
         from {

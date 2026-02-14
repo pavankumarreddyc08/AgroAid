@@ -6,6 +6,11 @@ const uploadBox = document.getElementById("uploadBox");
 const loading = document.getElementById("loading");
 const resultSection = document.getElementById("resultSection");
 
+if (!localStorage.getItem("loggedInUser")) {
+    alert("Please login to access detection feature!");
+    window.location.href = "auth.html";
+  }
+
 
 // ================= IMAGE PREVIEW =================
 imageInput.addEventListener("change", function () {

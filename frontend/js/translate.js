@@ -450,3 +450,28 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+async function changeLanguage(lang) {
+    const texts = {
+        title: "Fruit Disease Detection",
+        subtitle: "Upload a leaf image and let AI identify potential diseases",
+        selectFruit: "Select Fruit Type"
+    };
+
+    const response = await fetch("/translate", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            text: texts,
+            target_lang: lang
+        })
+    });
+
+    const data = await response.json();
+
+    document.querySelector("h1").innerText = data.title;
+    document.querySelector(".subtitle").innerText = data.subtitle;
+    document.querySelector(".select-fruit").innerText = data.selectFruit;
+}

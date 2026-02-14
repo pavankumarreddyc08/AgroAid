@@ -14,118 +14,68 @@
   </head>
 
   <body>
-    <!-- PROTECT PAGE -->
-    <script>
-      if (!localStorage.getItem("loggedInUser")) {
-        alert("Please login first!");
-        window.location.href = "auth.html";
-      }
-    </script>
-
     <!-- GLASS NAVBAR -->
     <nav class="glass-navbar fixed-top">
       <div class="container">
         <div class="nav-content">
           <a class="brand" href="index.html">
             <div class="brand-icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M12 2L2 7l10 5 10-5-10-5z" />
-                <path d="M2 17l10 5 10-5" />
-                <path d="M2 12l10 5 10-5" />
-              </svg>
+              <!-- SVG -->
             </div>
             <span>AgroAid</span>
           </a>
 
-          <button class="mobile-toggle" type="button" id="mobileToggle">
-            <span></span>
-            <span></span>
-            <span></span>
+          <button class="mobile-toggle" id="mobileToggle">
+            <span></span><span></span><span></span>
           </button>
 
           <div class="nav-menu" id="navMenu">
-            <a class="nav-link" href="index.html">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                <polyline points="9 22 9 12 15 12 15 22" />
-              </svg>
-              <span>Home</span>
-            </a>
+            <a class="nav-link" href="index.html">Home</a>
 
-            <a class="nav-link" href="detect.html">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <circle cx="11" cy="11" r="8" />
-                <path d="m21 21-4.3-4.3" />
-              </svg>
-              <span>Detect</span>
-            </a>
+            <a class="nav-link" href="detect.html">Detect</a>
 
-            <a class="nav-link active" href="dashboard.html">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <rect width="7" height="9" x="3" y="3" rx="1" />
-                <rect width="7" height="5" x="14" y="3" rx="1" />
-                <rect width="7" height="9" x="14" y="12" rx="1" />
-                <rect width="7" height="5" x="3" y="16" rx="1" />
-              </svg>
-              <span>Dashboard</span>
+            <!-- ✅ FIXED ACTIVE -->
+            <a
+              class="nav-link active"
+              href="dashboard.html"
+              id="dashboardNav"
+              style="display: none"
+            >
+              Dashboard
             </a>
 
             <div class="nav-auth" id="authArea"></div>
+
+            <!-- Language Selector -->
+            <div class="language-selector">
+              <button class="btn-language" id="languageBtn">
+                🌐 <span id="currentLang">EN</span>
+              </button>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" onclick="changeLanguage('en')"
+                  >English</a
+                >
+                <a class="dropdown-item" onclick="changeLanguage('hi')"
+                  >Hindi</a
+                >
+                <a class="dropdown-item" onclick="changeLanguage('te')"
+                  >Telugu</a
+                >
+                <a class="dropdown-item" onclick="changeLanguage('kn')"
+                  >Kannada</a
+                >
+                <a class="dropdown-item" onclick="changeLanguage('ta')"
+                  >Tamil</a
+                >
+                <a class="dropdown-item" onclick="changeLanguage('mr')"
+                  >Marathi</a
+                >
+                <a class="dropdown-item" onclick="changeLanguage('bn')"
+                  >Bengali</a
+                >
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <!-- Language Selector -->
-      <div class="language-selector">
-        <button class="btn-language" id="languageBtn">
-          <svg>...</svg>
-          <span id="currentLang">EN</span>
-        </button>
-        <div class="language-dropdown" id="languageDropdown">
-          <button class="lang-option" onclick="changeLanguage('en')">
-            <span class="flag">🇺🇸</span>
-            <span>English</span>
-          </button>
-          <!-- More languages... -->
         </div>
       </div>
     </nav>
@@ -290,9 +240,6 @@
       </div>
     </div>
 
-    <!-- Scripts -->
-    <script src="js/main.js"></script>
-    <script src="js/dashboard.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <style>
@@ -623,13 +570,68 @@
         }
       }
     </style>
-    <!-- Floating AI Chatbot -->
+
+    <!-- FLOATING AI CHATBOT -->
     <div class="chatbot-container" id="chatbotContainer">
-      <!-- Chat Button -->
-      <!-- Chat Window -->
-      <!-- Messages Area -->
-      <!-- Input Field -->
-      <!-- Quick Questions -->
+      <button class="chatbot-button" id="chatbotButton">
+        <svg
+          class="chat-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+          />
+        </svg>
+        <svg
+          class="close-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path d="M18 6 6 18" />
+          <path d="m6 6 12 12" />
+        </svg>
+      </button>
+
+      <div class="chatbot-window" id="chatbotWindow">
+        <div class="chatbot-header">
+          <div class="chatbot-header-info">
+            <div class="chatbot-avatar">🌿</div>
+            <div>
+              <h4>AgroAid Assistant</h4>
+              <span class="status-online">Online</span>
+            </div>
+          </div>
+          <button class="chatbot-minimize" id="minimizeChat">✕</button>
+        </div>
+
+        <div class="chatbot-messages" id="chatbotMessages"></div>
+
+        <div class="chatbot-input-container">
+          <input
+            type="text"
+            id="chatInput"
+            class="chatbot-input"
+            placeholder="Type your question..."
+          />
+          <button id="sendMessage" class="chatbot-send">➤</button>
+        </div>
+      </div>
     </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/translate.js"></script>
+    <script src="js/chatbot.js"></script>
   </body>
 </html>

@@ -6,29 +6,36 @@ from PIL import Image
 import json
 import io
 import os
+import requests
+from dotenv import load_dotenv
 from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
+
+# ---------------------------------------------------
+# INITIAL SETUP
+# ---------------------------------------------------
 
 app = Flask(__name__)
 CORS(app)
 
+load_dotenv()
+OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
+
 IMG_SIZE = 224
 CONFIDENCE_THRESHOLD = 70
-
-# ---------------------------------------------------
-# PATH SETUP
-# ---------------------------------------------------
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_DIR = os.path.join(BASE_DIR, "model")
 ROOT_DIR = os.path.join(BASE_DIR, "..")
 
 # ---------------------------------------------------
-# LOAD MODELS & CLASS FILES
+# LOAD MODEL FUNCTION
 # ---------------------------------------------------
 
 def load_model_and_classes(model_name, class_file):
     model_path = os.path.join(MODEL_DIR, model_name)
     class_path = os.path.join(ROOT_DIR, class_file)
+
+    print(f"Loading model: {model_name}")
 
     model = tf.keras.models.load_model(model_path)
 
@@ -37,21 +44,30 @@ def load_model_and_classes(model_name, class_file):
 
     return model, classes
 
+print("🔄 Loading All Fruit Models...")
 
-print("🔄 Loading Models...")
+fruit_models = {}
 
-guava_model, guava_classes = load_model_and_classes(
-    "Guavamodel7.keras",
-    "Guava_Classes.json"
-)
+try:
+    fruit_models["guava"] = load_model_and_classes(
+        "Guavamodel7.keras",
+        "Guava_Classes.json"
+    )
 
-mango_model, mango_classes = load_model_and_classes(
-    "Mangomodel1.keras",
-    "Mango_Classes.json"
-)
+    fruit_models["mango"] = load_model_and_classes(
+        "Mangomodel1.keras",
+        "Mango_Classes.json"
+    )
 
-print("✅ All Models Loaded Successfully")
+    fruit_models["banana"] = load_model_and_classes(
+        "BananaModel1.keras",
+        "Banana_Classes.json"
+    )
 
+    print("✅ All Models Loaded Successfully")
+
+except Exception as e:
+    print("❌ Error loading models:", str(e))
 
 # ---------------------------------------------------
 # IMAGE PREPROCESSING
@@ -64,9 +80,8 @@ def preprocess_image(image):
     image = np.expand_dims(image, axis=0)
     return image
 
-
 # ---------------------------------------------------
-# PREDICTION ROUTE
+# DISEASE PREDICTION ROUTE
 # ---------------------------------------------------
 
 @app.route("/predict", methods=["POST"])
@@ -78,24 +93,16 @@ def predict():
     fruit = request.form["fruit"].lower()
     file = request.files["file"]
 
+    if fruit not in fruit_models:
+        return jsonify({"error": "Selected fruit model not available"}), 400
+
     try:
         image = Image.open(io.BytesIO(file.read())).convert("RGB")
     except:
         return jsonify({"error": "Invalid image"}), 400
 
     processed = preprocess_image(image)
-
-    # 🔥 Select model dynamically
-    if fruit == "guava":
-        model = guava_model
-        classes = guava_classes
-
-    elif fruit == "mango":
-        model = mango_model
-        classes = mango_classes
-
-    else:
-        return jsonify({"error": "Selected fruit model not available"}), 400
+    model, classes = fruit_models[fruit]
 
     predictions = model.predict(processed)
     predicted_index = int(np.argmax(predictions))
@@ -103,6 +110,7 @@ def predict():
 
     if confidence < CONFIDENCE_THRESHOLD:
         return jsonify({
+            "fruit": fruit,
             "disease": "Unclear Image",
             "confidence": round(confidence, 2),
             "message": "Please capture a clearer leaf image"
@@ -116,6 +124,49 @@ def predict():
         "confidence": round(confidence, 2)
     })
 
+# ---------------------------------------------------
+# AI CHATBOT ROUTE
+# ---------------------------------------------------
+
+@app.route("/chat", methods=["POST"])
+def chat():
+    try:
+        data = request.json
+        user_message = data.get("message")
+
+        if not user_message:
+            return jsonify({"error": "No message provided"}), 400
+
+        response = requests.post(
+            "https://openrouter.ai/api/v1/chat/completions",
+            headers={
+                "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+                "Content-Type": "application/json"
+            },
+            json={
+                "model": "deepseek/deepseek-chat",
+                "messages": [
+                    {
+                        "role": "system",
+                        "content": "You are AgroAid AI assistant specialized in agriculture, crop disease detection, treatment advice, fertilizers, and farming guidance."
+                    },
+                    {
+                        "role": "user",
+                        "content": user_message
+                    }
+                ]
+            }
+        )
+
+        result = response.json()
+
+        ai_reply = result["choices"][0]["message"]["content"]
+
+        return jsonify({"reply": ai_reply})
+
+    except Exception as e:
+        print("AI Error:", str(e))
+        return jsonify({"error": "AI request failed"}), 500
 
 # ---------------------------------------------------
 # RUN SERVER
