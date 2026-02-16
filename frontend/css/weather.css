@@ -1,0 +1,108 @@
+/* Page Layout */
+.weather-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+    padding: 40px 20px;
+}
+
+/* Glass Card */
+.glass-card {
+    width: 520px;
+    max-width: 95%;
+    padding: 50px;
+    border-radius: 28px;
+    backdrop-filter: blur(30px);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+    text-align: center;
+    color: white;
+    transition: transform 0.3s ease;
+}
+
+.glass-card:hover {
+    transform: translateY(-8px);
+}
+
+
+/* Inputs */
+.form-group select,
+.form-group input,
+.form-group button {
+    width: 100%;
+    padding: 12px;
+    margin: 12px 0;
+    border-radius: 12px;
+    border: none;
+    font-size: 15px;
+}
+
+.form-group select,
+.form-group input {
+    background: rgba(255,255,255,0.15);
+    color: white;
+}
+
+.form-group input::placeholder {
+    color: rgba(255,255,255,0.7);
+}
+
+.form-group button {
+    background: linear-gradient(135deg,#7f5af0,#2cb67d);
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.form-group button:hover {
+    transform: scale(1.05);
+}
+
+/* Result Box */
+.result-box {
+    margin-top: 30px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease;
+}
+
+.result-box.show {
+    opacity: 1;
+    transform: translateY(0);
+    background: rgba(255,255,255,0.1);
+    padding: 20px;
+    border-radius: 18px;
+}
+
+
+/* Animated Weather Icon */
+.weatherIcon {
+    width: 90px;
+    animation: floatIcon 4s ease-in-out infinite;
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.4));
+}
+
+
+@keyframes floatIcon {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+
+.weather-section {
+    animation: fadePage 0.8s ease;
+}
+
+@keyframes fadePage {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

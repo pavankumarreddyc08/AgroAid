@@ -59,6 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function logout() {
     localStorage.removeItem("loggedInUser");
+    localStorage.removeItem("token");
     alert("Logged out successfully 👋");
     window.location.href = "index.html";
 }
@@ -90,4 +91,16 @@ async function changeLanguage(lang) {
     document.querySelector("h1").innerText = data.title;
     document.querySelector(".subtitle").innerText = data.subtitle;
     document.querySelector(".select-fruit").innerText = data.selectFruit;
+}
+
+function openWeatherFeature() {
+
+    let token = localStorage.getItem("token");
+
+    if(token){
+        window.location.href = "weather.html";
+    } else {
+        alert("⚠ Please login first to access this feature.");
+        window.location.href = "auth.html";
+    }
 }

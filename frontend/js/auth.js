@@ -67,6 +67,8 @@ function login() {
     }
 
     localStorage.setItem("loggedInUser", storedUser.name);
+    localStorage.setItem("token", "true");
+
 
     showNotification("Login Successful! ✅", "success");
     
