@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>Dashboard - AgroAid</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- Bootstrap -->
@@ -14,6 +15,11 @@
   </head>
 
   <body>
+<!-- BIRD ANIMATION -->
+<svg id="bird-canvas" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:visible;"></svg>
+<script>
+(function(){const svg=document.getElementById("bird-canvas");const ns="http://www.w3.org/2000/svg";const birds=[];for(let i=0;i<7;i++){const p=document.createElementNS(ns,"path");p.setAttribute("fill","none");p.setAttribute("stroke","rgba(255,255,255,0.4)");p.setAttribute("stroke-linecap","round");p.setAttribute("stroke-width",(1.4+Math.random()*0.8).toFixed(2));svg.appendChild(p);birds.push({el:p,span:14+Math.random()*18,x:Math.random()*window.innerWidth,y:60+Math.random()*(window.innerHeight*0.5),vx:0.5+Math.random()*0.8,vy:(Math.random()-0.5)*0.3,phase:Math.random()*Math.PI*2,freq:0.035+Math.random()*0.025});}let frame=0;function animate(){frame++;birds.forEach(function(b){b.x+=b.vx;b.y+=b.vy+Math.sin(frame*0.004+b.phase)*0.18;if(b.x>window.innerWidth+60){b.x=-60;b.y=60+Math.random()*window.innerHeight*0.5;}const dip=Math.sin(frame*b.freq+b.phase)*b.span*0.38;b.el.setAttribute("d","M "+(b.x-b.span)+" "+(b.y+dip)+" Q "+(b.x-b.span*0.5)+" "+(b.y-b.span*0.35)+" "+b.x+" "+b.y+" Q "+(b.x+b.span*0.5)+" "+(b.y-b.span*0.35)+" "+(b.x+b.span)+" "+(b.y+dip));});requestAnimationFrame(animate);}animate();})();
+</script>
     <!-- GLASS NAVBAR -->
     <nav class="glass-navbar fixed-top">
       <div class="container">
@@ -30,9 +36,9 @@
           </button>
 
           <div class="nav-menu" id="navMenu">
-            <a class="nav-link" href="index.html">Home</a>
+            <a class="nav-link" href="index.html" data-translate="nav_home">Home</a>
 
-            <a class="nav-link" href="detect.html">Detect</a>
+            <a class="nav-link" href="detect.html" data-translate="nav_detect">Detect</a>
 
             <!-- ✅ FIXED ACTIVE -->
             <a
@@ -40,6 +46,7 @@
               href="dashboard.html"
               id="dashboardNav"
               style="display: none"
+              data-translate="nav_dashboard"
             >
               Dashboard
             </a>
@@ -51,7 +58,8 @@
               <button class="btn-language" id="languageBtn">
                 🌐 <span id="currentLang">EN</span>
               </button>
-              <div class="dropdown-menu">
+              <div class="language-dropdown" id="languageDropdown">
+
                 <a class="dropdown-item" onclick="changeLanguage('en')"
                   >English</a
                 >
@@ -87,7 +95,7 @@
         <div class="welcome-section">
           <div class="welcome-content">
             <h1>Welcome back, <span id="userName">User</span> 👋</h1>
-            <p>Track your disease detection history and crop health insights</p>
+            <p data-translate="dash_welcome_sub">Track your disease detection history and crop health insights</p>
           </div>
           <div class="welcome-action">
             <a href="detect.html" class="btn-quick-scan">
@@ -105,7 +113,7 @@
                 <circle cx="11" cy="11" r="8" />
                 <path d="m21 21-4.3-4.3" />
               </svg>
-              <span>New Scan</span>
+              <span data-translate="dash_new_scan">New Scan</span>
             </a>
           </div>
         </div>
@@ -130,7 +138,7 @@
               </svg>
             </div>
             <div class="stat-info">
-              <div class="stat-label">Total Scans</div>
+              <div class="stat-label" data-translate="dash_total_scans">Total Scans</div>
               <div class="stat-value" id="totalScans">0</div>
             </div>
           </div>
@@ -156,7 +164,7 @@
               </svg>
             </div>
             <div class="stat-info">
-              <div class="stat-label">High Risk</div>
+              <div class="stat-label" data-translate="dash_high_risk">High Risk</div>
               <div class="stat-value" id="highRisk">0</div>
             </div>
           </div>
@@ -180,7 +188,7 @@
               </svg>
             </div>
             <div class="stat-info">
-              <div class="stat-label">Medium Risk</div>
+              <div class="stat-label" data-translate="dash_medium_risk">Medium Risk</div>
               <div class="stat-value" id="mediumRisk">0</div>
             </div>
           </div>
@@ -202,7 +210,7 @@
               </svg>
             </div>
             <div class="stat-info">
-              <div class="stat-label">Low Risk</div>
+              <div class="stat-label" data-translate="dash_low_risk">Low Risk</div>
               <div class="stat-value" id="healthyCount">0</div>
             </div>
           </div>
@@ -211,12 +219,12 @@
         <!-- Predictions Table -->
         <div class="table-section">
           <div class="table-header">
-            <h3>Recent Predictions</h3>
+            <h3 data-translate="dash_recent_predictions">Recent Predictions</h3>
             <div class="table-filter">
-              <button class="filter-btn active">All</button>
-              <button class="filter-btn">High Risk</button>
-              <button class="filter-btn">Medium</button>
-              <button class="filter-btn">Low</button>
+              <button class="filter-btn active" data-translate="dash_filter_all">All</button>
+              <button class="filter-btn" data-translate="dash_filter_high">High Risk</button>
+              <button class="filter-btn" data-translate="dash_filter_medium">Medium</button>
+              <button class="filter-btn" data-translate="dash_filter_low">Low</button>
             </div>
           </div>
 
@@ -224,11 +232,11 @@
             <table class="modern-table">
               <thead>
                 <tr>
-                  <th>Date</th>
-                  <th>Fruit</th>
-                  <th>Disease</th>
-                  <th>Confidence</th>
-                  <th>Risk Level</th>
+                  <th data-translate="dash_th_date">Date</th>
+                  <th data-translate="dash_th_crop">Crop</th>
+                  <th data-translate="dash_th_disease">Disease</th>
+                  <th data-translate="dash_th_confidence">Confidence</th>
+                  <th data-translate="dash_th_risk">Risk Level</th>
                 </tr>
               </thead>
               <tbody id="predictionTable">
@@ -569,6 +577,86 @@
           padding: 12px 16px;
         }
       }
+
+      /* ── Instant page-fade (no jarring pop) ── */
+      body {
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+      body.page-ready { opacity: 1; }
+
+      /* ── Stats grid ── */
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+        margin-bottom: 32px;
+      }
+      @media (max-width: 1100px) { .stats-grid { grid-template-columns: repeat(2,1fr); } }
+      @media (max-width: 600px)  { .stats-grid { grid-template-columns: 1fr; } }
+
+      .stat-card {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding: 28px 24px;
+        background: rgba(255,255,255,0.08);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255,255,255,0.15);
+        border-radius: 24px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .stat-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 32px rgba(0,0,0,0.2);
+      }
+      .stat-icon {
+        width: 56px; height: 56px;
+        border-radius: 16px;
+        background: rgba(255,255,255,0.12);
+        display: flex; align-items: center; justify-content: center;
+        color: white; flex-shrink: 0;
+      }
+      .stat-card.danger  .stat-icon { background: rgba(239,68,68,0.2);  color: #ef4444; }
+      .stat-card.warning .stat-icon { background: rgba(245,158,11,0.2); color: #f59e0b; }
+      .stat-card.success .stat-icon { background: rgba(16,185,129,0.2); color: #10b981; }
+      .stat-info { flex: 1; }
+      .stat-card .stat-label {
+        color: rgba(255,255,255,0.65);
+        font-size: 0.8rem; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.5px;
+        margin-bottom: 6px;
+      }
+      .stat-card .stat-value {
+        color: white; font-size: 2.25rem; font-weight: 800; line-height: 1;
+      }
+
+      /* ── Welcome section ── */
+      .welcome-content h1 {
+        font-size: 2.25rem; font-weight: 800; color: white; margin-bottom: 8px;
+      }
+      .welcome-content h1 span {
+        background: linear-gradient(135deg,#a7f3d0,#6ee7b7);
+        -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .welcome-content p { color: rgba(255,255,255,0.7); font-size: 1rem; }
+
+      /* ── New Scan button ── */
+      .btn-quick-scan {
+        display: inline-flex; align-items: center; gap: 10px;
+        padding: 13px 28px;
+        background: linear-gradient(135deg, #16a34a, #22c55e);
+        border-radius: 14px; color: white; font-weight: 700;
+        text-decoration: none;
+        box-shadow: 0 8px 24px rgba(34,197,94,0.35);
+        transition: all 0.3s ease;
+      }
+      .btn-quick-scan:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 14px 32px rgba(34,197,94,0.5);
+        color: white;
+      }
     </style>
 
     <!-- FLOATING AI CHATBOT -->
@@ -608,8 +696,8 @@
           <div class="chatbot-header-info">
             <div class="chatbot-avatar">🌿</div>
             <div>
-              <h4>AgroAid Assistant</h4>
-              <span class="status-online">Online</span>
+              <h4 data-translate="chatbot_title">AgroAid Assistant</h4>
+              <span class="status-online" data-translate="chatbot_status">Online</span>
             </div>
           </div>
           <button class="chatbot-minimize" id="minimizeChat">✕</button>
@@ -623,6 +711,7 @@
             id="chatInput"
             class="chatbot-input"
             placeholder="Type your question..."
+            data-translate="chatbot_placeholder"
           />
           <button id="sendMessage" class="chatbot-send">➤</button>
         </div>

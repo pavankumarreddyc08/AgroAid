@@ -1,217 +1,178 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // ✅ PAGE PROTECTION (ADD THIS)
+
+  // ── PAGE PROTECTION ──────────────────────────────────────────
   const user = localStorage.getItem("loggedInUser");
   if (!user) {
     window.location.replace("auth.html");
     return;
   }
 
-  // ================= USER NAME =================
-  const userName = localStorage.getItem("loggedInUser");
-  if (userName) {
-    document.getElementById("userName").innerText = userName;
-  }
+  requestAnimationFrame(() =>
+    document.body.classList.add("page-ready")
+  );
 
-  // ================= LOAD PREDICTIONS =================
-  const predictions = JSON.parse(localStorage.getItem("predictions")) || [];
+  const userNameEl = document.getElementById("userName");
+  if (userNameEl) userNameEl.innerText = user;
 
+  // ── LOAD USER PREDICTIONS ─────────────────────────────────────
+  const userKey = "predictions_" + user;
+  let predictions = JSON.parse(localStorage.getItem(userKey)) || [];
+
+  // 🔥 REMOVE INVALID ENTRIES (Auto-clean old data)
+  predictions = predictions.filter(p => {
+    const diseaseLower = (p.disease || "").toLowerCase();
+    return !(
+      diseaseLower.includes("irrelevant") ||
+      diseaseLower.includes("irelevant") ||
+      diseaseLower.includes("unclear")
+    );
+  });
+
+  // Save cleaned data back
+  localStorage.setItem(userKey, JSON.stringify(predictions));
+
+  // ── RENDER TABLE ──────────────────────────────────────────────
   const table = document.getElementById("predictionTable");
-
-  let high = 0;
-  let medium = 0;
-  let low = 0;
-
-  // Clear table first (important to avoid duplication)
   table.innerHTML = "";
 
+  let high = 0, medium = 0, low = 0;
+
   if (predictions.length === 0) {
-    // Modern empty state
     table.innerHTML = `
-            <tr>
-                <td colspan="5" style="padding: 60px 40px;">
-                    <div class="empty-state">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                            <polyline points="14 2 14 8 20 8"/>
-                            <line x1="12" y1="18" x2="12" y2="12"/>
-                            <line x1="9" y1="15" x2="15" y2="15"/>
-                        </svg>
-                        <p>No predictions yet</p>
-                        <a href="detect.html" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: rgba(102, 126, 234, 0.25); border: 1px solid rgba(102, 126, 234, 0.4); border-radius: 12px; color: #667eea; font-weight: 600; text-decoration: none; margin-top: 8px; transition: all 0.3s ease;">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="11" cy="11" r="8"/>
-                                <path d="m21 21-4.3-4.3"/>
-                            </svg>
-                            Start Your First Scan
-                        </a>
-                    </div>
-                </td>
-            </tr>
-        `;
+      <tr>
+        <td colspan="5" style="padding:60px 40px;text-align:center;">
+          <p style="color:rgba(255,255,255,0.7);">
+            No valid predictions yet for <strong>${user}</strong>
+          </p>
+        </td>
+      </tr>`;
   } else {
-    // Show latest first
-    predictions
-      .slice()
-      .reverse()
-      .forEach((p, index) => {
-        if (p.risk === "High") high++;
-        else if (p.risk === "Medium") medium++;
-        else low++;
+    predictions.slice().reverse().forEach(function (p, index) {
 
-        // Format date to be more readable
-        const formattedDate = formatDate(p.date);
+      if (p.risk === "High") high++;
+      else if (p.risk === "Medium") medium++;
+      else low++;
 
-        // Capitalize fruit name
-        const fruitName = capitalizeFirst(p.fruit);
+      const formattedDate = formatDate(p.date);
+      const fruitName = capitalizeFirst(p.fruit);
 
-        const row = `
-                <tr style="animation: fadeInRow 0.5s ease ${index * 0.05}s both;">
-                    <td>${formattedDate}</td>
-                    <td>${fruitName}</td>
-                    <td>${p.disease}</td>
-                    <td>
-                        <div style="display: flex; align-items: center; gap: 8px;">
-                            <div style="flex: 1; max-width: 100px; height: 8px; background: rgba(255, 255, 255, 0.1); border-radius: 10px; overflow: hidden;">
-                                <div style="width: ${p.confidence}%; height: 100%; background: linear-gradient(90deg, #10b981, #059669); border-radius: 10px;"></div>
-                            </div>
-                            <span style="font-weight: 700; min-width: 45px;">${p.confidence}%</span>
-                        </div>
-                    </td>
-                    <td>
-                        <span class="badge 
-                            ${
-                              p.risk === "High"
-                                ? "bg-danger"
-                                : p.risk === "Medium"
-                                  ? "bg-warning text-dark"
-                                  : "bg-success"
-                            }">
-                            ${p.risk}
-                        </span>
-                    </td>
-                </tr>
-            `;
+      const badgeClass =
+        p.risk === "High" ? "bg-danger"
+        : p.risk === "Medium" ? "bg-warning text-dark"
+        : "bg-success";
 
-        table.innerHTML += row;
-      });
+      table.innerHTML += `
+        <tr style="animation: fadeInRow 0.45s ease ${index * 0.05}s both;">
+          <td>${formattedDate}</td>
+          <td>${fruitName}</td>
+          <td>${p.disease}</td>
+          <td>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div style="flex:1;max-width:100px;height:8px;
+                          background:rgba(255,255,255,0.1);
+                          border-radius:10px;overflow:hidden;">
+                <div style="width:${p.confidence}%;height:100%;
+                            background:linear-gradient(90deg,#10b981,#059669);
+                            border-radius:10px;"></div>
+              </div>
+              <span style="font-weight:700;min-width:45px;">
+                ${p.confidence}%
+              </span>
+            </div>
+          </td>
+          <td>
+            <span class="badge ${badgeClass}">
+              ${p.risk}
+            </span>
+          </td>
+        </tr>`;
+    });
   }
 
-  // ================= UPDATE SUMMARY CARDS WITH ANIMATION =================
+  // ── STAT COUNTERS ─────────────────────────────────────────────
   animateCounter("totalScans", predictions.length);
   animateCounter("highRisk", high);
   animateCounter("mediumRisk", medium);
   animateCounter("healthyCount", low);
 
-  // ================= FILTER FUNCTIONALITY =================
   setupFilters();
 });
 
-// Helper function to format date
+
+// ── HELPERS ────────────────────────────────────────────────────
+
 function formatDate(dateString) {
   const date = new Date(dateString);
-  const options = { month: "short", day: "numeric", year: "numeric" };
-  return date.toLocaleDateString("en-US", options);
+  return date.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric"
+  });
 }
 
-// Helper function to capitalize first letter
 function capitalizeFirst(str) {
+  if (!str) return "";
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-// Animate counter function
 function animateCounter(elementId, targetValue) {
-  const element = document.getElementById(elementId);
-  if (!element) return;
+  const el = document.getElementById(elementId);
+  if (!el) return;
 
   let current = 0;
-  const increment = targetValue / 30; // 30 steps
-  const duration = 1000; // 1 second
-  const stepTime = duration / 30;
+  const steps = 30;
+  const increment = targetValue / steps;
+  const intervalTime = 900 / steps;
 
-  const timer = setInterval(() => {
+  const timer = setInterval(function () {
     current += increment;
+
     if (current >= targetValue) {
-      element.innerText = targetValue;
+      el.innerText = targetValue;
       clearInterval(timer);
     } else {
-      element.innerText = Math.floor(current);
+      el.innerText = Math.floor(current);
     }
-  }, stepTime);
+  }, intervalTime);
 }
 
-// Setup filter buttons
 function setupFilters() {
   const filterButtons = document.querySelectorAll(".filter-btn");
-  const tableRows = document.querySelectorAll("#predictionTable tr");
+  if (!filterButtons.length) return;
 
-  if (filterButtons.length === 0) return;
+  filterButtons.forEach(function (btn) {
+    btn.addEventListener("click", function () {
 
-  filterButtons.forEach((button) => {
-    button.addEventListener("click", function () {
-      // Remove active class from all buttons
-      filterButtons.forEach((btn) => btn.classList.remove("active"));
-
-      // Add active class to clicked button
+      filterButtons.forEach(b => b.classList.remove("active"));
       this.classList.add("active");
 
       const filterText = this.textContent.trim();
+      const rows = document.querySelectorAll("#predictionTable tr");
 
-      // Show/hide rows based on filter
-      tableRows.forEach((row) => {
-        const riskBadge = row.querySelector(".badge");
+      rows.forEach(function (row) {
+        const badge = row.querySelector(".badge");
+        if (!badge) return;
 
-        if (!riskBadge) {
-          // Empty state row
-          row.style.display = "";
-          return;
-        }
+        const risk = badge.textContent.trim();
 
-        const riskText = riskBadge.textContent.trim();
+        const show =
+          filterText === "All" ||
+          (filterText === "High Risk" && risk === "High") ||
+          (filterText === "Medium" && risk === "Medium") ||
+          (filterText === "Low" && risk === "Low");
 
-        if (filterText === "All") {
-          row.style.display = "";
-        } else if (filterText === "High Risk" && riskText === "High") {
-          row.style.display = "";
-        } else if (filterText === "Medium" && riskText === "Medium") {
-          row.style.display = "";
-        } else if (filterText === "Low" && riskText === "Low") {
-          row.style.display = "";
-        } else {
-          row.style.display = "none";
-        }
+        row.style.display = show ? "" : "none";
       });
-
-      // Check if all rows are hidden
-      const visibleRows = Array.from(tableRows).filter(
-        (row) => row.style.display !== "none",
-      );
-      const tbody = document.getElementById("predictionTable");
-
-      if (visibleRows.length === 0) {
-        tbody.innerHTML = `
-                    <tr>
-                        <td colspan="5" style="padding: 40px; text-align: center; color: rgba(255, 255, 255, 0.6);">
-                            No predictions found for this filter
-                        </td>
-                    </tr>
-                `;
-      }
     });
   });
 }
 
-// Add CSS animation for row fade-in
+
+// ── ROW ANIMATION ──────────────────────────────────────────────
 const style = document.createElement("style");
 style.textContent = `
-    @keyframes fadeInRow {
-        from {
-            opacity: 0;
-            transform: translateY(10px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-`;
+  @keyframes fadeInRow {
+    from { opacity:0; transform:translateY(8px); }
+    to   { opacity:1; transform:translateY(0); }
+  }`;
 document.head.appendChild(style);

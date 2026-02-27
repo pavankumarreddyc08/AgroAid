@@ -3,24 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <title>Weather Integration | AgroAid</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/weather.css">
 </head>
 
 <body>
+<!-- BIRD ANIMATION -->
+<svg id="bird-canvas" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:visible;"></svg>
+<script>
+(function(){const svg=document.getElementById("bird-canvas");const ns="http://www.w3.org/2000/svg";const birds=[];for(let i=0;i<7;i++){const p=document.createElementNS(ns,"path");p.setAttribute("fill","none");p.setAttribute("stroke","rgba(255,255,255,0.4)");p.setAttribute("stroke-linecap","round");p.setAttribute("stroke-width",(1.4+Math.random()*0.8).toFixed(2));svg.appendChild(p);birds.push({el:p,span:14+Math.random()*18,x:Math.random()*window.innerWidth,y:60+Math.random()*(window.innerHeight*0.5),vx:0.5+Math.random()*0.8,vy:(Math.random()-0.5)*0.3,phase:Math.random()*Math.PI*2,freq:0.035+Math.random()*0.025});}let frame=0;function animate(){frame++;birds.forEach(function(b){b.x+=b.vx;b.y+=b.vy+Math.sin(frame*0.004+b.phase)*0.18;if(b.x>window.innerWidth+60){b.x=-60;b.y=60+Math.random()*window.innerHeight*0.5;}const dip=Math.sin(frame*b.freq+b.phase)*b.span*0.38;b.el.setAttribute("d","M "+(b.x-b.span)+" "+(b.y+dip)+" Q "+(b.x-b.span*0.5)+" "+(b.y-b.span*0.35)+" "+b.x+" "+b.y+" Q "+(b.x+b.span*0.5)+" "+(b.y-b.span*0.35)+" "+(b.x+b.span)+" "+(b.y+dip));});requestAnimationFrame(animate);}animate();})();
+</script>
 
-<!-- ✅ SAME GLASS NAVBAR AS INDEX -->
 <nav class="glass-navbar fixed-top">
   <div class="container">
     <div class="nav-content">
-
       <a class="brand" href="index.html">
-        <div class="brand-icon">
-          🌿
-        </div>
+        <div class="brand-icon">🌿</div>
         <span>AgroAid</span>
       </a>
 
@@ -29,47 +30,122 @@
       </button>
 
       <div class="nav-menu" id="navMenu">
-        <a class="nav-link" href="index.html">Home</a>
-        <a class="nav-link" href="detect.html">Detect</a>
-        <a class="nav-link" href="dashboard.html" id="dashboardNav" style="display:none;">Dashboard</a>
+        <a class="nav-link" href="index.html" data-translate="nav_home">Home</a>
+        <a class="nav-link" href="detect.html" data-translate="nav_detect">Detect</a>
+        <a class="nav-link" href="dashboard.html" id="dashboardNav" style="display:none;" data-translate="nav_dashboard">Dashboard</a>
 
-        <div class="nav-auth" id="authArea"></div>
+        <div class="nav-auth" id="authArea">
+          <a class="btn-glass" href="auth.html">
+            <span data-translate="nav_login">Login</span>
+          </a>
+        </div>
 
         <div class="language-selector">
-          <button class="btn-language">🌐 EN</button>
+          <button class="btn-language" id="languageBtn">
+            🌐 <span id="currentLang">EN</span>
+          </button>
+          <div class="language-dropdown" id="languageDropdown">
+            <a class="dropdown-item" onclick="changeLanguage('en')">English</a>
+            <a class="dropdown-item" onclick="changeLanguage('hi')">Hindi</a>
+            <a class="dropdown-item" onclick="changeLanguage('te')">Telugu</a>
+            <a class="dropdown-item" onclick="changeLanguage('kn')">Kannada</a>
+            <a class="dropdown-item" onclick="changeLanguage('ta')">Tamil</a>
+            <a class="dropdown-item" onclick="changeLanguage('mr')">Marathi</a>
+            <a class="dropdown-item" onclick="changeLanguage('bn')">Bengali</a>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </nav>
 
-<!-- WEATHER SECTION -->
 <section class="weather-section" style="margin-top:120px;">
-
 <div class="glass-card">
 
-<h1>🌦 Smart Weather Disease Predictor</h1>
+<h1 data-translate="weather_title">🌦 Smart Weather Disease Predictor</h1>
+
+<!-- CROP SELECTOR -->
+<div class="crop-selector-weather">
+  <label>Select Crop:</label>
+  <div class="crop-options">
+    <button class="crop-btn active" data-crop="potato" onclick="selectWeatherCrop('potato')">
+      🥔 Potato
+    </button>
+    <button class="crop-btn coming-soon" onclick="showWeatherComingSoon('Tomato')">
+      🍅 Tomato <span style="font-size:0.7rem;">🔄</span>
+    </button>
+    <button class="crop-btn coming-soon" onclick="showWeatherComingSoon('Onion')">
+      🧅 Onion <span style="font-size:0.7rem;">🔄</span>
+    </button>
+  </div>
+</div>
 
 <div class="form-group">
-<select id="fruit">
-<option value="mango">🥭 Mango</option>
-<option value="banana">🍌 Banana</option>
-<option value="guava">🍈 Guava</option>
-</select>
-
-<input type="text" id="city" placeholder="Enter City (ex: Bangalore)">
-<button onclick="predict()">Predict Disease</button>
+<input type="text" id="city" placeholder="Enter City (ex: Bangalore)" data-translate-placeholder="weather_city_placeholder">
+<button onclick="predict()" data-translate="weather_predict_btn">Predict Disease Risk</button>
 </div>
 
 <div id="result" class="result-box"></div>
 
 </div>
-
 </section>
+
+<!-- CHATBOT -->
+<div class="chatbot-container" id="chatbotContainer">
+    <button class="chatbot-button" id="chatbotButton">
+        <svg class="chat-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+        </svg>
+        <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+        </svg>
+    </button>
+
+    <div class="chatbot-window" id="chatbotWindow">
+        <div class="chatbot-header">
+            <div class="chatbot-header-info">
+                <div class="chatbot-avatar">🌿</div>
+                <div>
+                    <h4 data-translate="chatbot_title">AgroAid Assistant</h4>
+                    <span class="status-online" data-translate="chatbot_status">Online</span>
+                </div>
+            </div>
+            <button class="chatbot-minimize" id="minimizeChat">✕</button>
+        </div>
+
+        <div class="chatbot-messages" id="chatbotMessages">
+            <div class="message bot-message">
+                <div class="message-avatar">🌿</div>
+                <div class="message-content">
+                    <p data-translate="chatbot_welcome">Hello! I'm your AgroAid Assistant. How can I help you with your crops today?</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="chatbot-input-container">
+            <button class="voice-input-btn" id="voiceInputBtn" title="Voice Input">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                    <path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/>
+                </svg>
+            </button>
+            <input type="text" id="chatInput" class="chatbot-input" placeholder="Type your question..." data-translate-placeholder="chatbot_placeholder">
+            <button class="chatbot-send" id="sendMessage">➤</button>
+        </div>
+
+        <div class="quick-questions">
+            <button class="quick-btn" data-translate="quick_q1" onclick="sendQuickQuestion('What potato diseases can you detect?')">What potato diseases can you detect?</button>
+            <button class="quick-btn" data-translate="quick_q2" onclick="sendQuickQuestion('How to prevent potato diseases?')">How to prevent potato diseases?</button>
+            <button class="quick-btn" data-translate="quick_q3" onclick="sendQuickQuestion('Best fertilizers for potatoes?')">Best fertilizers for potatoes?</button>
+        </div>
+    </div>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="js/main.js"></script>
 <script src="js/weather.js"></script>
+<script src="js/chatbot.js"></script>
+<script src="js/translate.js"></script>
 
 </body>
 </html>

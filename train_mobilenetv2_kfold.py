@@ -12,33 +12,56 @@ from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.callbacks import ModelCheckpoint
 
 # ================== CONFIG ==================
-FRUIT_NAME = "Guava"
-DATASET_DIR = r"dataset\Guava"
+
+FRUIT_NAME = "Mango"
+
+DATASET_DIRS = [
+    r"dataset\Mango"
+]
 IMG_SIZE = 224
 BATCH_SIZE = 32
-EPOCHS_P1 = 10
-EPOCHS_P2 = 20
-NUM_FOLDS = 3
+EPOCHS_P1 = 20
+EPOCHS_P2 = 30
+NUM_FOLDS = 4
 SEED = 42
 
 np.random.seed(SEED)
 tf.random.set_seed(SEED)
 
 # ================== LOAD DATA ==================
-class_names = sorted(os.listdir(DATASET_DIR))
+
+image_paths = []
+labels = []
+all_class_names = set()
+
+# Collect all class names from both folders
+for dataset_dir in DATASET_DIRS:
+    for cls in os.listdir(dataset_dir):
+        full_path = os.path.join(dataset_dir, cls)
+        if os.path.isdir(full_path):
+            all_class_names.add(cls)
+
+class_names = sorted(list(all_class_names))
 class_to_idx = {c: i for i, c in enumerate(class_names)}
 
-image_paths, labels = [], []
+# Collect all images
+for dataset_dir in DATASET_DIRS:
+    for cls in os.listdir(dataset_dir):
+        cls_dir = os.path.join(dataset_dir, cls)
 
-for cls in class_names:
-    cls_dir = os.path.join(DATASET_DIR, cls)
-    for img in os.listdir(cls_dir):
-        if img.lower().endswith((".jpg", ".jpeg", ".png")):
-            image_paths.append(os.path.join(cls_dir, img))
-            labels.append(class_to_idx[cls])
+        if not os.path.isdir(cls_dir):
+            continue
+
+        for img in os.listdir(cls_dir):
+            if img.lower().endswith((".jpg", ".jpeg", ".png")):
+                image_paths.append(os.path.join(cls_dir, img))
+                labels.append(class_to_idx[cls])
 
 image_paths = np.array(image_paths)
 labels = np.array(labels)
+
+print("✅ Total Images:", len(image_paths))
+print("✅ Classes:", class_names)
 
 with open("class_names.json", "w") as f:
     json.dump(class_names, f, indent=2)
@@ -50,7 +73,7 @@ def load_img(path, label):
     img = tf.image.decode_image(img, channels=3, expand_animations=False)
     img.set_shape([None, None, 3])
     img = tf.image.resize(img, (IMG_SIZE, IMG_SIZE))
-    img = preprocess_input(img)   # 🔥 important
+    img = preprocess_input(img)
     return img, label
 
 
@@ -78,7 +101,6 @@ def make_ds(paths, labels, train=True):
 
     return ds
 
-
 # ================== MODEL ==================
 
 def build_model(num_classes):
@@ -97,7 +119,6 @@ def build_model(num_classes):
     model = Model(base.input, output)
     return model, base
 
-
 # ================== K-FOLD ==================
 
 kf = KFold(n_splits=NUM_FOLDS, shuffle=True, random_state=SEED)
@@ -111,6 +132,7 @@ checkpoint = ModelCheckpoint(
 )
 
 for fold, (train_idx, val_idx) in enumerate(kf.split(image_paths), 1):
+
     print(f"\n===== {FRUIT_NAME.upper()} | FOLD {fold}/{NUM_FOLDS} =====")
 
     train_ds = make_ds(image_paths[train_idx], labels[train_idx], train=True)
@@ -125,16 +147,21 @@ for fold, (train_idx, val_idx) in enumerate(kf.split(image_paths), 1):
 
     model, base_model = build_model(len(class_names))
 
+    # Phase 1
     model.compile(
         optimizer=Adam(1e-3),
         loss="sparse_categorical_crossentropy",
         metrics=["accuracy"]
     )
 
-    model.fit(train_ds, validation_data=val_ds,
-              epochs=EPOCHS_P1, class_weight=cw)
+    model.fit(
+        train_ds,
+        validation_data=val_ds,
+        epochs=EPOCHS_P1,
+        class_weight=cw
+    )
 
-    # Fine-tune last 10 layers
+    # Phase 2 (Fine-tuning)
     base_model.trainable = True
     for layer in base_model.layers[:-10]:
         layer.trainable = False
@@ -145,11 +172,13 @@ for fold, (train_idx, val_idx) in enumerate(kf.split(image_paths), 1):
         metrics=["accuracy"]
     )
 
-    history = model.fit(train_ds,
-                        validation_data=val_ds,
-                        epochs=EPOCHS_P2,
-                        class_weight=cw,
-                        callbacks=[checkpoint])
+    history = model.fit(
+        train_ds,
+        validation_data=val_ds,
+        epochs=EPOCHS_P2,
+        class_weight=cw,
+        callbacks=[checkpoint]
+    )
 
     fold_acc = max(history.history["val_accuracy"])
     best_acc = max(best_acc, fold_acc)

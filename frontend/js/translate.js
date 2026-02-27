@@ -2,31 +2,23 @@
 
 const translations = {
     en: {
-        // Navigation
         nav_home: "Home",
         nav_detect: "Detect",
         nav_dashboard: "Dashboard",
         nav_login: "Login",
         nav_logout: "Logout",
-        
-        // Hero Section
         hero_badge: "Powered by AI",
-        hero_title: "AI-Based Fruit Disease Detection System",
+        hero_title: "AI-Based Crop Disease Detection System",
         hero_description: "Upload a fruit leaf image and get instant disease detection with AI-powered analysis, risk prediction, and personalized treatment recommendations.",
         hero_cta_primary: "Start Detection",
         hero_cta_secondary: "Learn More",
-        
-        // Stats
         stat_accuracy: "Accuracy",
         stat_diseases: "Diseases",
         stat_support: "Support",
-        
-        // Features
         features_badge: "Features",
         features_title: "Smart Agriculture Solutions",
         features_subtitle: "Everything you need to protect and optimize your crop health",
         most_popular: "Most Popular",
-        
         feature1_title: "Secure Authentication",
         feature1_desc: "User authentication with encrypted data storage and secure session management.",
         feature2_title: "AI Disease Detection",
@@ -39,12 +31,9 @@ const translations = {
         feature5_desc: "Real-time weather data combined with AI predictions for environmental risk assessment.",
         feature6_title: "AI Chatbot Support",
         feature6_desc: "24/7 intelligent farming assistant for crop advice, disease queries, and agricultural guidance.",
-        
-        // Process
         process_badge: "Process",
         process_title: "How It Works",
         process_subtitle: "Simple 4-step process to protect your crops",
-        
         step1_title: "Upload Image",
         step1_desc: "Select your fruit type and upload a clear photo of the affected leaf",
         step2_title: "AI Analysis",
@@ -53,53 +42,90 @@ const translations = {
         step3_desc: "Get confidence scores and risk levels based on weather and AI predictions",
         step4_title: "Get Solutions",
         step4_desc: "Receive detailed treatment advice and prevention strategies for your crops",
-        
-        // CTA
         cta_title: "Ready to Protect Your Crops?",
         cta_subtitle: "Start detecting diseases and get treatment recommendations today",
         cta_primary: "Get Started Free",
         cta_secondary: "Try Detection",
-        
-        // Footer
         footer_tagline: "AI-powered fruit disease detection for smarter farming",
         footer_copyright: "© 2026 AgroAid. All rights reserved.",
-        
-        // Chatbot
         chatbot_title: "AgroAid Assistant",
         chatbot_status: "Online",
         chatbot_welcome: "Hello! I'm your AgroAid Assistant. How can I help you with your crops today?",
         chatbot_placeholder: "Type your question...",
         quick_q1: "What diseases can you detect?",
         quick_q2: "How to prevent crop diseases?",
-        quick_q3: "Best fertilizers for fruits?"
+        quick_q3: "Best fertilizers for fruits?",
+        detect_title: "Crop Disease Detection",
+        detect_subtitle: "Select your crop and upload a leaf image for instant AI-powered disease detection",
+        detect_select_label: "Select Fruit Type",
+        detect_choose_fruit: "Choose your fruit",
+        detect_drag_drop: "Drag & Drop Image Here",
+        detect_browse: "or click to browse from your device",
+        detect_choose_image: "Choose Image",
+        detect_uploaded_image: "Uploaded Image",
+        detect_analyze_btn: "Analyze with AI",
+        detect_analyzing: "AI is analyzing your image...",
+        detect_complete: "Detection Complete",
+        detect_detected_disease: "Detected Disease",
+        detect_confidence: "Confidence Level",
+        detect_risk_label: "Risk Assessment",
+        detect_treatment_header: "Treatment Recommendations",
+        detect_view_history: "View History",
+        dash_welcome_sub: "Track your disease detection history and crop health insights",
+        dash_new_scan: "New Scan",
+        dash_total_scans: "Total Scans",
+        dash_high_risk: "High Risk",
+        dash_medium_risk: "Medium Risk",
+        dash_low_risk: "Low Risk",
+        dash_recent_predictions: "Recent Predictions",
+        dash_filter_all: "All",
+        dash_filter_high: "High Risk",
+        dash_filter_medium: "Medium",
+        dash_filter_low: "Low",
+        dash_th_date: "Date",
+        dash_th_fruit: "Fruit",
+        dash_th_disease: "Disease",
+        dash_th_confidence: "Confidence",
+        dash_th_risk: "Risk Level",
+        auth_login_title: "Welcome Back",
+        auth_login_subtitle: "Sign in to continue to AgroAid",
+        auth_email_label: "Email Address",
+        auth_email_placeholder: "Enter your email",
+        auth_password_label: "Password",
+        auth_password_placeholder: "Enter your password",
+        auth_sign_in: "Sign In",
+        auth_no_account: "Don't have an account?",
+        auth_create_one: "Create one",
+        auth_register_title: "Create Account",
+        auth_register_subtitle: "Join AgroAid today",
+        auth_name_label: "Full Name",
+        auth_name_placeholder: "Enter your full name",
+        auth_create_password_placeholder: "Create a password",
+        auth_create_account_btn: "Create Account",
+        auth_have_account: "Already have an account?",
+        auth_sign_in_link: "Sign in",
+        weather_title: "🌦 Smart Weather Disease Predictor",
+        weather_predict_btn: "Predict Disease"
     },
-    
+
     hi: {
-        // Navigation
         nav_home: "होम",
         nav_detect: "पहचानें",
         nav_dashboard: "डैशबोर्ड",
         nav_login: "लॉगिन",
         nav_logout: "लॉगआउट",
-        
-        // Hero Section
         hero_badge: "AI द्वारा संचालित",
         hero_title: "AI-आधारित फल रोग पहचान प्रणाली",
         hero_description: "फल की पत्ती की तस्वीर अपलोड करें और AI-संचालित विश्लेषण, जोखिम पूर्वानुमान और व्यक्तिगत उपचार सिफारिशों के साथ तत्काल रोग पहचान प्राप्त करें।",
         hero_cta_primary: "पहचान शुरू करें",
         hero_cta_secondary: "और जानें",
-        
-        // Stats
         stat_accuracy: "सटीकता",
         stat_diseases: "रोग",
         stat_support: "समर्थन",
-        
-        // Features
         features_badge: "सुविधाएँ",
         features_title: "स्मार्ट कृषि समाधान",
         features_subtitle: "अपनी फसल स्वास्थ्य की रक्षा और अनुकूलन के लिए आवश्यक सब कुछ",
         most_popular: "सबसे लोकप्रिय",
-        
         feature1_title: "सुरक्षित प्रमाणीकरण",
         feature1_desc: "एन्क्रिप्टेड डेटा स्टोरेज और सुरक्षित सत्र प्रबंधन के साथ उपयोगकर्ता प्रमाणीकरण।",
         feature2_title: "AI रोग पहचान",
@@ -112,12 +138,9 @@ const translations = {
         feature5_desc: "पर्यावरणीय जोखिम मूल्यांकन के लिए AI भविष्यवाणियों के साथ संयुक्त वास्तविक समय मौसम डेटा।",
         feature6_title: "AI चैटबॉट समर्थन",
         feature6_desc: "फसल सलाह, रोग प्रश्नों और कृषि मार्गदर्शन के लिए 24/7 बुद्धिमान खेती सहायक।",
-        
-        // Process
         process_badge: "प्रक्रिया",
         process_title: "यह कैसे काम करता है",
         process_subtitle: "अपनी फसलों की रक्षा के लिए सरल 4-चरण प्रक्रिया",
-        
         step1_title: "छवि अपलोड करें",
         step1_desc: "अपना फल प्रकार चुनें और प्रभावित पत्ती की स्पष्ट तस्वीर अपलोड करें",
         step2_title: "AI विश्लेषण",
@@ -126,352 +149,687 @@ const translations = {
         step3_desc: "मौसम और AI भविष्यवाणियों के आधार पर विश्वास स्कोर और जोखिम स्तर प्राप्त करें",
         step4_title: "समाधान प्राप्त करें",
         step4_desc: "अपनी फसलों के लिए विस्तृत उपचार सलाह और रोकथाम रणनीतियां प्राप्त करें",
-        
-        // CTA
         cta_title: "अपनी फसलों की रक्षा के लिए तैयार हैं?",
         cta_subtitle: "आज ही रोग पहचान शुरू करें और उपचार सिफारिशें प्राप्त करें",
         cta_primary: "मुफ्त शुरू करें",
         cta_secondary: "पहचान आज़माएं",
-        
-        // Footer
         footer_tagline: "स्मार्ट खेती के लिए AI-संचालित फल रोग पहचान",
         footer_copyright: "© 2026 AgroAid। सर्वाधिकार सुरक्षित।",
-        
-        // Chatbot
         chatbot_title: "AgroAid सहायक",
         chatbot_status: "ऑनलाइन",
         chatbot_welcome: "नमस्ते! मैं आपका AgroAid सहायक हूं। आज मैं आपकी फसलों में कैसे मदद कर सकता हूं?",
         chatbot_placeholder: "अपना प्रश्न टाइप करें...",
         quick_q1: "आप कौन से रोगों का पता लगा सकते हैं?",
         quick_q2: "फसल रोगों को कैसे रोकें?",
-        quick_q3: "फलों के लिए सर्वोत्तम उर्वरक?"
+        quick_q3: "फलों के लिए सर्वोत्तम उर्वरक?",
+        detect_title: "फसल रोग पहचान",
+        detect_subtitle: "अपनी फसल चुनें और तुरंत AI-संचालित रोग पहचान के लिए पत्ती की छवि अपलोड करें",
+        detect_select_label: "फल प्रकार चुनें",
+        detect_choose_fruit: "अपना फल चुनें",
+        detect_drag_drop: "यहाँ छवि खींचें और छोड़ें",
+        detect_browse: "या अपने डिवाइस से ब्राउज़ करने के लिए क्लिक करें",
+        detect_choose_image: "छवि चुनें",
+        detect_uploaded_image: "अपलोड की गई छवि",
+        detect_analyze_btn: "AI से विश्लेषण करें",
+        detect_analyzing: "AI आपकी छवि का विश्लेषण कर रहा है...",
+        detect_complete: "पहचान पूर्ण",
+        detect_detected_disease: "पहचाना गया रोग",
+        detect_confidence: "विश्वास स्तर",
+        detect_risk_label: "जोखिम मूल्यांकन",
+        detect_treatment_header: "उपचार सिफारिशें",
+        detect_view_history: "इतिहास देखें",
+        dash_welcome_sub: "अपने रोग पहचान इतिहास और फसल स्वास्थ्य अंतर्दृष्टि ट्रैक करें",
+        dash_new_scan: "नया स्कैन",
+        dash_total_scans: "कुल स्कैन",
+        dash_high_risk: "उच्च जोखिम",
+        dash_medium_risk: "मध्यम जोखिम",
+        dash_low_risk: "कम जोखिम",
+        dash_recent_predictions: "हाल की भविष्यवाणियाँ",
+        dash_filter_all: "सभी",
+        dash_filter_high: "उच्च जोखिम",
+        dash_filter_medium: "मध्यम",
+        dash_filter_low: "कम",
+        dash_th_date: "तारीख",
+        dash_th_fruit: "फल",
+        dash_th_disease: "रोग",
+        dash_th_confidence: "विश्वास",
+        dash_th_risk: "जोखिम स्तर",
+        auth_login_title: "वापस स्वागत है",
+        auth_login_subtitle: "AgroAid जारी रखने के लिए साइन इन करें",
+        auth_email_label: "ईमेल पता",
+        auth_email_placeholder: "अपना ईमेल दर्ज करें",
+        auth_password_label: "पासवर्ड",
+        auth_password_placeholder: "अपना पासवर्ड दर्ज करें",
+        auth_sign_in: "साइन इन करें",
+        auth_no_account: "खाता नहीं है?",
+        auth_create_one: "एक बनाएं",
+        auth_register_title: "खाता बनाएं",
+        auth_register_subtitle: "आज AgroAid से जुड़ें",
+        auth_name_label: "पूरा नाम",
+        auth_name_placeholder: "अपना पूरा नाम दर्ज करें",
+        auth_create_password_placeholder: "पासवर्ड बनाएं",
+        auth_create_account_btn: "खाता बनाएं",
+        auth_have_account: "पहले से खाता है?",
+        auth_sign_in_link: "साइन इन करें",
+        weather_title: "🌦 स्मार्ट मौसम रोग भविष्यवक्ता",
+        weather_predict_btn: "रोग का अनुमान लगाएं"
     },
-    
-    es: {
-        // Navigation
-        nav_home: "Inicio",
-        nav_detect: "Detectar",
-        nav_dashboard: "Panel",
-        nav_login: "Iniciar sesión",
-        nav_logout: "Cerrar sesión",
-        
-        // Hero
-        hero_badge: "Impulsado por IA",
-        hero_title: "Sistema de Detección de Enfermedades en Frutas Basado en IA",
-        hero_description: "Cargue una imagen de hoja de fruta y obtenga detección instantánea de enfermedades con análisis impulsado por IA, predicción de riesgos y recomendaciones de tratamiento personalizadas.",
-        hero_cta_primary: "Iniciar Detección",
-        hero_cta_secondary: "Más Información",
-        
-        // Stats
-        stat_accuracy: "Precisión",
-        stat_diseases: "Enfermedades",
-        stat_support: "Soporte",
-        
-        // Features
-        features_badge: "Características",
-        features_title: "Soluciones Agrícolas Inteligentes",
-        features_subtitle: "Todo lo que necesita para proteger y optimizar la salud de sus cultivos",
-        most_popular: "Más Popular",
-        
-        feature1_title: "Autenticación Segura",
-        feature1_desc: "Autenticación de usuario con almacenamiento de datos cifrados y gestión de sesiones segura.",
-        feature2_title: "Detección de Enfermedades por IA",
-        feature2_desc: "Modelos avanzados de aprendizaje profundo entrenados en miles de imágenes de enfermedades de plantas para un diagnóstico preciso.",
-        feature3_title: "Recomendaciones de Tratamiento",
-        feature3_desc: "Obtenga planes de tratamiento personalizados y accionables y estrategias de prevención para enfermedades detectadas.",
-        feature4_title: "Panel de Análisis",
-        feature4_desc: "Realice un seguimiento del historial de detección de enfermedades, tendencias de riesgo y conocimientos sobre la salud de los cultivos.",
-        feature5_title: "Integración Meteorológica",
-        feature5_desc: "Datos meteorológicos en tiempo real combinados con predicciones de IA para evaluación de riesgo ambiental.",
-        feature6_title: "Soporte de Chatbot IA",
-        feature6_desc: "Asistente agrícola inteligente 24/7 para consejos sobre cultivos, consultas sobre enfermedades y orientación agrícola.",
-        
-        // Process
-        process_badge: "Proceso",
-        process_title: "Cómo Funciona",
-        process_subtitle: "Proceso simple de 4 pasos para proteger sus cultivos",
-        
-        step1_title: "Cargar Imagen",
-        step1_desc: "Seleccione su tipo de fruta y cargue una foto clara de la hoja afectada",
-        step2_title: "Análisis por IA",
-        step2_desc: "Nuestro modelo de aprendizaje profundo analiza la imagen e identifica enfermedades potenciales",
-        step3_title: "Evaluación de Riesgo",
-        step3_desc: "Obtenga puntuaciones de confianza y niveles de riesgo basados en el clima y las predicciones de IA",
-        step4_title: "Obtener Soluciones",
-        step4_desc: "Reciba consejos de tratamiento detallados y estrategias de prevención para sus cultivos",
-        
-        // CTA
-        cta_title: "¿Listo para Proteger sus Cultivos?",
-        cta_subtitle: "Comience a detectar enfermedades y obtenga recomendaciones de tratamiento hoy",
-        cta_primary: "Comenzar Gratis",
-        cta_secondary: "Probar Detección",
-        
-        // Footer
-        footer_tagline: "Detección de enfermedades de frutas impulsada por IA para una agricultura más inteligente",
-        footer_copyright: "© 2026 AgroAid. Todos los derechos reservados.",
-        
-        // Chatbot
-        chatbot_title: "Asistente AgroAid",
-        chatbot_status: "En línea",
-        chatbot_welcome: "¡Hola! Soy su Asistente AgroAid. ¿Cómo puedo ayudarle con sus cultivos hoy?",
-        chatbot_placeholder: "Escriba su pregunta...",
-        quick_q1: "¿Qué enfermedades pueden detectar?",
-        quick_q2: "¿Cómo prevenir enfermedades de cultivos?",
-        quick_q3: "¿Mejores fertilizantes para frutas?"
+
+    te: {
+        nav_home: "హోమ్",
+        nav_detect: "గుర్తించు",
+        nav_dashboard: "డాష్‌బోర్డ్",
+        nav_login: "లాగిన్",
+        nav_logout: "లాగ్అవుట్",
+        hero_badge: "AI ద్వారా శక్తివంతమైనది",
+        hero_title: "AI ఆధారిత పండ్ల వ్యాధి గుర్తింపు వ్యవస్థ",
+        hero_description: "పండు ఆకు చిత్రాన్ని అప్‌లోడ్ చేయండి మరియు AI-శక్తివంతమైన విశ్లేషణ, రిస్క్ అంచనా మరియు వ్యక్తిగతీకరించిన చికిత్స సిఫారసులతో తక్షణ వ్యాధి గుర్తింపు పొందండి.",
+        hero_cta_primary: "గుర్తింపు ప్రారంభించండి",
+        hero_cta_secondary: "మరింత తెలుసుకోండి",
+        stat_accuracy: "ఖచ్చితత్వం",
+        stat_diseases: "వ్యాధులు",
+        stat_support: "మద్దతు",
+        features_badge: "లక్షణాలు",
+        features_title: "స్మార్ట్ వ్యవసాయ పరిష్కారాలు",
+        features_subtitle: "మీ పంట ఆరోగ్యాన్ని రక్షించడానికి మరియు ఆప్టిమైజ్ చేయడానికి మీకు అవసరమైన ప్రతిదీ",
+        most_popular: "అత్యంత ప్రజాదరణ పొందినది",
+        feature1_title: "సురక్షిత ప్రమాణీకరణ",
+        feature1_desc: "గుప్తీకరించిన డేటా నిల్వ మరియు సురక్షిత సెషన్ నిర్వహణతో వినియోగదారు ప్రమాణీకరణ.",
+        feature2_title: "AI వ్యాధి గుర్తింపు",
+        feature2_desc: "ఖచ్చితమైన నిర్ధారణ కోసం వేలాది మొక్కల వ్యాధి చిత్రాలపై శిక్షణ పొందిన అధునాతన డీప్ లెర్నింగ్ మోడల్స్.",
+        feature3_title: "చికిత్స సిఫారసులు",
+        feature3_desc: "గుర్తించిన వ్యాధులకు వ్యక్తిగతీకరించిన, చర్య తీసుకోగల చికిత్స ప్రణాళికలు మరియు నివారణ వ్యూహాలు పొందండి.",
+        feature4_title: "అనలిటిక్స్ డాష్‌బోర్డ్",
+        feature4_desc: "కాలక్రమేణా వ్యాధి గుర్తింపు చరిత్ర, రిస్క్ ట్రెండ్‌లు మరియు పంట ఆరోగ్య అంతర్దృష్టులను ట్రాక్ చేయండి.",
+        feature5_title: "వాతావరణ ఏకీకరణ",
+        feature5_desc: "పర్యావరణ ప్రమాద మూల్యాంకనం కోసం AI అంచనాలతో కలిపిన రియల్-టైమ్ వాతావరణ డేటా.",
+        feature6_title: "AI చాట్‌బాట్ మద్దతు",
+        feature6_desc: "పంట సలహా, వ్యాధి ప్రశ్నలు మరియు వ్యవసాయ మార్గదర్శకత్వం కోసం 24/7 తెలివైన వ్యవసాయ సహాయకుడు.",
+        process_badge: "ప్రక్రియ",
+        process_title: "ఇది ఎలా పని చేస్తుంది",
+        process_subtitle: "మీ పంటలను రక్షించడానికి సరళమైన 4-దశల ప్రక్రియ",
+        step1_title: "చిత్రం అప్‌లోడ్ చేయండి",
+        step1_desc: "మీ పండు రకాన్ని ఎంచుకుని మరియు ప్రభావిత ఆకు యొక్క స్పష్టమైన ఫోటో అప్‌లోడ్ చేయండి",
+        step2_title: "AI విశ్లేషణ",
+        step2_desc: "మా డీప్ లెర్నింగ్ మోడల్ చిత్రాన్ని విశ్లేషిస్తుంది మరియు సంభావ్య వ్యాధులను గుర్తిస్తుంది",
+        step3_title: "రిస్క్ అంచనా",
+        step3_desc: "వాతావరణం మరియు AI అంచనాల ఆధారంగా నమ్మకం స్కోర్లు మరియు రిస్క్ స్థాయిలు పొందండి",
+        step4_title: "పరిష్కారాలు పొందండి",
+        step4_desc: "మీ పంటలకు వివరణాత్మక చికిత్స సలహా మరియు నివారణ వ్యూహాలు అందుకోండి",
+        cta_title: "మీ పంటలను రక్షించడానికి సిద్ధంగా ఉన్నారా?",
+        cta_subtitle: "నేడే వ్యాధులను గుర్తించడం ప్రారంభించండి మరియు చికిత్స సిఫారసులు పొందండి",
+        cta_primary: "ఉచితంగా ప్రారంభించండి",
+        cta_secondary: "గుర్తింపు ప్రయత్నించండి",
+        footer_tagline: "స్మార్ట్ వ్యవసాయం కోసం AI-శక్తివంతమైన పండ్ల వ్యాధి గుర్తింపు",
+        footer_copyright: "© 2026 AgroAid. అన్ని హక్కులు రిజర్వ్ చేయబడ్డాయి.",
+        chatbot_title: "AgroAid సహాయకుడు",
+        chatbot_status: "ఆన్‌లైన్",
+        chatbot_welcome: "హలో! నేను మీ AgroAid సహాయకుడిని. నేడు మీ పంటలతో మీకు ఎలా సహాయం చేయగలను?",
+        chatbot_placeholder: "మీ ప్రశ్న టైప్ చేయండి...",
+        quick_q1: "మీరు ఏ వ్యాధులను గుర్తించగలరు?",
+        quick_q2: "పంట వ్యాధులను ఎలా నివారించాలి?",
+        quick_q3: "పండ్లకు ఉత్తమ ఎరువులు?",
+        detect_title: "పంట వ్యాధి గుర్తింపు",
+        detect_subtitle: "ఆకు చిత్రాన్ని అప్‌లోడ్ చేయండి మరియు AI సంభావ్య వ్యాధులను గుర్తించనివ్వండి",
+        detect_select_label: "పండు రకాన్ని ఎంచుకోండి",
+        detect_choose_fruit: "మీ పండు ఎంచుకోండి",
+        detect_drag_drop: "ఇక్కడ చిత్రాన్ని లాగి వదలండి",
+        detect_browse: "లేదా మీ పరికరం నుండి బ్రౌజ్ చేయడానికి క్లిక్ చేయండి",
+        detect_choose_image: "చిత్రాన్ని ఎంచుకోండి",
+        detect_uploaded_image: "అప్‌లోడ్ చేసిన చిత్రం",
+        detect_analyze_btn: "AI తో విశ్లేషించండి",
+        detect_analyzing: "AI మీ చిత్రాన్ని విశ్లేషిస్తోంది...",
+        detect_complete: "గుర్తింపు పూర్తయింది",
+        detect_detected_disease: "గుర్తించిన వ్యాధి",
+        detect_confidence: "నమ్మకం స్థాయి",
+        detect_risk_label: "రిస్క్ అంచనా",
+        detect_treatment_header: "చికిత్స సిఫారసులు",
+        detect_view_history: "చరిత్ర చూడండి",
+        dash_welcome_sub: "మీ వ్యాధి గుర్తింపు చరిత్ర మరియు పంట ఆరోగ్య అంతర్దృష్టులను ట్రాక్ చేయండి",
+        dash_new_scan: "కొత్త స్కాన్",
+        dash_total_scans: "మొత్తం స్కాన్‌లు",
+        dash_high_risk: "అధిక రిస్క్",
+        dash_medium_risk: "మధ్యస్థ రిస్క్",
+        dash_low_risk: "తక్కువ రిస్క్",
+        dash_recent_predictions: "ఇటీవలి అంచనాలు",
+        dash_filter_all: "అన్నీ",
+        dash_filter_high: "అధిక రిస్క్",
+        dash_filter_medium: "మధ్యస్థ",
+        dash_filter_low: "తక్కువ",
+        dash_th_date: "తేదీ",
+        dash_th_fruit: "పండు",
+        dash_th_disease: "వ్యాధి",
+        dash_th_confidence: "నమ్మకం",
+        dash_th_risk: "రిస్క్ స్థాయి",
+        auth_login_title: "తిరిగి స్వాగతం",
+        auth_login_subtitle: "AgroAid కొనసాగించడానికి సైన్ ఇన్ చేయండి",
+        auth_email_label: "ఇమెయిల్ చిరునామా",
+        auth_email_placeholder: "మీ ఇమెయిల్ నమోదు చేయండి",
+        auth_password_label: "పాస్‌వర్డ్",
+        auth_password_placeholder: "మీ పాస్‌వర్డ్ నమోదు చేయండి",
+        auth_sign_in: "సైన్ ఇన్",
+        auth_no_account: "ఖాతా లేదా?",
+        auth_create_one: "ఒకటి సృష్టించండి",
+        auth_register_title: "ఖాతా సృష్టించండి",
+        auth_register_subtitle: "నేడే AgroAid లో చేరండి",
+        auth_name_label: "పూర్తి పేరు",
+        auth_name_placeholder: "మీ పూర్తి పేరు నమోదు చేయండి",
+        auth_create_password_placeholder: "పాస్‌వర్డ్ సృష్టించండి",
+        auth_create_account_btn: "ఖాతా సృష్టించండి",
+        auth_have_account: "ఇప్పటికే ఖాతా ఉందా?",
+        auth_sign_in_link: "సైన్ ఇన్",
+        weather_title: "🌦 స్మార్ట్ వాతావరణ వ్యాధి అంచనాకర్త",
+        weather_predict_btn: "వ్యాధిని అంచనా వేయండి"
     },
-    
-    fr: {
-        // Navigation
-        nav_home: "Accueil",
-        nav_detect: "Détecter",
-        nav_dashboard: "Tableau de bord",
-        nav_login: "Connexion",
-        nav_logout: "Déconnexion",
-        
-        // Hero
-        hero_badge: "Propulsé par l'IA",
-        hero_title: "Système de Détection des Maladies des Fruits Basé sur l'IA",
-        hero_description: "Téléchargez une image de feuille de fruit et obtenez une détection instantanée des maladies avec analyse alimentée par l'IA, prédiction des risques et recommandations de traitement personnalisées.",
-        hero_cta_primary: "Commencer la Détection",
-        hero_cta_secondary: "En Savoir Plus",
-        
-        // Stats
-        stat_accuracy: "Précision",
-        stat_diseases: "Maladies",
-        stat_support: "Support",
-        
-        // Features
-        features_badge: "Fonctionnalités",
-        features_title: "Solutions Agricoles Intelligentes",
-        features_subtitle: "Tout ce dont vous avez besoin pour protéger et optimiser la santé de vos cultures",
-        most_popular: "Plus Populaire",
-        
-        feature1_title: "Authentification Sécurisée",
-        feature1_desc: "Authentification utilisateur avec stockage de données cryptées et gestion de session sécurisée.",
-        feature2_title: "Détection de Maladies par IA",
-        feature2_desc: "Modèles d'apprentissage profond avancés formés sur des milliers d'images de maladies végétales pour un diagnostic précis.",
-        feature3_title: "Recommandations de Traitement",
-        feature3_desc: "Obtenez des plans de traitement personnalisés et exploitables et des stratégies de prévention pour les maladies détectées.",
-        feature4_title: "Tableau de Bord Analytique",
-        feature4_desc: "Suivez l'historique de détection des maladies, les tendances des risques et les informations sur la santé des cultures.",
-        feature5_title: "Intégration Météo",
-        feature5_desc: "Données météorologiques en temps réel combinées avec des prédictions d'IA pour l'évaluation des risques environnementaux.",
-        feature6_title: "Support Chatbot IA",
-        feature6_desc: "Assistant agricole intelligent 24/7 pour conseils sur les cultures, requêtes sur les maladies et orientation agricole.",
-        
-        // Process
-        process_badge: "Processus",
-        process_title: "Comment Ça Marche",
-        process_subtitle: "Processus simple en 4 étapes pour protéger vos cultures",
-        
-        step1_title: "Télécharger l'Image",
-        step1_desc: "Sélectionnez votre type de fruit et téléchargez une photo claire de la feuille affectée",
-        step2_title: "Analyse IA",
-        step2_desc: "Notre modèle d'apprentissage profond analyse l'image et identifie les maladies potentielles",
-        step3_title: "Évaluation des Risques",
-        step3_desc: "Obtenez des scores de confiance et des niveaux de risque basés sur la météo et les prédictions de l'IA",
-        step4_title: "Obtenir des Solutions",
-        step4_desc: "Recevez des conseils de traitement détaillés et des stratégies de prévention pour vos cultures",
-        
-        // CTA
-        cta_title: "Prêt à Protéger Vos Cultures?",
-        cta_subtitle: "Commencez à détecter les maladies et obtenez des recommandations de traitement aujourd'hui",
-        cta_primary: "Commencer Gratuitement",
-        cta_secondary: "Essayer la Détection",
-        
-        // Footer
-        footer_tagline: "Détection des maladies des fruits alimentée par l'IA pour une agriculture plus intelligente",
-        footer_copyright: "© 2026 AgroAid. Tous droits réservés.",
-        
-        // Chatbot
-        chatbot_title: "Assistant AgroAid",
-        chatbot_status: "En ligne",
-        chatbot_welcome: "Bonjour! Je suis votre Assistant AgroAid. Comment puis-je vous aider avec vos cultures aujourd'hui?",
-        chatbot_placeholder: "Tapez votre question...",
-        quick_q1: "Quelles maladies pouvez-vous détecter?",
-        quick_q2: "Comment prévenir les maladies des cultures?",
-        quick_q3: "Meilleurs engrais pour les fruits?"
+
+    kn: {
+        nav_home: "ಮನೆ",
+        nav_detect: "ಪತ್ತೆ ಮಾಡು",
+        nav_dashboard: "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್",
+        nav_login: "ಲಾಗಿನ್",
+        nav_logout: "ಲಾಗ್‌ಔಟ್",
+        hero_badge: "AI ನಿಂದ ಚಾಲಿತ",
+        hero_title: "AI ಆಧಾರಿತ ಹಣ್ಣಿನ ರೋಗ ಪತ್ತೆ ವ್ಯವಸ್ಥೆ",
+        hero_description: "ಹಣ್ಣಿನ ಎಲೆಯ ಚಿತ್ರವನ್ನು ಅಪ್‌ಲೋಡ್ ಮಾಡಿ ಮತ್ತು AI-ಚಾಲಿತ ವಿಶ್ಲೇಷಣೆ, ಅಪಾಯ ಭವಿಷ್ಯ ಮತ್ತು ವೈಯಕ್ತಿಕ ಚಿಕಿತ್ಸಾ ಶಿಫಾರಸುಗಳೊಂದಿಗೆ ತ್ವರಿತ ರೋಗ ಪತ್ತೆ ಪಡೆಯಿರಿ.",
+        hero_cta_primary: "ಪತ್ತೆ ಪ್ರಾರಂಭಿಸಿ",
+        hero_cta_secondary: "ಇನ್ನಷ್ಟು ತಿಳಿಯಿರಿ",
+        stat_accuracy: "ನಿಖರತೆ",
+        stat_diseases: "ರೋಗಗಳು",
+        stat_support: "ಬೆಂಬಲ",
+        features_badge: "ವೈಶಿಷ್ಟ್ಯಗಳು",
+        features_title: "ಸ್ಮಾರ್ಟ್ ಕೃಷಿ ಪರಿಹಾರಗಳು",
+        features_subtitle: "ನಿಮ್ಮ ಬೆಳೆಯ ಆರೋಗ್ಯವನ್ನು ರಕ್ಷಿಸಲು ಮತ್ತು ಅತ್ಯುತ್ತಮಗೊಳಿಸಲು ನಿಮಗೆ ಬೇಕಾದ ಎಲ್ಲವೂ",
+        most_popular: "ಅತ್ಯಂತ ಜನಪ್ರಿಯ",
+        feature1_title: "ಸುರಕ್ಷಿತ ದೃಢೀಕರಣ",
+        feature1_desc: "ಎನ್‌ಕ್ರಿಪ್ಟೆಡ್ ಡೇಟಾ ಸಂಗ್ರಹಣೆ ಮತ್ತು ಸುರಕ್ಷಿತ ಅಧಿವೇಶನ ನಿರ್ವಹಣೆಯೊಂದಿಗೆ ಬಳಕೆದಾರ ದೃಢೀಕರಣ.",
+        feature2_title: "AI ರೋಗ ಪತ್ತೆ",
+        feature2_desc: "ನಿಖರ ರೋಗನಿರ್ಣಯಕ್ಕಾಗಿ ಸಾವಿರಾರು ಸಸ್ಯ ರೋಗ ಚಿತ್ರಗಳ ಮೇಲೆ ತರಬೇತಿ ಪಡೆದ ಸುಧಾರಿತ ಡೀಪ್ ಲರ್ನಿಂಗ್ ಮಾದರಿಗಳು.",
+        feature3_title: "ಚಿಕಿತ್ಸಾ ಶಿಫಾರಸುಗಳು",
+        feature3_desc: "ಪತ್ತೆಯಾದ ರೋಗಗಳಿಗೆ ವೈಯಕ್ತಿಕ, ಕ್ರಿಯಾಶೀಲ ಚಿಕಿತ್ಸಾ ಯೋಜನೆಗಳು ಮತ್ತು ತಡೆಗಟ್ಟುವ ತಂತ್ರಗಳನ್ನು ಪಡೆಯಿರಿ.",
+        feature4_title: "ವಿಶ್ಲೇಷಣಾ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್",
+        feature4_desc: "ಕಾಲಾನಂತರದಲ್ಲಿ ರೋಗ ಪತ್ತೆ ಇತಿಹಾಸ, ಅಪಾಯ ಪ್ರವೃತ್ತಿಗಳು ಮತ್ತು ಬೆಳೆ ಆರೋಗ್ಯ ಒಳನೋಟಗಳನ್ನು ಟ್ರ್ಯಾಕ್ ಮಾಡಿ.",
+        feature5_title: "ಹವಾಮಾನ ಏಕೀಕರಣ",
+        feature5_desc: "ಪರಿಸರ ಅಪಾಯ ಮೌಲ್ಯಮಾಪನಕ್ಕಾಗಿ AI ಭವಿಷ್ಯಗಳೊಂದಿಗೆ ಸಂಯೋಜಿಸಲಾದ ರಿಯಲ್-ಟೈಮ್ ಹವಾಮಾನ ಡೇಟಾ.",
+        feature6_title: "AI ಚಾಟ್‌ಬಾಟ್ ಬೆಂಬಲ",
+        feature6_desc: "ಬೆಳೆ ಸಲಹೆ, ರೋಗ ಪ್ರಶ್ನೆಗಳು ಮತ್ತು ಕೃಷಿ ಮಾರ್ಗದರ್ಶನಕ್ಕಾಗಿ 24/7 ಬುದ್ಧಿವಂತ ಕೃಷಿ ಸಹಾಯಕ.",
+        process_badge: "ಪ್ರಕ್ರಿಯೆ",
+        process_title: "ಇದು ಹೇಗೆ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತದೆ",
+        process_subtitle: "ನಿಮ್ಮ ಬೆಳೆಗಳನ್ನು ರಕ್ಷಿಸಲು ಸರಳ 4-ಹಂತದ ಪ್ರಕ್ರಿಯೆ",
+        step1_title: "ಚಿತ್ರ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ",
+        step1_desc: "ನಿಮ್ಮ ಹಣ್ಣಿನ ಪ್ರಕಾರವನ್ನು ಆಯ್ಕೆ ಮಾಡಿ ಮತ್ತು ಪ್ರಭಾವಿತ ಎಲೆಯ ಸ್ಪಷ್ಟ ಫೋಟೋ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ",
+        step2_title: "AI ವಿಶ್ಲೇಷಣೆ",
+        step2_desc: "ನಮ್ಮ ಡೀಪ್ ಲರ್ನಿಂಗ್ ಮಾದರಿ ಚಿತ್ರವನ್ನು ವಿಶ್ಲೇಷಿಸುತ್ತದೆ ಮತ್ತು ಸಂಭಾವ್ಯ ರೋಗಗಳನ್ನು ಗುರುತಿಸುತ್ತದೆ",
+        step3_title: "ಅಪಾಯ ಮೌಲ್ಯಮಾಪನ",
+        step3_desc: "ಹವಾಮಾನ ಮತ್ತು AI ಭವಿಷ್ಯಗಳ ಆಧಾರದ ಮೇಲೆ ವಿಶ್ವಾಸ ಸ್ಕೋರ್‌ಗಳು ಮತ್ತು ಅಪಾಯ ಮಟ್ಟಗಳನ್ನು ಪಡೆಯಿರಿ",
+        step4_title: "ಪರಿಹಾರಗಳನ್ನು ಪಡೆಯಿರಿ",
+        step4_desc: "ನಿಮ್ಮ ಬೆಳೆಗಳಿಗೆ ವಿವರವಾದ ಚಿಕಿತ್ಸಾ ಸಲಹೆ ಮತ್ತು ತಡೆಗಟ್ಟುವ ತಂತ್ರಗಳನ್ನು ಸ್ವೀಕರಿಸಿ",
+        cta_title: "ನಿಮ್ಮ ಬೆಳೆಗಳನ್ನು ರಕ್ಷಿಸಲು ಸಿದ್ಧರಾಗಿದ್ದೀರಾ?",
+        cta_subtitle: "ಇಂದೇ ರೋಗಗಳನ್ನು ಪತ್ತೆ ಮಾಡಲು ಪ್ರಾರಂಭಿಸಿ ಮತ್ತು ಚಿಕಿತ್ಸಾ ಶಿಫಾರಸುಗಳನ್ನು ಪಡೆಯಿರಿ",
+        cta_primary: "ಉಚಿತವಾಗಿ ಪ್ರಾರಂಭಿಸಿ",
+        cta_secondary: "ಪತ್ತೆ ಪ್ರಯತ್ನಿಸಿ",
+        footer_tagline: "ಸ್ಮಾರ್ಟ್ ಕೃಷಿಗಾಗಿ AI-ಚಾಲಿತ ಹಣ್ಣಿನ ರೋಗ ಪತ್ತೆ",
+        footer_copyright: "© 2026 AgroAid. ಎಲ್ಲ ಹಕ್ಕುಗಳನ್ನು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ.",
+        chatbot_title: "AgroAid ಸಹಾಯಕ",
+        chatbot_status: "ಆನ್‌ಲೈನ್",
+        chatbot_welcome: "ಹಲೋ! ನಾನು ನಿಮ್ಮ AgroAid ಸಹಾಯಕ. ಇಂದು ನಿಮ್ಮ ಬೆಳೆಗಳಲ್ಲಿ ನಾನು ಹೇಗೆ ಸಹಾಯ ಮಾಡಬಹುದು?",
+        chatbot_placeholder: "ನಿಮ್ಮ ಪ್ರಶ್ನೆ ಟೈಪ್ ಮಾಡಿ...",
+        quick_q1: "ನೀವು ಯಾವ ರೋಗಗಳನ್ನು ಪತ್ತೆ ಮಾಡಬಹುದು?",
+        quick_q2: "ಬೆಳೆ ರೋಗಗಳನ್ನು ಹೇಗೆ ತಡೆಗಟ್ಟುವುದು?",
+        quick_q3: "ಹಣ್ಣುಗಳಿಗೆ ಉತ್ತಮ ಗೊಬ್ಬರಗಳು?",
+        detect_title: "ಬೆಳೆಯ ರೋಗ ಪತ್ತೆ",
+        detect_subtitle: "ಎಲೆಯ ಚಿತ್ರವನ್ನು ಅಪ್‌ಲೋಡ್ ಮಾಡಿ ಮತ್ತು AI ಸಂಭಾವ್ಯ ರೋಗಗಳನ್ನು ಗುರುತಿಸಲಿ",
+        detect_select_label: "ಹಣ್ಣಿನ ಪ್ರಕಾರ ಆಯ್ಕೆ ಮಾಡಿ",
+        detect_choose_fruit: "ನಿಮ್ಮ ಹಣ್ಣನ್ನು ಆಯ್ಕೆ ಮಾಡಿ",
+        detect_drag_drop: "ಇಲ್ಲಿ ಚಿತ್ರವನ್ನು ಎಳೆದು ಬಿಡಿ",
+        detect_browse: "ಅಥವಾ ನಿಮ್ಮ ಸಾಧನದಿಂದ ಬ್ರೌಸ್ ಮಾಡಲು ಕ್ಲಿಕ್ ಮಾಡಿ",
+        detect_choose_image: "ಚಿತ್ರ ಆಯ್ಕೆ ಮಾಡಿ",
+        detect_uploaded_image: "ಅಪ್‌ಲೋಡ್ ಮಾಡಿದ ಚಿತ್ರ",
+        detect_analyze_btn: "AI ನಿಂದ ವಿಶ್ಲೇಷಿಸಿ",
+        detect_analyzing: "AI ನಿಮ್ಮ ಚಿತ್ರವನ್ನು ವಿಶ್ಲೇಷಿಸುತ್ತಿದೆ...",
+        detect_complete: "ಪತ್ತೆ ಪೂರ್ಣಗೊಂಡಿದೆ",
+        detect_detected_disease: "ಪತ್ತೆಯಾದ ರೋಗ",
+        detect_confidence: "ವಿಶ್ವಾಸ ಮಟ್ಟ",
+        detect_risk_label: "ಅಪಾಯ ಮೌಲ್ಯಮಾಪನ",
+        detect_treatment_header: "ಚಿಕಿತ್ಸಾ ಶಿಫಾರಸುಗಳು",
+        detect_view_history: "ಇತಿಹಾಸ ನೋಡಿ",
+        dash_welcome_sub: "ನಿಮ್ಮ ರೋಗ ಪತ್ತೆ ಇತಿಹಾಸ ಮತ್ತು ಬೆಳೆ ಆರೋಗ್ಯ ಒಳನೋಟಗಳನ್ನು ಟ್ರ್ಯಾಕ್ ಮಾಡಿ",
+        dash_new_scan: "ಹೊಸ ಸ್ಕ್ಯಾನ್",
+        dash_total_scans: "ಒಟ್ಟು ಸ್ಕ್ಯಾನ್‌ಗಳು",
+        dash_high_risk: "ಹೆಚ್ಚಿನ ಅಪಾಯ",
+        dash_medium_risk: "ಮಧ್ಯಮ ಅಪಾಯ",
+        dash_low_risk: "ಕಡಿಮೆ ಅಪಾಯ",
+        dash_recent_predictions: "ಇತ್ತೀಚಿನ ಭವಿಷ್ಯಗಳು",
+        dash_filter_all: "ಎಲ್ಲಾ",
+        dash_filter_high: "ಹೆಚ್ಚಿನ ಅಪಾಯ",
+        dash_filter_medium: "ಮಧ್ಯಮ",
+        dash_filter_low: "ಕಡಿಮೆ",
+        dash_th_date: "ದಿನಾಂಕ",
+        dash_th_fruit: "ಹಣ್ಣು",
+        dash_th_disease: "ರೋಗ",
+        dash_th_confidence: "ವಿಶ್ವಾಸ",
+        dash_th_risk: "ಅಪಾಯ ಮಟ್ಟ",
+        auth_login_title: "ಮತ್ತೆ ಸ್ವಾಗತ",
+        auth_login_subtitle: "AgroAid ಮುಂದುವರಿಸಲು ಸೈನ್ ಇನ್ ಮಾಡಿ",
+        auth_email_label: "ಇಮೇಲ್ ವಿಳಾಸ",
+        auth_email_placeholder: "ನಿಮ್ಮ ಇಮೇಲ್ ನಮೂದಿಸಿ",
+        auth_password_label: "ಪಾಸ್‌ವರ್ಡ್",
+        auth_password_placeholder: "ನಿಮ್ಮ ಪಾಸ್‌ವರ್ಡ್ ನಮೂದಿಸಿ",
+        auth_sign_in: "ಸೈನ್ ಇನ್",
+        auth_no_account: "ಖಾತೆ ಇಲ್ಲವೇ?",
+        auth_create_one: "ಒಂದನ್ನು ರಚಿಸಿ",
+        auth_register_title: "ಖಾತೆ ರಚಿಸಿ",
+        auth_register_subtitle: "ಇಂದು AgroAid ಸೇರಿ",
+        auth_name_label: "ಪೂರ್ಣ ಹೆಸರು",
+        auth_name_placeholder: "ನಿಮ್ಮ ಪೂರ್ಣ ಹೆಸರು ನಮೂದಿಸಿ",
+        auth_create_password_placeholder: "ಪಾಸ್‌ವರ್ಡ್ ರಚಿಸಿ",
+        auth_create_account_btn: "ಖಾತೆ ರಚಿಸಿ",
+        auth_have_account: "ಈಗಾಗಲೇ ಖಾತೆ ಇದೆಯೇ?",
+        auth_sign_in_link: "ಸೈನ್ ಇನ್",
+        weather_title: "🌦 ಸ್ಮಾರ್ಟ್ ಹವಾಮಾನ ರೋಗ ಭವಿಷ್ಯಕಾರ",
+        weather_predict_btn: "ರೋಗ ಭವಿಷ್ಯ ಹೇಳಿ"
     },
-    
-    pt: {
-        // Navigation
-        nav_home: "Início",
-        nav_detect: "Detectar",
-        nav_dashboard: "Painel",
-        nav_login: "Entrar",
-        nav_logout: "Sair",
-        
-        // Hero
-        hero_badge: "Alimentado por IA",
-        hero_title: "Sistema de Detecção de Doenças em Frutas Baseado em IA",
-        hero_description: "Carregue uma imagem de folha de fruta e obtenha detecção instantânea de doenças com análise alimentada por IA, previsão de riscos e recomendações de tratamento personalizadas.",
-        hero_cta_primary: "Iniciar Detecção",
-        hero_cta_secondary: "Saiba Mais",
-        
-        // Stats
-        stat_accuracy: "Precisão",
-        stat_diseases: "Doenças",
-        stat_support: "Suporte",
-        
-        // Features
-        features_badge: "Recursos",
-        features_title: "Soluções Agrícolas Inteligentes",
-        features_subtitle: "Tudo que você precisa para proteger e otimizar a saúde de suas culturas",
-        most_popular: "Mais Popular",
-        
-        feature1_title: "Autenticação Segura",
-        feature1_desc: "Autenticação de usuário com armazenamento de dados criptografados e gerenciamento seguro de sessão.",
-        feature2_title: "Detecção de Doenças por IA",
-        feature2_desc: "Modelos avançados de aprendizado profundo treinados em milhares de imagens de doenças de plantas para diagnóstico preciso.",
-        feature3_title: "Recomendações de Tratamento",
-        feature3_desc: "Obtenha planos de tratamento personalizados e acionáveis e estratégias de prevenção para doenças detectadas.",
-        feature4_title: "Painel de Análise",
-        feature4_desc: "Acompanhe o histórico de detecção de doenças, tendências de risco e insights sobre a saúde das culturas.",
-        feature5_title: "Integração Meteorológica",
-        feature5_desc: "Dados meteorológicos em tempo real combinados com previsões de IA para avaliação de risco ambiental.",
-        feature6_title: "Suporte de Chatbot IA",
-        feature6_desc: "Assistente agrícola inteligente 24/7 para conselhos sobre culturas, consultas sobre doenças e orientação agrícola.",
-        
-        // Process
-        process_badge: "Processo",
-        process_title: "Como Funciona",
-        process_subtitle: "Processo simples de 4 etapas para proteger suas culturas",
-        
-        step1_title: "Carregar Imagem",
-        step1_desc: "Selecione seu tipo de fruta e carregue uma foto clara da folha afetada",
-        step2_title: "Análise por IA",
-        step2_desc: "Nosso modelo de aprendizado profundo analisa a imagem e identifica doenças potenciais",
-        step3_title: "Avaliação de Risco",
-        step3_desc: "Obtenha pontuações de confiança e níveis de risco baseados no clima e previsões de IA",
-        step4_title: "Obter Soluções",
-        step4_desc: "Receba conselhos de tratamento detalhados e estratégias de prevenção para suas culturas",
-        
-        // CTA
-        cta_title: "Pronto para Proteger Suas Culturas?",
-        cta_subtitle: "Comece a detectar doenças e obtenha recomendações de tratamento hoje",
-        cta_primary: "Começar Grátis",
-        cta_secondary: "Testar Detecção",
-        
-        // Footer
-        footer_tagline: "Detecção de doenças de frutas alimentada por IA para uma agricultura mais inteligente",
-        footer_copyright: "© 2026 AgroAid. Todos os direitos reservados.",
-        
-        // Chatbot
-        chatbot_title: "Assistente AgroAid",
-        chatbot_status: "Online",
-        chatbot_welcome: "Olá! Sou seu Assistente AgroAid. Como posso ajudá-lo com suas culturas hoje?",
-        chatbot_placeholder: "Digite sua pergunta...",
-        quick_q1: "Quais doenças vocês podem detectar?",
-        quick_q2: "Como prevenir doenças de culturas?",
-        quick_q3: "Melhores fertilizantes para frutas?"
+
+    ta: {
+        nav_home: "முகப்பு",
+        nav_detect: "கண்டறி",
+        nav_dashboard: "டாஷ்போர்டு",
+        nav_login: "உள்நுழை",
+        nav_logout: "வெளியேறு",
+        hero_badge: "AI ஆல் இயக்கப்படுகிறது",
+        hero_title: "AI அடிப்படையிலான பழ நோய் கண்டறிதல் அமைப்பு",
+        hero_description: "பழ இலை படத்தை பதிவேற்றவும் மற்றும் AI-இயக்கப்படும் பகுப்பாய்வு, ஆபத்து கணிப்பு மற்றும் தனிப்பயனாக்கப்பட்ட சிகிச்சை பரிந்துரைகளுடன் உடனடி நோய் கண்டறிதல் பெறுங்கள்.",
+        hero_cta_primary: "கண்டறிதல் தொடங்கு",
+        hero_cta_secondary: "மேலும் அறிக",
+        stat_accuracy: "துல்லியம்",
+        stat_diseases: "நோய்கள்",
+        stat_support: "ஆதரவு",
+        features_badge: "அம்சங்கள்",
+        features_title: "ஸ்மார்ட் விவசாய தீர்வுகள்",
+        features_subtitle: "உங்கள் பயிர் ஆரோக்கியத்தை பாதுகாக்கவும் மேம்படுத்தவும் தேவையான அனைத்தும்",
+        most_popular: "மிகவும் பிரபலமானது",
+        feature1_title: "பாதுகாப்பான அங்கீகாரம்",
+        feature1_desc: "என்க்ரிப்ட் செய்யப்பட்ட தரவு சேமிப்பு மற்றும் பாதுகாப்பான அமர்வு மேலாண்மையுடன் பயனர் அங்கீகாரம்.",
+        feature2_title: "AI நோய் கண்டறிதல்",
+        feature2_desc: "துல்லியமான நோயறிதலுக்காக ஆயிரக்கணக்கான தாவர நோய் படங்களில் பயிற்றுவிக்கப்பட்ட மேம்பட்ட டீப் லேர்னிங் மாதிரிகள்.",
+        feature3_title: "சிகிச்சை பரிந்துரைகள்",
+        feature3_desc: "கண்டறியப்பட்ட நோய்களுக்கு தனிப்பயனாக்கப்பட்ட, செயல்படக்கூடிய சிகிச்சை திட்டங்கள் மற்றும் தடுப்பு உத்திகளை பெறுங்கள்.",
+        feature4_title: "பகுப்பாய்வு டாஷ்போர்டு",
+        feature4_desc: "காலப்போக்கில் நோய் கண்டறிதல் வரலாறு, ஆபத்து போக்குகள் மற்றும் பயிர் ஆரோக்கிய நுண்ணறிவுகளை கண்காணிக்கவும்.",
+        feature5_title: "வானிலை ஒருங்கிணைப்பு",
+        feature5_desc: "சுற்றுச்சூழல் ஆபத்து மதிப்பீட்டிற்கான AI கணிப்புகளுடன் இணைக்கப்பட்ட நிகழ்நேர வானிலை தரவு.",
+        feature6_title: "AI சாட்போட் ஆதரவு",
+        feature6_desc: "பயிர் ஆலோசனை, நோய் கேள்விகள் மற்றும் விவசாய வழிகாட்டுதலுக்கான 24/7 புத்திசாலி விவசாய உதவியாளர்.",
+        process_badge: "செயல்முறை",
+        process_title: "இது எவ்வாறு செயல்படுகிறது",
+        process_subtitle: "உங்கள் பயிர்களை பாதுகாக்க எளிய 4-படி செயல்முறை",
+        step1_title: "படம் பதிவேற்று",
+        step1_desc: "உங்கள் பழ வகையை தேர்ந்தெடுத்து பாதிக்கப்பட்ட இலையின் தெளிவான புகைப்படத்தை பதிவேற்றவும்",
+        step2_title: "AI பகுப்பாய்வு",
+        step2_desc: "எங்கள் டீப் லேர்னிங் மாதிரி படத்தை பகுப்பாய்வு செய்து சாத்தியமான நோய்களை அடையாளம் காட்டுகிறது",
+        step3_title: "ஆபத்து மதிப்பீடு",
+        step3_desc: "வானிலை மற்றும் AI கணிப்புகளின் அடிப்படையில் நம்பிக்கை மதிப்பெண்கள் மற்றும் ஆபத்து நிலைகளை பெறுங்கள்",
+        step4_title: "தீர்வுகளை பெறுங்கள்",
+        step4_desc: "உங்கள் பயிர்களுக்கான விரிவான சிகிச்சை ஆலோசனை மற்றும் தடுப்பு உத்திகளை பெறுங்கள்",
+        cta_title: "உங்கள் பயிர்களை பாதுகாக்க தயாரா?",
+        cta_subtitle: "இன்றே நோய்களை கண்டறியத் தொடங்கி சிகிச்சை பரிந்துரைகளை பெறுங்கள்",
+        cta_primary: "இலவசமாக தொடங்குங்கள்",
+        cta_secondary: "கண்டறிதலை முயற்சிக்கவும்",
+        footer_tagline: "ஸ்மார்ட் விவசாயத்திற்கான AI-இயக்கப்படும் பழ நோய் கண்டறிதல்",
+        footer_copyright: "© 2026 AgroAid. அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.",
+        chatbot_title: "AgroAid உதவியாளர்",
+        chatbot_status: "ஆன்லைன்",
+        chatbot_welcome: "வணக்கம்! நான் உங்கள் AgroAid உதவியாளர். இன்று உங்கள் பயிர்களில் நான் எவ்வாறு உதவலாம்?",
+        chatbot_placeholder: "உங்கள் கேள்வியை தட்டச்சு செய்யவும்...",
+        quick_q1: "நீங்கள் எந்த நோய்களை கண்டறியலாம்?",
+        quick_q2: "பயிர் நோய்களை எவ்வாறு தடுப்பது?",
+        quick_q3: "பழங்களுக்கு சிறந்த உரங்கள்?",
+        detect_title: "பயிர் நோய் கண்டறிதல்",
+        detect_subtitle: "இலை படத்தை பதிவேற்றவும் மற்றும் AI சாத்தியமான நோய்களை அடையாளம் காணட்டும்",
+        detect_select_label: "பழ வகையை தேர்ந்தெடுக்கவும்",
+        detect_choose_fruit: "உங்கள் பழத்தை தேர்ந்தெடுக்கவும்",
+        detect_drag_drop: "இங்கே படத்தை இழுத்து விடுங்கள்",
+        detect_browse: "அல்லது உங்கள் சாதனத்திலிருந்து உலாவ கிளிக் செய்யவும்",
+        detect_choose_image: "படத்தை தேர்ந்தெடுக்கவும்",
+        detect_uploaded_image: "பதிவேற்றிய படம்",
+        detect_analyze_btn: "AI உடன் பகுப்பாய்வு செய்யவும்",
+        detect_analyzing: "AI உங்கள் படத்தை பகுப்பாய்வு செய்கிறது...",
+        detect_complete: "கண்டறிதல் முடிந்தது",
+        detect_detected_disease: "கண்டறியப்பட்ட நோய்",
+        detect_confidence: "நம்பிக்கை நிலை",
+        detect_risk_label: "ஆபத்து மதிப்பீடு",
+        detect_treatment_header: "சிகிச்சை பரிந்துரைகள்",
+        detect_view_history: "வரலாற்றை பார்க்கவும்",
+        dash_welcome_sub: "உங்கள் நோய் கண்டறிதல் வரலாறு மற்றும் பயிர் ஆரோக்கிய நுண்ணறிவுகளை கண்காணிக்கவும்",
+        dash_new_scan: "புதிய ஸ்கேன்",
+        dash_total_scans: "மொத்த ஸ்கேன்கள்",
+        dash_high_risk: "அதிக ஆபத்து",
+        dash_medium_risk: "நடுத்தர ஆபத்து",
+        dash_low_risk: "குறைந்த ஆபத்து",
+        dash_recent_predictions: "சமீபத்திய கணிப்புகள்",
+        dash_filter_all: "அனைத்தும்",
+        dash_filter_high: "அதிக ஆபத்து",
+        dash_filter_medium: "நடுத்தர",
+        dash_filter_low: "குறைந்த",
+        dash_th_date: "தேதி",
+        dash_th_fruit: "பழம்",
+        dash_th_disease: "நோய்",
+        dash_th_confidence: "நம்பிக்கை",
+        dash_th_risk: "ஆபத்து நிலை",
+        auth_login_title: "மீண்டும் வரவேற்கிறோம்",
+        auth_login_subtitle: "AgroAid தொடர உள்நுழைக",
+        auth_email_label: "மின்னஞ்சல் முகவரி",
+        auth_email_placeholder: "உங்கள் மின்னஞ்சலை உள்ளிடவும்",
+        auth_password_label: "கடவுச்சொல்",
+        auth_password_placeholder: "உங்கள் கடவுச்சொல்லை உள்ளிடவும்",
+        auth_sign_in: "உள்நுழைக",
+        auth_no_account: "கணக்கு இல்லையா?",
+        auth_create_one: "ஒன்று உருவாக்கவும்",
+        auth_register_title: "கணக்கை உருவாக்கவும்",
+        auth_register_subtitle: "இன்றே AgroAid இல் சேரவும்",
+        auth_name_label: "முழு பெயர்",
+        auth_name_placeholder: "உங்கள் முழு பெயரை உள்ளிடவும்",
+        auth_create_password_placeholder: "கடவுச்சொல் உருவாக்கவும்",
+        auth_create_account_btn: "கணக்கை உருவாக்கவும்",
+        auth_have_account: "ஏற்கனவே கணக்கு உள்ளதா?",
+        auth_sign_in_link: "உள்நுழைக",
+        weather_title: "🌦 ஸ்மார்ட் வானிலை நோய் கணிப்பான்",
+        weather_predict_btn: "நோயை கணிக்கவும்"
+    },
+
+    mr: {
+        nav_home: "मुख्यपृष्ठ",
+        nav_detect: "ओळखा",
+        nav_dashboard: "डॅशबोर्ड",
+        nav_login: "लॉगिन",
+        nav_logout: "लॉगआउट",
+        hero_badge: "AI द्वारे चालवलेले",
+        hero_title: "AI-आधारित फळ रोग शोध प्रणाली",
+        hero_description: "फळाच्या पानाचे चित्र अपलोड करा आणि AI-चालित विश्लेषण, जोखीम अंदाज आणि वैयक्तिक उपचार शिफारशींसह त्वरित रोग शोध मिळवा.",
+        hero_cta_primary: "शोध सुरू करा",
+        hero_cta_secondary: "अधिक जाणून घ्या",
+        stat_accuracy: "अचूकता",
+        stat_diseases: "रोग",
+        stat_support: "समर्थन",
+        features_badge: "वैशिष्ट्ये",
+        features_title: "स्मार्ट शेती समाधाने",
+        features_subtitle: "आपल्या पिकाच्या आरोग्याचे संरक्षण आणि अनुकूलन करण्यासाठी आवश्यक सर्व काही",
+        most_popular: "सर्वात लोकप्रिय",
+        feature1_title: "सुरक्षित प्रमाणीकरण",
+        feature1_desc: "एन्क्रिप्टेड डेटा स्टोरेज आणि सुरक्षित सत्र व्यवस्थापनासह वापरकर्ता प्रमाणीकरण.",
+        feature2_title: "AI रोग शोध",
+        feature2_desc: "अचूक निदानासाठी हजारो वनस्पती रोग प्रतिमांवर प्रशिक्षित प्रगत डीप लर्निंग मॉडेल्स.",
+        feature3_title: "उपचार शिफारशी",
+        feature3_desc: "आढळलेल्या रोगांसाठी वैयक्तिक, कृती करण्यायोग्य उपचार योजना आणि प्रतिबंध धोरणे मिळवा.",
+        feature4_title: "विश्लेषण डॅशबोर्ड",
+        feature4_desc: "कालांतराने रोग शोध इतिहास, जोखीम ट्रेंड आणि पीक आरोग्य अंतर्दृष्टी ट्रॅक करा.",
+        feature5_title: "हवामान एकीकरण",
+        feature5_desc: "पर्यावरणीय जोखीम मूल्यांकनासाठी AI अंदाजांसह एकत्रित रिअल-टाइम हवामान डेटा.",
+        feature6_title: "AI चॅटबॉट समर्थन",
+        feature6_desc: "पीक सल्ला, रोग प्रश्न आणि कृषी मार्गदर्शनासाठी 24/7 बुद्धिमान शेती सहाय्यक.",
+        process_badge: "प्रक्रिया",
+        process_title: "हे कसे कार्य करते",
+        process_subtitle: "आपल्या पिकांचे संरक्षण करण्यासाठी सोपी 4-चरण प्रक्रिया",
+        step1_title: "चित्र अपलोड करा",
+        step1_desc: "आपला फळ प्रकार निवडा आणि प्रभावित पानाचा स्पष्ट फोटो अपलोड करा",
+        step2_title: "AI विश्लेषण",
+        step2_desc: "आमचे डीप लर्निंग मॉडेल चित्राचे विश्लेषण करते आणि संभाव्य रोग ओळखते",
+        step3_title: "जोखीम मूल्यांकन",
+        step3_desc: "हवामान आणि AI अंदाजांवर आधारित विश्वास स्कोर आणि जोखीम स्तर मिळवा",
+        step4_title: "उपाय मिळवा",
+        step4_desc: "आपल्या पिकांसाठी तपशीलवार उपचार सलाह आणि प्रतिबंध धोरणे प्राप्त करा",
+        cta_title: "आपल्या पिकांचे संरक्षण करण्यास तयार आहात?",
+        cta_subtitle: "आजच रोग शोधणे सुरू करा आणि उपचार शिफारशी मिळवा",
+        cta_primary: "मोफत सुरुवात करा",
+        cta_secondary: "शोध वापरून पहा",
+        footer_tagline: "स्मार्ट शेतीसाठी AI-चालित फळ रोग शोध",
+        footer_copyright: "© 2026 AgroAid. सर्व हक्क राखीव.",
+        chatbot_title: "AgroAid सहाय्यक",
+        chatbot_status: "ऑनलाइन",
+        chatbot_welcome: "नमस्कार! मी तुमचा AgroAid सहाय्यक आहे. आज मी तुमच्या पिकांमध्ये कशी मदत करू शकतो?",
+        chatbot_placeholder: "आपला प्रश्न टाइप करा...",
+        quick_q1: "आपण कोणते रोग शोधू शकता?",
+        quick_q2: "पीक रोग कसे टाळायचे?",
+        quick_q3: "फळांसाठी सर्वोत्तम खते?",
+        detect_title: "पीक रोग शोध",
+        detect_subtitle: "पानाचे चित्र अपलोड करा आणि AI संभाव्य रोग ओळखू द्या",
+        detect_select_label: "फळ प्रकार निवडा",
+        detect_choose_fruit: "तुमचे फळ निवडा",
+        detect_drag_drop: "येथे चित्र ड्रॅग करा",
+        detect_browse: "किंवा तुमच्या डिव्हाइसवरून ब्राउझ करण्यासाठी क्लिक करा",
+        detect_choose_image: "चित्र निवडा",
+        detect_uploaded_image: "अपलोड केलेले चित्र",
+        detect_analyze_btn: "AI ने विश्लेषण करा",
+        detect_analyzing: "AI तुमच्या चित्राचे विश्लेषण करत आहे...",
+        detect_complete: "शोध पूर्ण",
+        detect_detected_disease: "आढळलेला रोग",
+        detect_confidence: "विश्वास पातळी",
+        detect_risk_label: "जोखीम मूल्यांकन",
+        detect_treatment_header: "उपचार शिफारशी",
+        detect_view_history: "इतिहास पहा",
+        dash_welcome_sub: "तुमचा रोग शोध इतिहास आणि पीक आरोग्य अंतर्दृष्टी ट्रॅक करा",
+        dash_new_scan: "नवीन स्कॅन",
+        dash_total_scans: "एकूण स्कॅन",
+        dash_high_risk: "उच्च जोखीम",
+        dash_medium_risk: "मध्यम जोखीम",
+        dash_low_risk: "कमी जोखीम",
+        dash_recent_predictions: "अलीकडील अंदाज",
+        dash_filter_all: "सर्व",
+        dash_filter_high: "उच्च जोखीम",
+        dash_filter_medium: "मध्यम",
+        dash_filter_low: "कमी",
+        dash_th_date: "तारीख",
+        dash_th_fruit: "फळ",
+        dash_th_disease: "रोग",
+        dash_th_confidence: "विश्वास",
+        dash_th_risk: "जोखीम स्तर",
+        auth_login_title: "परत स्वागत आहे",
+        auth_login_subtitle: "AgroAid सुरू ठेवण्यासाठी साइन इन करा",
+        auth_email_label: "ईमेल पत्ता",
+        auth_email_placeholder: "तुमचा ईमेल प्रविष्ट करा",
+        auth_password_label: "पासवर्ड",
+        auth_password_placeholder: "तुमचा पासवर्ड प्रविष्ट करा",
+        auth_sign_in: "साइन इन",
+        auth_no_account: "खाते नाही?",
+        auth_create_one: "एक तयार करा",
+        auth_register_title: "खाते तयार करा",
+        auth_register_subtitle: "आज AgroAid मध्ये सामील व्हा",
+        auth_name_label: "पूर्ण नाव",
+        auth_name_placeholder: "तुमचे पूर्ण नाव प्रविष्ट करा",
+        auth_create_password_placeholder: "पासवर्ड तयार करा",
+        auth_create_account_btn: "खाते तयार करा",
+        auth_have_account: "आधीच खाते आहे?",
+        auth_sign_in_link: "साइन इन",
+        weather_title: "🌦 स्मार्ट हवामान रोग अंदाजकर्ता",
+        weather_predict_btn: "रोगाचा अंदाज करा"
+    },
+
+    bn: {
+        nav_home: "হোম",
+        nav_detect: "সনাক্ত করুন",
+        nav_dashboard: "ড্যাশবোর্ড",
+        nav_login: "লগইন",
+        nav_logout: "লগআউট",
+        hero_badge: "AI দ্বারা চালিত",
+        hero_title: "AI-ভিত্তিক ফল রোগ সনাক্তকরণ সিস্টেম",
+        hero_description: "একটি ফলের পাতার ছবি আপলোড করুন এবং AI-চালিত বিশ্লেষণ, ঝুঁকি পূর্বাভাস এবং ব্যক্তিগতকৃত চিকিৎসা সুপারিশ সহ তাৎক্ষণিক রোগ সনাক্তকরণ পান।",
+        hero_cta_primary: "সনাক্তকরণ শুরু করুন",
+        hero_cta_secondary: "আরও জানুন",
+        stat_accuracy: "নির্ভুলতা",
+        stat_diseases: "রোগ",
+        stat_support: "সহায়তা",
+        features_badge: "বৈশিষ্ট্য",
+        features_title: "স্মার্ট কৃষি সমাধান",
+        features_subtitle: "আপনার ফসলের স্বাস্থ্য রক্ষা এবং অপ্টিমাইজ করতে আপনার প্রয়োজনীয় সব কিছু",
+        most_popular: "সবচেয়ে জনপ্রিয়",
+        feature1_title: "নিরাপদ প্রমাণীকরণ",
+        feature1_desc: "এনক্রিপ্টেড ডেটা স্টোরেজ এবং নিরাপদ সেশন ম্যানেজমেন্ট সহ ব্যবহারকারী প্রমাণীকরণ।",
+        feature2_title: "AI রোগ সনাক্তকরণ",
+        feature2_desc: "সঠিক রোগ নির্ণয়ের জন্য হাজার হাজার উদ্ভিদ রোগের ছবিতে প্রশিক্ষিত উন্নত ডিপ লার্নিং মডেল।",
+        feature3_title: "চিকিৎসা সুপারিশ",
+        feature3_desc: "সনাক্ত করা রোগের জন্য ব্যক্তিগতকৃত, কার্যকর চিকিৎসা পরিকল্পনা এবং প্রতিরোধ কৌশল পান।",
+        feature4_title: "অ্যানালিটিক্স ড্যাশবোর্ড",
+        feature4_desc: "সময়ের সাথে রোগ সনাক্তকরণের ইতিহাস, ঝুঁকির প্রবণতা এবং ফসলের স্বাস্থ্যের অন্তর্দৃষ্টি ট্র্যাক করুন।",
+        feature5_title: "আবহাওয়া ইন্টিগ্রেশন",
+        feature5_desc: "পরিবেশগত ঝুঁকি মূল্যায়নের জন্য AI পূর্বাভাসের সাথে মিলিত রিয়েল-টাইম আবহাওয়া ডেটা।",
+        feature6_title: "AI চ্যাটবট সহায়তা",
+        feature6_desc: "ফসলের পরামর্শ, রোগের প্রশ্ন এবং কৃষি নির্দেশনার জন্য 24/7 বুদ্ধিমান কৃষি সহকারী।",
+        process_badge: "প্রক্রিয়া",
+        process_title: "এটি কীভাবে কাজ করে",
+        process_subtitle: "আপনার ফসল রক্ষা করতে সহজ 4-পদক্ষেপ প্রক্রিয়া",
+        step1_title: "ছবি আপলোড করুন",
+        step1_desc: "আপনার ফলের ধরন নির্বাচন করুন এবং আক্রান্ত পাতার একটি স্পষ্ট ছবি আপলোড করুন",
+        step2_title: "AI বিশ্লেষণ",
+        step2_desc: "আমাদের ডিপ লার্নিং মডেল ছবিটি বিশ্লেষণ করে এবং সম্ভাব্য রোগ সনাক্ত করে",
+        step3_title: "ঝুঁকি মূল্যায়ন",
+        step3_desc: "আবহাওয়া এবং AI পূর্বাভাসের উপর ভিত্তি করে আস্থা স্কোর এবং ঝুঁকির স্তর পান",
+        step4_title: "সমাধান পান",
+        step4_desc: "আপনার ফসলের জন্য বিস্তারিত চিকিৎসা পরামর্শ এবং প্রতিরোধ কৌশল পান",
+        cta_title: "আপনার ফসল রক্ষা করতে প্রস্তুত?",
+        cta_subtitle: "আজই রোগ সনাক্তকরণ শুরু করুন এবং চিকিৎসা সুপারিশ পান",
+        cta_primary: "বিনামূল্যে শুরু করুন",
+        cta_secondary: "সনাক্তকরণ চেষ্টা করুন",
+        footer_tagline: "স্মার্ট চাষের জন্য AI-চালিত ফল রোগ সনাক্তকরণ",
+        footer_copyright: "© 2026 AgroAid. সমস্ত অধিকার সংরক্ষিত।",
+        chatbot_title: "AgroAid সহকারী",
+        chatbot_status: "অনলাইন",
+        chatbot_welcome: "হ্যালো! আমি আপনার AgroAid সহকারী। আজ আমি আপনার ফসলে কীভাবে সাহায্য করতে পারি?",
+        chatbot_placeholder: "আপনার প্রশ্ন টাইপ করুন...",
+        quick_q1: "আপনি কোন রোগগুলি সনাক্ত করতে পারেন?",
+        quick_q2: "ফসলের রোগ কীভাবে প্রতিরোধ করবেন?",
+        quick_q3: "ফলের জন্য সেরা সার?",
+        detect_title: "ফসল রোগ সনাক্তকরণ",
+        detect_subtitle: "একটি পাতার ছবি আপলোড করুন এবং AI সম্ভাব্য রোগগুলি সনাক্ত করুক",
+        detect_select_label: "ফলের ধরন নির্বাচন করুন",
+        detect_choose_fruit: "আপনার ফল বেছে নিন",
+        detect_drag_drop: "এখানে ছবি টেনে আনুন",
+        detect_browse: "বা আপনার ডিভাইস থেকে ব্রাউজ করতে ক্লিক করুন",
+        detect_choose_image: "ছবি বেছে নিন",
+        detect_uploaded_image: "আপলোড করা ছবি",
+        detect_analyze_btn: "AI দিয়ে বিশ্লেষণ করুন",
+        detect_analyzing: "AI আপনার ছবি বিশ্লেষণ করছে...",
+        detect_complete: "সনাক্তকরণ সম্পন্ন",
+        detect_detected_disease: "সনাক্ত করা রোগ",
+        detect_confidence: "আস্থার মাত্রা",
+        detect_risk_label: "ঝুঁকি মূল্যায়ন",
+        detect_treatment_header: "চিকিৎসা সুপারিশ",
+        detect_view_history: "ইতিহাস দেখুন",
+        dash_welcome_sub: "আপনার রোগ সনাক্তকরণের ইতিহাস এবং ফসলের স্বাস্থ্যের অন্তর্দৃষ্টি ট্র্যাক করুন",
+        dash_new_scan: "নতুন স্ক্যান",
+        dash_total_scans: "মোট স্ক্যান",
+        dash_high_risk: "উচ্চ ঝুঁকি",
+        dash_medium_risk: "মাঝারি ঝুঁকি",
+        dash_low_risk: "কম ঝুঁকি",
+        dash_recent_predictions: "সাম্প্রতিক পূর্বাভাস",
+        dash_filter_all: "সব",
+        dash_filter_high: "উচ্চ ঝুঁকি",
+        dash_filter_medium: "মাঝারি",
+        dash_filter_low: "কম",
+        dash_th_date: "তারিখ",
+        dash_th_fruit: "ফল",
+        dash_th_disease: "রোগ",
+        dash_th_confidence: "আস্থা",
+        dash_th_risk: "ঝুঁকির স্তর",
+        auth_login_title: "ফিরে আসার স্বাগতম",
+        auth_login_subtitle: "AgroAid চালিয়ে যেতে সাইন ইন করুন",
+        auth_email_label: "ইমেইল ঠিকানা",
+        auth_email_placeholder: "আপনার ইমেইল দিন",
+        auth_password_label: "পাসওয়ার্ড",
+        auth_password_placeholder: "আপনার পাসওয়ার্ড দিন",
+        auth_sign_in: "সাইন ইন",
+        auth_no_account: "অ্যাকাউন্ট নেই?",
+        auth_create_one: "একটি তৈরি করুন",
+        auth_register_title: "অ্যাকাউন্ট তৈরি করুন",
+        auth_register_subtitle: "আজই AgroAid এ যোগ দিন",
+        auth_name_label: "পূর্ণ নাম",
+        auth_name_placeholder: "আপনার পূর্ণ নাম দিন",
+        auth_create_password_placeholder: "পাসওয়ার্ড তৈরি করুন",
+        auth_create_account_btn: "অ্যাকাউন্ট তৈরি করুন",
+        auth_have_account: "ইতিমধ্যে অ্যাকাউন্ট আছে?",
+        auth_sign_in_link: "সাইন ইন",
+        weather_title: "🌦 স্মার্ট আবহাওয়া রোগ পূর্বাভাসকারী",
+        weather_predict_btn: "রোগ পূর্বাভাস দিন"
     }
+};
+
+// ─── Language label map (matches HTML dropdown exactly) ───────────────────────
+const langLabels = {
+    'en': 'EN',
+    'hi': 'HI',
+    'te': 'TE',
+    'kn': 'KN',
+    'ta': 'TA',
+    'mr': 'MR',
+    'bn': 'BN'
 };
 
 // Get current language from localStorage or default to 'en'
 let currentLanguage = localStorage.getItem('agroaidLanguage') || 'en';
 
-// Change language function
+// Validate stored language is still supported; reset if not
+if (!translations[currentLanguage]) {
+    currentLanguage = 'en';
+    localStorage.setItem('agroaidLanguage', 'en');
+}
+
+// ─── Change language ───────────────────────────────────────────────────────────
 function changeLanguage(lang) {
+    if (!translations[lang]) return; // guard against unknown codes
     currentLanguage = lang;
     localStorage.setItem('agroaidLanguage', lang);
-    
-    // Update current language display
-    const langLabels = {
-        'en': 'EN',
-        'hi': 'HI',
-        'es': 'ES',
-        'fr': 'FR',
-        'pt': 'PT'
-    };
-    
-    document.getElementById('currentLang').textContent = langLabels[lang];
-    
-    // Close dropdown
+
+    const el = document.getElementById('currentLang');
+    if (el) el.textContent = langLabels[lang];
+
     document.getElementById('languageDropdown').classList.remove('active');
-    
-    // Translate all elements
     translatePage();
 }
 
-// Translate page function
+// ─── Apply translations to the page ──────────────────────────────────────────
 function translatePage() {
-    const elements = document.querySelectorAll('[data-translate]');
-    
-    elements.forEach(element => {
-        const key = element.getAttribute('data-translate');
-        if (translations[currentLanguage] && translations[currentLanguage][key]) {
-            element.textContent = translations[currentLanguage][key];
+    const lang = translations[currentLanguage];
+    if (!lang) return;
+
+    // Text content — also handles input[placeholder] tagged with data-translate
+    document.querySelectorAll('[data-translate]').forEach(el => {
+        const key = el.getAttribute('data-translate');
+        if (lang[key] !== undefined) {
+            if (el.tagName === 'INPUT' && el.hasAttribute('placeholder')) {
+                el.placeholder = lang[key];
+            } else {
+                el.textContent = lang[key];
+            }
         }
     });
-    
-    // Translate placeholders
-    const placeholders = document.querySelectorAll('[data-translate-placeholder]');
-    placeholders.forEach(element => {
-        const key = element.getAttribute('data-translate-placeholder');
-        if (translations[currentLanguage] && translations[currentLanguage][key]) {
-            element.placeholder = translations[currentLanguage][key];
+
+    // Explicit placeholder attributes (legacy support)
+    document.querySelectorAll('[data-translate-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-translate-placeholder');
+        if (lang[key] !== undefined) {
+            el.placeholder = lang[key];
         }
     });
 }
 
-// Initialize on page load
-document.addEventListener('DOMContentLoaded', function() {
-    // Set initial language
-    const langLabels = {
-        'en': 'EN',
-        'hi': 'HI',
-        'es': 'ES',
-        'fr': 'FR',
-        'pt': 'PT'
-    };
-    
-    if (document.getElementById('currentLang')) {
-        document.getElementById('currentLang').textContent = langLabels[currentLanguage];
-    }
-    
-    // Translate page
+// ─── Initialise on DOMContentLoaded ──────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', function () {
+    const el = document.getElementById('currentLang');
+    if (el) el.textContent = langLabels[currentLanguage] || 'EN';
+
     translatePage();
-    
-    // Language dropdown toggle
-    const languageBtn = document.getElementById('languageBtn');
+
+    const languageBtn      = document.getElementById('languageBtn');
     const languageDropdown = document.getElementById('languageDropdown');
-    
+
     if (languageBtn && languageDropdown) {
-        languageBtn.addEventListener('click', function(e) {
+        languageBtn.addEventListener('click', function (e) {
             e.stopPropagation();
             languageDropdown.classList.toggle('active');
         });
-        
-        // Close dropdown when clicking outside
-        document.addEventListener('click', function(e) {
+
+        document.addEventListener('click', function (e) {
             if (!languageBtn.contains(e.target) && !languageDropdown.contains(e.target)) {
                 languageDropdown.classList.remove('active');
             }
         });
     }
 });
-
-async function changeLanguage(lang) {
-    const texts = {
-        title: "Fruit Disease Detection",
-        subtitle: "Upload a leaf image and let AI identify potential diseases",
-        selectFruit: "Select Fruit Type"
-    };
-
-    const response = await fetch("/translate", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            text: texts,
-            target_lang: lang
-        })
-    });
-
-    const data = await response.json();
-
-    document.querySelector("h1").innerText = data.title;
-    document.querySelector(".subtitle").innerText = data.subtitle;
-    document.querySelector(".select-fruit").innerText = data.selectFruit;
-}

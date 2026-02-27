@@ -3,93 +3,56 @@
   <head>
     <meta charset="UTF-8" />
     <title>Detect Disease - AgroAid</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <!-- Bootstrap -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/detect.css" />
   </head>
 
   <body>
+<!-- BIRD ANIMATION -->
+<svg id="bird-canvas" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:visible;"></svg>
+<script>
+(function(){const svg=document.getElementById("bird-canvas");const ns="http://www.w3.org/2000/svg";const birds=[];for(let i=0;i<7;i++){const p=document.createElementNS(ns,"path");p.setAttribute("fill","none");p.setAttribute("stroke","rgba(255,255,255,0.4)");p.setAttribute("stroke-linecap","round");p.setAttribute("stroke-width",(1.4+Math.random()*0.8).toFixed(2));svg.appendChild(p);birds.push({el:p,span:14+Math.random()*18,x:Math.random()*window.innerWidth,y:60+Math.random()*(window.innerHeight*0.5),vx:0.5+Math.random()*0.8,vy:(Math.random()-0.5)*0.3,phase:Math.random()*Math.PI*2,freq:0.035+Math.random()*0.025});}let frame=0;function animate(){frame++;birds.forEach(function(b){b.x+=b.vx;b.y+=b.vy+Math.sin(frame*0.004+b.phase)*0.18;if(b.x>window.innerWidth+60){b.x=-60;b.y=60+Math.random()*window.innerHeight*0.5;}const dip=Math.sin(frame*b.freq+b.phase)*b.span*0.38;b.el.setAttribute("d","M "+(b.x-b.span)+" "+(b.y+dip)+" Q "+(b.x-b.span*0.5)+" "+(b.y-b.span*0.35)+" "+b.x+" "+b.y+" Q "+(b.x+b.span*0.5)+" "+(b.y-b.span*0.35)+" "+(b.x+b.span)+" "+(b.y+dip));});requestAnimationFrame(animate);}animate();})();
+</script>
+<!-- BIRD ANIMATION -->
     <!-- GLASS NAVBAR -->
     <nav class="glass-navbar fixed-top">
       <div class="container">
         <div class="nav-content">
-          <!-- Brand -->
           <a class="brand" href="index.html">
-            <div class="brand-icon">
-                  🌿
-            </div>
+            <div class="brand-icon">🌿</div>
             <span>AgroAid</span>
           </a>
 
-          <!-- Mobile Toggle -->
           <button class="mobile-toggle" type="button" id="mobileToggle">
-            <span></span>
-            <span></span>
-            <span></span>
+            <span></span><span></span><span></span>
           </button>
 
-          <!-- Nav Menu -->
           <div class="nav-menu" id="navMenu">
-            <!-- Home -->
-            <a class="nav-link" href="index.html">
-              <span>Home</span>
-            </a>
+            <a class="nav-link" href="index.html"><span data-translate="nav_home">Home</span></a>
+            <a class="nav-link active" href="detect.html"><span data-translate="nav_detect">Detect</span></a>
+            <a class="nav-link" href="dashboard.html" id="dashboardNav" style="display: none"><span data-translate="nav_dashboard">Dashboard</span></a>
 
-            <!-- ✅ ACTIVE PAGE -->
-            <a class="nav-link active" href="detect.html">
-              <span>Detect</span>
-            </a>
-
-            <!-- Dashboard -->
-            <a
-              class="nav-link"
-              href="dashboard.html"
-              id="dashboardNav"
-              style="display: none"
-            >
-              <span>Dashboard</span>
-            </a>
-
-            <!-- Auth Area -->
             <div class="nav-auth" id="authArea">
               <a class="btn-glass" href="auth.html">
-                <span>Login</span>
+                <span data-translate="nav_login">Login</span>
               </a>
             </div>
 
-            <!-- Language Selector -->
             <div class="language-selector">
               <button class="btn-language" id="languageBtn">
                 🌐 <span id="currentLang">EN</span>
               </button>
-
-              <div class="dropdown-menu">
-                <a class="dropdown-item" onclick="changeLanguage('en')"
-                  >English</a
-                >
-                <a class="dropdown-item" onclick="changeLanguage('hi')"
-                  >Hindi</a
-                >
-                <a class="dropdown-item" onclick="changeLanguage('te')"
-                  >Telugu</a
-                >
-                <a class="dropdown-item" onclick="changeLanguage('kn')"
-                  >Kannada</a
-                >
-                <a class="dropdown-item" onclick="changeLanguage('ta')"
-                  >Tamil</a
-                >
-                <a class="dropdown-item" onclick="changeLanguage('mr')"
-                  >Marathi</a
-                >
-                <a class="dropdown-item" onclick="changeLanguage('bn')"
-                  >Bengali</a
-                >
+              <div class="language-dropdown" id="languageDropdown">
+                <a class="dropdown-item" onclick="changeLanguage('en')">English</a>
+                <a class="dropdown-item" onclick="changeLanguage('hi')">Hindi</a>
+                <a class="dropdown-item" onclick="changeLanguage('te')">Telugu</a>
+                <a class="dropdown-item" onclick="changeLanguage('kn')">Kannada</a>
+                <a class="dropdown-item" onclick="changeLanguage('ta')">Tamil</a>
+                <a class="dropdown-item" onclick="changeLanguage('mr')">Marathi</a>
+                <a class="dropdown-item" onclick="changeLanguage('bn')">Bengali</a>
               </div>
             </div>
           </div>
@@ -98,741 +61,205 @@
     </nav>
 
     <!-- MAIN SECTION -->
-    <div class="detect-container">
+    <section class="detect-section">
       <div class="container">
+        
+        <!-- Page Header -->
         <div class="detect-header">
-          <div class="detect-icon">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="40"
-              height="40"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <circle cx="11" cy="11" r="8" />
-              <path d="m21 21-4.3-4.3" />
+          <div class="detect-badge">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2z"/>
             </svg>
+            <span>AI Detection</span>
           </div>
-          <h2>Fruit Disease Detection</h2>
-          <p class="subtitle">Upload a leaf image and let AI identify potential diseases</p>
+          <h1 data-translate="detect_title">Crop Disease Detection</h1>
+          <p data-translate="detect_subtitle">Select your crop and upload a leaf image for instant AI-powered disease detection</p>
         </div>
 
-        <!-- Fruit Selection -->
-        <div class="glass-card mb-4">
-          <label class="select-fruit">Select Fruit Type</label>
-          <select class="glass-select" id="fruitSelect">
-            <option value="">Choose your fruit</option>
-            <option value="guava">🍈 Guava</option>
-            <option value="banana">🍌 Banana</option>
-            <option value="mango">🥭 Mango</option>
-          </select>
-        </div>
-
-        <!-- Upload Box -->
-        <div class="upload-box-modern" id="uploadBox">
-          <div class="upload-icon">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="64"
-              height="64"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-              <polyline points="17 8 12 3 7 8" />
-              <line x1="12" x2="12" y1="3" y2="15" />
-            </svg>
-          </div>
-          <h3>Drag & Drop Image Here</h3>
-          <p>or click to browse from your device</p>
-          <input type="file" id="imageInput" hidden accept="image/*" />
-          <button
-            class="btn-upload"
-            onclick="document.getElementById('imageInput').click()"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path
-                d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"
-              />
-              <circle cx="12" cy="13" r="3" />
-            </svg>
-            <span>Choose Image</span>
-          </button>
-        </div>
-
-        <!-- Image Preview -->
-        <div
-          class="preview-container"
-          id="previewContainer"
-          style="display: none"
-        >
-          <div class="glass-card">
-            <div class="preview-header">
-              <h4>Uploaded Image</h4>
-              <button class="btn-remove" onclick="removeImage()">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="M18 6 6 18" />
-                  <path d="m6 6 12 12" />
+        <!-- CROP SELECTOR -->
+        <div class="crop-selector-section">
+          <h3 data-translate="select_crop">Select Your Crop</h3>
+          <div class="crop-grid">
+            
+            <!-- Potato - AVAILABLE -->
+            <div class="crop-card available" data-crop="potato" onclick="selectCrop('potato')">
+              <div class="crop-icon">🥔</div>
+              <div class="crop-name">Potato</div>
+              <div class="crop-status available-status">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                  <polyline points="20 6 9 17 4 12"/>
                 </svg>
-                Remove
-              </button>
+                Available
+              </div>
             </div>
-            <img id="previewImage" class="preview-image" />
-          </div>
-        </div>
 
-        <!-- Detect Button -->
-        <div class="text-center my-4">
-          <button class="btn-detect" onclick="detectDisease()">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+            <!-- Tomato - COMING SOON -->
+            <div class="crop-card coming-soon" onclick="showComingSoon('Tomato')">
+              <div class="crop-icon">🍅</div>
+              <div class="crop-name">Tomato</div>
+              <div class="crop-status coming-soon-status">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+                </svg>
+                Coming Soon
+              </div>
+            </div>
+
+            <!-- Onion - COMING SOON -->
+            <div class="crop-card coming-soon" onclick="showComingSoon('Onion')">
+              <div class="crop-icon">🧅</div>
+              <div class="crop-name">Onion</div>
+              <div class="crop-status coming-soon-status">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+                </svg>
+                Coming Soon
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Selected Crop Display -->
+          <div id="selectedCropDisplay" class="selected-crop-display">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="20 6 9 17 4 12"/>
             </svg>
-            <span>Analyze with AI</span>
-          </button>
-        </div>
-
-        <!-- Loading Spinner -->
-        <div class="loading-container" id="loading" style="display: none">
-          <div class="loading-spinner"></div>
-          <p>AI is analyzing your image...</p>
-          <div class="loading-dots">
-            <span></span>
-            <span></span>
-            <span></span>
+            <span>Selected: <strong id="selectedCropName">Potato 🥔</strong></span>
           </div>
         </div>
 
-        <!-- RESULT SECTION -->
-        <div class="result-container" id="resultSection" style="display: none">
-          <div class="glass-card result-card">
-            <div class="result-header">
-              <div class="result-icon">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="32"
-                  height="32"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <polyline points="20 6 9 17 4 12" />
+        <!-- DETECTION CARD -->
+        <div class="detect-card">
+          
+          <!-- Upload Section -->
+          <div class="upload-section" id="uploadSection">
+            <div class="upload-box" id="uploadBox">
+              <div class="upload-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="17 8 12 3 7 8" />
+                  <line x1="12" y1="3" x2="12" y2="15" />
                 </svg>
               </div>
-              <h3>Detection Complete</h3>
+              <h3 data-translate="upload_title">Upload Leaf Image</h3>
+              <p data-translate="upload_subtitle">Click to browse or drag and drop your image here</p>
+              <input type="file" id="imageInput" accept="image/*" style="display: none"/>
+              <button class="btn-upload" onclick="document.getElementById('imageInput').click()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="17 8 12 3 7 8"/>
+                  <line x1="12" y1="3" x2="12" y2="15"/>
+                </svg>
+                <span data-translate="browse_btn">Browse Files</span>
+              </button>
             </div>
 
-            <div class="result-item">
-              <div class="result-label">Detected Disease</div>
-              <div class="result-value disease-name" id="diseaseName">-</div>
+            <!-- Preview -->
+            <div class="preview-container" id="previewContainer">
+              <div class="preview-image-wrapper">
+                <img id="previewImage" alt="Preview" />
+              </div>
+              <div class="preview-actions">
+                <button class="btn-remove" onclick="removeImage()">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="3 6 5 6 21 6"/>
+                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                  </svg>
+                  <span data-translate="remove_btn">Remove</span>
+                </button>
+                <button class="btn-detect" onclick="detectDisease()">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2z"/>
+                  </svg>
+                  <span data-translate="detect_btn">Detect Disease</span>
+                </button>
+              </div>
             </div>
+          </div>
 
-            <div class="result-item">
-              <div class="result-label">Confidence Level</div>
-              <div class="confidence-container">
-                <div class="confidence-bar-bg">
-                  <div id="confidenceBar" class="confidence-bar"></div>
+          <!-- Loading -->
+          <div class="loading" id="loading">
+            <div class="spinner-container">
+              <div class="spinner"></div>
+            </div>
+            <p data-translate="analyzing">Analyzing image...</p>
+          </div>
+
+          <!-- Results -->
+          <div class="result-section" id="resultSection">
+            <div class="result-card">
+              <div class="result-header">
+                <div class="result-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                    <polyline points="22 4 12 14.01 9 11.01" />
+                  </svg>
                 </div>
-                <div class="confidence-text" id="confidenceText">0%</div>
+                <h3 data-translate="detection_result">Detection Result</h3>
               </div>
-            </div>
 
-            <div class="result-item">
-              <div class="result-label">Risk Assessment</div>
-              <div class="risk-badge-container">
-                <span id="riskLevel" class="risk-badge">-</span>
+              <div class="result-details">
+                <div class="result-item">
+                  <label data-translate="disease_label">Disease Detected</label>
+                  <div class="disease-name" id="diseaseName">-</div>
+                </div>
+
+                <div class="result-item">
+                  <label data-translate="confidence_label">Confidence Level</label>
+                  <div class="confidence-display">
+                    <div class="confidence-bar-container">
+                      <div class="confidence-bar" id="confidenceBar"></div>
+                    </div>
+                    <strong class="confidence-text" id="confidenceText">0%</strong>
+                  </div>
+                </div>
+
+                <div class="result-item">
+                  <label data-translate="risk_label">Risk Assessment</label>
+                  <div class="risk-badge-wrapper">
+                    <span class="risk-badge" id="riskLevel">-</span>
+                  </div>
+                </div>
               </div>
-            </div>
 
-            <div class="result-item treatment-section">
-              <div class="treatment-header">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path
-                    d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"
-                  />
-                </svg>
-                <span>Treatment Recommendations</span>
+              <div class="treatment-section">
+                <h4 data-translate="treatment_label">Recommended Treatment</h4>
+                <p id="treatmentText">Apply recommended treatment and monitor crop health regularly.</p>
               </div>
-              <p id="treatmentText" class="treatment-text">-</p>
-            </div>
 
-            <div class="result-actions">
-              <button class="btn-new-scan" onclick="newScan()">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8" />
-                  <path d="M21 3v5h-5" />
-                </svg>
-                New Scan
-              </button>
-              <a href="dashboard.html" class="btn-view-history">
-                View History
-              </a>
+              <div class="result-actions">
+                <button class="btn-new-scan" onclick="newScan()">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="23 4 23 10 17 10"/>
+                    <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+                  </svg>
+                  <span data-translate="new_scan_btn">New Scan</span>
+                </button>
+                <button class="btn-save" onclick="saveToDashboard()">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+                    <polyline points="17 21 17 13 7 13 7 21"/>
+                    <polyline points="7 3 7 8 15 8"/>
+                  </svg>
+                  <span data-translate="save_btn">Save to Dashboard</span>
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-    <style>
-      /* Additional Detect Page Styles */
-      .detect-container {
-        min-height: 100vh;
-        padding: 120px 0 80px;
-      }
-
-      .detect-header {
-        text-align: center;
-        margin-bottom: 48px;
-      }
-
-      .detect-icon {
-        width: 80px;
-        height: 80px;
-        margin: 0 auto 24px;
-        background: rgba(255, 255, 255, 0.12);
-        backdrop-filter: blur(10px);
-        border-radius: 24px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-      }
-
-      .detect-header h2 {
-        font-size: 2.5rem;
-        font-weight: 800;
-        color: white;
-        margin-bottom: 12px;
-      }
-
-      .detect-header p {
-        font-size: 1.125rem;
-        color: rgba(255, 255, 255, 0.7);
-      }
-
-      .glass-card {
-        background: rgba(255, 255, 255, 0.08);
-        backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        border-radius: 24px;
-        padding: 32px;
-      }
-
-      .input-label {
-        display: block;
-        color: white;
-        font-weight: 600;
-        font-size: 1rem;
-        margin-bottom: 12px;
-      }
-
-      .glass-select {
-        width: 100%;
-        padding: 16px 20px;
-        background: rgba(255, 255, 255, 0.08);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 16px;
-        color: white;
-        font-size: 1rem;
-        outline: none;
-        cursor: pointer;
-        transition: all 0.3s ease;
-      }
-
-      .glass-select:focus {
-        background: rgba(255, 255, 255, 0.12);
-        border-color: rgba(255, 255, 255, 0.4);
-      }
-
-      .glass-select option {
-        background: #1f2937;
-        color: white;
-      }
-
-      .upload-box-modern {
-        background: rgba(255, 255, 255, 0.08);
-        backdrop-filter: blur(20px);
-        border: 2px dashed rgba(255, 255, 255, 0.3);
-        border-radius: 24px;
-        padding: 60px 40px;
-        text-align: center;
-        transition: all 0.3s ease;
-        cursor: pointer;
-      }
-
-      .upload-box-modern:hover {
-        background: rgba(255, 255, 255, 0.12);
-        border-color: rgba(255, 255, 255, 0.5);
-        transform: translateY(-4px);
-      }
-
-      .upload-icon {
-        color: rgba(255, 255, 255, 0.6);
-        margin-bottom: 24px;
-      }
-
-      .upload-box-modern h3 {
-        color: white;
-        font-size: 1.5rem;
-        font-weight: 700;
-        margin-bottom: 8px;
-      }
-
-      .upload-box-modern p {
-        color: rgba(255, 255, 255, 0.6);
-        margin-bottom: 24px;
-      }
-
-      .btn-upload {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        padding: 14px 32px;
-        background: rgba(255, 255, 255, 0.15);
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        border-radius: 14px;
-        color: white;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-      }
-
-      .btn-upload:hover {
-        background: rgba(255, 255, 255, 0.25);
-        transform: translateY(-2px);
-      }
-
-      .preview-container {
-        margin: 32px 0;
-      }
-
-      .preview-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 20px;
-      }
-
-      .preview-header h4 {
-        color: white;
-        font-weight: 700;
-        margin: 0;
-      }
-
-      .btn-remove {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        padding: 8px 16px;
-        background: rgba(239, 68, 68, 0.2);
-        border: 1px solid rgba(239, 68, 68, 0.3);
-        border-radius: 10px;
-        color: #ef4444;
-        font-weight: 600;
-        font-size: 0.875rem;
-        cursor: pointer;
-        transition: all 0.3s ease;
-      }
-
-      .btn-remove:hover {
-        background: rgba(239, 68, 68, 0.3);
-      }
-
-      .preview-image {
-        width: 100%;
-        max-height: 400px;
-        object-fit: contain;
-        border-radius: 16px;
-      }
-
-      .btn-detect {
-        display: inline-flex;
-        align-items: center;
-        gap: 12px;
-        padding: 18px 48px;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        border: none;
-        border-radius: 16px;
-        color: white;
-        font-weight: 700;
-        font-size: 1.125rem;
-        cursor: pointer;
-        transition: all 0.4s ease;
-        box-shadow: 0 12px 40px rgba(102, 126, 234, 0.4);
-      }
-
-      .btn-detect:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 20px 60px rgba(102, 126, 234, 0.6);
-      }
-
-      .loading-container {
-        text-align: center;
-        padding: 60px 40px;
-        background: rgba(255, 255, 255, 0.08);
-        backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        border-radius: 24px;
-      }
-
-      .loading-spinner {
-        width: 60px;
-        height: 60px;
-        margin: 0 auto 24px;
-        border: 4px solid rgba(255, 255, 255, 0.2);
-        border-top-color: white;
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-      }
-
-      @keyframes spin {
-        to {
-          transform: rotate(360deg);
-        }
-      }
-
-      .loading-container p {
-        color: white;
-        font-size: 1.125rem;
-        font-weight: 600;
-        margin-bottom: 16px;
-      }
-
-      .loading-dots {
-        display: flex;
-        justify-content: center;
-        gap: 8px;
-      }
-
-      .loading-dots span {
-        width: 8px;
-        height: 8px;
-        background: rgba(255, 255, 255, 0.6);
-        border-radius: 50%;
-        animation: bounce 1.4s ease-in-out infinite both;
-      }
-
-      .loading-dots span:nth-child(1) {
-        animation-delay: -0.32s;
-      }
-      .loading-dots span:nth-child(2) {
-        animation-delay: -0.16s;
-      }
-
-      @keyframes bounce {
-        0%,
-        80%,
-        100% {
-          transform: scale(0);
-        }
-        40% {
-          transform: scale(1);
-        }
-      }
-
-      .result-container {
-        margin-top: 32px;
-      }
-
-      .result-card {
-        padding: 48px;
-      }
-
-      .result-header {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        margin-bottom: 32px;
-        padding-bottom: 24px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      }
-
-      .result-icon {
-        width: 64px;
-        height: 64px;
-        background: rgba(16, 185, 129, 0.2);
-        border: 2px solid rgba(16, 185, 129, 0.4);
-        border-radius: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #10b981;
-      }
-
-      .result-header h3 {
-        color: white;
-        font-size: 1.75rem;
-        font-weight: 700;
-        margin: 0;
-      }
-
-      .result-item {
-        margin-bottom: 32px;
-      }
-
-      .result-label {
-        color: rgba(255, 255, 255, 0.7);
-        font-size: 0.95rem;
-        font-weight: 600;
-        margin-bottom: 12px;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-      }
-
-      .result-value {
-        color: white;
-        font-size: 1.5rem;
-        font-weight: 700;
-      }
-
-      .disease-name {
-        padding: 12px 20px;
-        background: rgba(255, 255, 255, 0.08);
-        border-radius: 12px;
-        display: inline-block;
-      }
-
-      .confidence-container {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-      }
-
-      .confidence-bar-bg {
-        flex: 1;
-        height: 16px;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 10px;
-        overflow: hidden;
-      }
-
-      .confidence-bar {
-        height: 100%;
-        background: linear-gradient(90deg, #10b981, #059669);
-        border-radius: 10px;
-        transition: width 1s ease-in-out;
-      }
-
-      .confidence-text {
-        color: white;
-        font-size: 1.25rem;
-        font-weight: 700;
-        min-width: 60px;
-        text-align: right;
-      }
-
-      .risk-badge-container {
-        display: inline-block;
-      }
-
-      .risk-badge {
-        display: inline-block;
-        padding: 12px 24px;
-        border-radius: 12px;
-        font-weight: 700;
-        font-size: 1.125rem;
-      }
-
-      .risk-badge.high {
-        background: rgba(239, 68, 68, 0.2);
-        color: #ef4444;
-        border: 2px solid rgba(239, 68, 68, 0.4);
-      }
-
-      .risk-badge.medium {
-        background: rgba(245, 158, 11, 0.2);
-        color: #f59e0b;
-        border: 2px solid rgba(245, 158, 11, 0.4);
-      }
-
-      .risk-badge.low {
-        background: rgba(16, 185, 129, 0.2);
-        color: #10b981;
-        border: 2px solid rgba(16, 185, 129, 0.4);
-      }
-
-      .treatment-section {
-        background: rgba(255, 255, 255, 0.05);
-        padding: 24px;
-        border-radius: 16px;
-      }
-
-      .treatment-header {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        color: white;
-        font-weight: 700;
-        font-size: 1.125rem;
-        margin-bottom: 16px;
-      }
-
-      .treatment-text {
-        color: rgba(255, 255, 255, 0.8);
-        font-size: 1rem;
-        line-height: 1.6;
-        margin: 0;
-      }
-
-      .result-actions {
-        display: flex;
-        gap: 16px;
-        margin-top: 32px;
-        padding-top: 32px;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-      }
-
-      .btn-new-scan {
-        flex: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        padding: 16px 32px;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        border: none;
-        border-radius: 14px;
-        color: white;
-        font-weight: 700;
-        font-size: 1rem;
-        cursor: pointer;
-        transition: all 0.3s ease;
-      }
-
-      .btn-new-scan:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
-      }
-
-      .btn-view-history {
-        flex: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 16px 32px;
-        background: rgba(255, 255, 255, 0.1);
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        border-radius: 14px;
-        color: white;
-        font-weight: 600;
-        font-size: 1rem;
-        text-decoration: none;
-        transition: all 0.3s ease;
-      }
-
-      .btn-view-history:hover {
-        background: rgba(255, 255, 255, 0.15);
-        color: white;
-        transform: translateY(-2px);
-      }
-
-      @media (max-width: 768px) {
-        .detect-header h2 {
-          font-size: 2rem;
-        }
-
-        .result-card {
-          padding: 32px 24px;
-        }
-
-        .result-actions {
-          flex-direction: column;
-        }
-      }
-    </style>
+    </section>
 
     <!-- FLOATING AI CHATBOT -->
     <div class="chatbot-container" id="chatbotContainer">
       <button class="chatbot-button" id="chatbotButton">
-        <svg
-          class="chat-icon"
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-        >
-          <path
-            d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
-          />
+        <svg class="chat-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
         </svg>
-        <svg
-          class="close-icon"
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-        >
-          <path d="M18 6 6 18" />
-          <path d="m6 6 12 12" />
+        <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
         </svg>
       </button>
 
@@ -841,27 +268,42 @@
           <div class="chatbot-header-info">
             <div class="chatbot-avatar">🌿</div>
             <div>
-              <h4>AgroAid Assistant</h4>
-              <span class="status-online">Online</span>
+              <h4 data-translate="chatbot_title">AgroAid Assistant</h4>
+              <span class="status-online" data-translate="chatbot_status">Online</span>
             </div>
           </div>
           <button class="chatbot-minimize" id="minimizeChat">✕</button>
         </div>
 
-        <div class="chatbot-messages" id="chatbotMessages"></div>
+        <div class="chatbot-messages" id="chatbotMessages">
+          <div class="message bot-message">
+            <div class="message-avatar">🌿</div>
+            <div class="message-content">
+              <p data-translate="chatbot_welcome">Hello! I'm your AgroAid Assistant. How can I help you with your crops today?</p>
+            </div>
+          </div>
+        </div>
 
         <div class="chatbot-input-container">
-          <input
-            type="text"
-            id="chatInput"
-            class="chatbot-input"
-            placeholder="Type your question..."
-          />
+          <button class="voice-input-btn" id="voiceInputBtn" title="Voice Input">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+              <path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/>
+            </svg>
+          </button>
+          <input type="text" id="chatInput" class="chatbot-input" placeholder="Type your question..." data-translate-placeholder="chatbot_placeholder"/>
           <button id="sendMessage" class="chatbot-send">➤</button>
+        </div>
+
+        <div class="quick-questions">
+          <button class="quick-btn" data-translate="quick_q1" onclick="sendQuickQuestion('What diseases can you detect?')">What diseases can you detect?</button>
+          <button class="quick-btn" data-translate="quick_q2" onclick="sendQuickQuestion('How to prevent crop diseases?')">How to prevent crop diseases?</button>
+          <button class="quick-btn" data-translate="quick_q3" onclick="sendQuickQuestion('Best fertilizers?')">Best fertilizers?</button>
         </div>
       </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/detect.js"></script>
     <script src="js/translate.js"></script>

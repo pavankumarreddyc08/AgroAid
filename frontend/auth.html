@@ -3,223 +3,188 @@
   <head>
     <meta charset="UTF-8" />
     <title>AgroAid Authentication</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="css/auth.css" />
   </head>
   <body>
+
+    <!-- SVG Bird Animation Canvas -->
+    <svg id="bird-canvas" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"></svg>
+
     <div class="auth-container">
       <div class="auth-card">
-        <!-- LOGIN -->
+
+        <!-- ═══════════════ LOGIN ═══════════════ -->
         <div class="form login active">
           <div class="form-header">
-            <div class="icon-wrapper">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="48"
-                height="48"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M12 2L2 7l10 5 10-5-10-5z" />
-                <path d="M2 17l10 5 10-5" />
-                <path d="M2 12l10 5 10-5" />
-              </svg>
-            </div>
-            <h2>Welcome Back</h2>
-            <p class="subtitle">Sign in to continue to AgroAid</p>
+            <div class="icon-wrapper">🌿</div>
+            <h2 data-translate="auth_login_title">Welcome Back</h2>
+            <p class="subtitle" data-translate="auth_login_subtitle">Sign in to continue to AgroAid</p>
           </div>
 
           <div class="input-group">
-            <label>Email Address</label>
-            <input
-              type="email"
-              id="loginEmail"
+            <label data-translate="auth_email_label">Email Address</label>
+            <input type="email" id="loginEmail"
               placeholder="Enter your email"
-            />
+              data-translate="auth_email_placeholder" />
           </div>
 
           <div class="input-group">
-            <label>Password</label>
-            <input
-              type="password"
-              id="loginPassword"
+            <label data-translate="auth_password_label">Password</label>
+            <input type="password" id="loginPassword"
               placeholder="Enter your password"
-            />
+              data-translate="auth_password_placeholder" />
           </div>
 
           <button class="btn-primary" onclick="login()">
-            <span>Sign In</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <line x1="5" y1="12" x2="19" y2="12" />
-              <polyline points="12 5 19 12 12 19" />
+            <span data-translate="auth_sign_in">Sign In</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                 viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"/>
+              <polyline points="12 5 19 12 12 19"/>
             </svg>
           </button>
 
           <p class="switch-form">
-            Don't have an account?
-            <span onclick="toggleForm()">Create one</span>
+            <span data-translate="auth_no_account">Don't have an account?</span>
+            &nbsp;<span class="link-btn" onclick="toggleForm()"
+              data-translate="auth_create_one">Create one</span>
           </p>
         </div>
 
-        <!-- REGISTER -->
+        <!-- ═══════════════ REGISTER ═══════════════ -->
         <div class="form register">
           <div class="form-header">
             <div class="icon-wrapper">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="48"
-                height="48"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                <circle cx="9" cy="7" r="4" />
-                <line x1="19" y1="8" x2="19" y2="14" />
-                <line x1="22" y1="11" x2="16" y2="11" />
+              <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38"
+                   viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <line x1="19" y1="8" x2="19" y2="14"/>
+                <line x1="22" y1="11" x2="16" y2="11"/>
               </svg>
             </div>
-            <h2>Create Account</h2>
-            <p class="subtitle">Join AgroAid today</p>
+            <h2 data-translate="auth_register_title">Create Account</h2>
+            <p class="subtitle" data-translate="auth_register_subtitle">Join AgroAid today</p>
           </div>
 
           <div class="input-group">
-            <label>Full Name</label>
-            <input
-              type="text"
-              id="registerName"
+            <label data-translate="auth_name_label">Full Name</label>
+            <input type="text" id="registerName"
               placeholder="Enter your full name"
-            />
+              data-translate="auth_name_placeholder" />
           </div>
 
           <div class="input-group">
-            <label>Email Address</label>
-            <input
-              type="email"
-              id="registerEmail"
+            <label data-translate="auth_email_label">Email Address</label>
+            <input type="email" id="registerEmail"
               placeholder="Enter your email"
-            />
+              data-translate="auth_email_placeholder" />
           </div>
 
           <div class="input-group">
-            <label>Password</label>
-            <input
-              type="password"
-              id="registerPassword"
+            <label data-translate="auth_password_label">Password</label>
+            <input type="password" id="registerPassword"
               placeholder="Create a password"
-            />
+              data-translate="auth_create_password_placeholder" />
           </div>
 
           <button class="btn-primary" onclick="register()">
-            <span>Create Account</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <line x1="5" y1="12" x2="19" y2="12" />
-              <polyline points="12 5 19 12 12 19" />
+            <span data-translate="auth_create_account_btn">Create Account</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                 viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"/>
+              <polyline points="12 5 19 12 12 19"/>
             </svg>
           </button>
 
           <p class="switch-form">
-            Already have an account?
-            <span onclick="toggleForm()">Sign in</span>
+            <span data-translate="auth_have_account">Already have an account?</span>
+            &nbsp;<span class="link-btn" onclick="toggleForm()"
+              data-translate="auth_sign_in_link">Sign in</span>
           </p>
         </div>
-      </div>
 
-      <!-- Decorative Elements -->
-      <div class="floating-element element-1"></div>
-      <div class="floating-element element-2"></div>
-      <div class="floating-element element-3"></div>
-    </div>
-
-    <script src="js/auth.js"></script>
-
-    <!-- FLOATING AI CHATBOT
-    <div class="chatbot-container" id="chatbotContainer">
-      <button class="chatbot-button" id="chatbotButton">
-        <svg
-          class="chat-icon"
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-        >
-          <path
-            d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
-          />
-        </svg>
-        <svg
-          class="close-icon"
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-        >
-          <path d="M18 6 6 18" />
-          <path d="m6 6 12 12" />
-        </svg>
-      </button>
-
-      <div class="chatbot-window" id="chatbotWindow">
-        <div class="chatbot-header">
-          <div class="chatbot-header-info">
-            <div class="chatbot-avatar">🌿</div>
-            <div>
-              <h4>AgroAid Assistant</h4>
-              <span class="status-online">Online</span>
-            </div>
-          </div>
-          <button class="chatbot-minimize" id="minimizeChat">✕</button>
-        </div>
-
-        <div class="chatbot-messages" id="chatbotMessages"></div>
-
-        <div class="chatbot-input-container">
-          <input
-            type="text"
-            id="chatInput"
-            class="chatbot-input"
-            placeholder="Type your question..."
-          />
-          <button id="sendMessage" class="chatbot-send">➤</button>
-        </div>
-      </div>
-    </div> -->
+      </div><!-- /.auth-card -->
+    </div><!-- /.auth-container -->
 
     <script src="js/auth.js"></script>
     <script src="js/translate.js"></script>
-    <script src="js/chatbot.js"></script>
+
+    <!-- ── Animated SVG Birds ─────────────────────────────────────────── -->
+    <script>
+    (function () {
+      const svg = document.getElementById('bird-canvas');
+      const ns  = 'http://www.w3.org/2000/svg';
+
+      // A bird is two bezier arcs forming a flying-M silhouette
+      function birdPath(cx, cy, span) {
+        const s = span;
+        return `M ${cx - s} ${cy}
+                Q ${cx - s * 0.55} ${cy - s * 0.45} ${cx} ${cy}
+                Q ${cx + s * 0.55} ${cy - s * 0.45} ${cx + s} ${cy}`;
+      }
+
+      const NUM_BIRDS = 7;
+      const birds = [];
+
+      for (let i = 0; i < NUM_BIRDS; i++) {
+        const path = document.createElementNS(ns, 'path');
+        path.setAttribute('fill', 'none');
+        path.setAttribute('stroke', 'rgba(255,255,255,0.55)');
+        path.setAttribute('stroke-linecap', 'round');
+        svg.appendChild(path);
+
+        const span     = 14 + Math.random() * 18;      // wing span half-width
+        const strokeW  = 1.4 + Math.random() * 0.8;
+        path.setAttribute('stroke-width', strokeW);
+
+        birds.push({
+          el:    path,
+          span,
+          x:     Math.random() * window.innerWidth,
+          y:     60  + Math.random() * (window.innerHeight * 0.55),
+          vx:    0.55 + Math.random() * 0.9,
+          vy:    (Math.random() - 0.5) * 0.3,
+          phase: Math.random() * Math.PI * 2,   // wing-flap phase offset
+          freq:  0.035 + Math.random() * 0.025, // flap speed
+        });
+      }
+
+      let frame = 0;
+      function animate() {
+        frame++;
+        const W = window.innerWidth;
+        const H = window.innerHeight;
+
+        birds.forEach(function (b) {
+          b.x += b.vx;
+          b.y += b.vy + Math.sin(frame * 0.004 + b.phase) * 0.18;
+
+          // Wrap around
+          if (b.x > W + 60) { b.x = -60; b.y = 60 + Math.random() * H * 0.55; }
+
+          // Wing-flap: arc depth oscillates
+          const flap = Math.sin(frame * b.freq + b.phase);
+          const dip  = flap * b.span * 0.38;   // how far the tips dip
+
+          const cx = b.x, cy = b.y, s = b.span;
+          b.el.setAttribute('d',
+            `M ${cx - s} ${cy + dip}
+             Q ${cx - s * 0.5} ${cy - s * 0.35} ${cx} ${cy}
+             Q ${cx + s * 0.5} ${cy - s * 0.35} ${cx + s} ${cy + dip}`
+          );
+        });
+
+        requestAnimationFrame(animate);
+      }
+      animate();
+    })();
+    </script>
+
   </body>
 </html>

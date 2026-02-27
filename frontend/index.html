@@ -1,677 +1,500 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>AgroAid - AI Fruit Disease Detection</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="css/style.css" />
-  </head>
-  <body>
-    <!-- GLASS NAVBAR -->
-    <nav class="glass-navbar fixed-top">
-      <div class="container">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroAid - AI Crop Disease Detection</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════ -->
+<!-- BIRD ANIMATION CANVAS -->
+<!-- ═══════════════════════════════════════════════════════════════════════════ -->
+<svg id="bird-canvas" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"></svg>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════ -->
+<!-- NAVIGATION BAR -->
+<!-- ═══════════════════════════════════════════════════════════════════════════ -->
+<nav class="glass-navbar fixed-top">
+    <div class="container">
         <div class="nav-content">
-          <!-- Brand -->
-          <a class="brand" href="index.html">
-            <div class="brand-icon">
-              🌿
+            <a class="brand" href="index.html">
+                <div class="brand-icon">🌿</div>
+                <span>AgroAid</span>
+            </a>
+
+            <button class="mobile-toggle" id="mobileToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <div class="nav-menu" id="navMenu">
+                <a class="nav-link" href="index.html" data-translate="nav_home">Home</a>
+                <a class="nav-link" href="detect.html" data-translate="nav_detect">Detect</a>
+                <a class="nav-link" href="dashboard.html" id="dashboardNav" style="display:none;" data-translate="nav_dashboard">Dashboard</a>
+
+                <div class="nav-auth" id="authArea">
+                    <a class="btn-glass" href="auth.html">
+                        <span data-translate="nav_login">Login</span>
+                    </a>
+                </div>
+
+                <div class="language-selector">
+                    <button class="btn-language" id="languageBtn">
+                        🌐 <span id="currentLang">EN</span>
+                    </button>
+                    <div class="language-dropdown" id="languageDropdown">
+                        <a class="dropdown-item" onclick="changeLanguage('en')">English</a>
+                        <a class="dropdown-item" onclick="changeLanguage('hi')">हिंदी (Hindi)</a>
+                        <a class="dropdown-item" onclick="changeLanguage('te')">తెలుగు (Telugu)</a>
+                        <a class="dropdown-item" onclick="changeLanguage('kn')">ಕನ್ನಡ (Kannada)</a>
+                        <a class="dropdown-item" onclick="changeLanguage('ta')">தமிழ் (Tamil)</a>
+                        <a class="dropdown-item" onclick="changeLanguage('mr')">मराठी (Marathi)</a>
+                        <a class="dropdown-item" onclick="changeLanguage('bn')">বাংলা (Bengali)</a>
+                    </div>
+                </div>
             </div>
-            <span>AgroAid</span>
-          </a>
-
-          <button class="mobile-toggle" id="mobileToggle">
-            <span></span><span></span><span></span>
-          </button>
-
-          <div class="nav-menu" id="navMenu">
-            <!-- ✅ ACTIVE -->
-            <a class="nav-link active" href="index.html">Home</a>
-
-            <a class="nav-link" href="detect.html">Detect</a>
-
-            <a
-              class="nav-link"
-              href="dashboard.html"
-              id="dashboardNav"
-              style="display: none"
-              >Dashboard</a
-            >
-
-            <div class="nav-auth" id="authArea">
-              <a class="btn-glass" href="auth.html">
-                <span>Login</span>
-              </a>
-            </div>
-
-            <!-- Language Selector -->
-            <div class="language-selector">
-              <button class="btn-language" id="languageBtn">
-                🌐 <span id="currentLang">EN</span>
-              </button>
-
-              <div class="dropdown-menu">
-                <a class="dropdown-item" onclick="changeLanguage('en')"
-                  >English</a
-                >
-                <a class="dropdown-item" onclick="changeLanguage('hi')"
-                  >Hindi</a
-                >
-                <a class="dropdown-item" onclick="changeLanguage('te')"
-                  >Telugu</a
-                >
-                <a class="dropdown-item" onclick="changeLanguage('kn')"
-                  >Kannada</a
-                >
-                <a class="dropdown-item" onclick="changeLanguage('ta')"
-                  >Tamil</a
-                >
-                <a class="dropdown-item" onclick="changeLanguage('mr')"
-                  >Marathi</a
-                >
-                <a class="dropdown-item" onclick="changeLanguage('bn')"
-                  >Bengali</a
-                >
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
-    </nav>
+    </div>
+</nav>
 
-    <!-- HERO SECTION -->
-    <section class="hero-section">
-      <div class="hero-background">
-        <div class="gradient-orb orb-1"></div>
-        <div class="gradient-orb orb-2"></div>
-        <div class="gradient-orb orb-3"></div>
-      </div>
-
-      <div class="container">
+<!-- ═══════════════════════════════════════════════════════════════════════════ -->
+<!-- HERO SECTION -->
+<!-- ═══════════════════════════════════════════════════════════════════════════ -->
+<section class="hero-section">
+    <div class="container">
         <div class="hero-content">
-          <div class="hero-badge">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-            </svg>
-            <span>Powered by AI</span>
-          </div>
-
-          <h1>AI-Based Fruit Disease Detection System</h1>
-
-          <p class="hero-description">
-            Upload a fruit leaf image and get instant disease detection with
-            AI-powered analysis, risk prediction, and personalized treatment
-            recommendations.
-          </p>
-
-          <div class="hero-actions">
-            <a href="detect.html" class="btn-primary-hero">
-              <span>Start Detection</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <line x1="5" y1="12" x2="19" y2="12" />
-                <polyline points="12 5 19 12 12 19" />
-              </svg>
-            </a>
-            <a href="#features" class="btn-secondary-hero">
-              <span>Learn More</span>
-            </a>
-          </div>
-
-          <div class="hero-stats">
-            <div class="stat-item">
-              <div class="stat-value">99%</div>
-              <div class="stat-label">Accuracy</div>
+            <div class="hero-badge">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12 6 12 12 16 14"/>
+                </svg>
+                <span>AI-Powered Detection</span>
             </div>
-            <div class="stat-divider"></div>
-            <div class="stat-item">
-              <div class="stat-value">50+</div>
-              <div class="stat-label">Diseases</div>
+
+            <h1 class="hero-title" data-translate="hero_title">
+                AI-Based Crop Disease Detection System
+            </h1>
+
+            <p class="hero-description" data-translate="hero_description">
+                Upload a crop leaf image and get instant disease detection with AI-powered analysis, risk prediction, and personalized treatment recommendations.
+            </p>
+
+            <div class="hero-actions">
+                <a href="detect.html" class="btn-primary">
+                    <span data-translate="hero_cta_primary">Start Detection</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="5" y1="12" x2="19" y2="12"/>
+                        <polyline points="12 5 19 12 12 19"/>
+                    </svg>
+                </a>
+                <a href="#features" class="btn-secondary">
+                    <span data-translate="hero_cta_secondary">Learn More</span>
+                </a>
             </div>
-            <div class="stat-divider"></div>
-            <div class="stat-item">
-              <div class="stat-value">24/7</div>
-              <div class="stat-label">Support</div>
+
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-value">95%</div>
+                    <div class="stat-label" data-translate="stat_accuracy">Accuracy</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">15+</div>
+                    <div class="stat-label" data-translate="stat_diseases">Diseases</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">24/7</div>
+                    <div class="stat-label" data-translate="stat_support">Support</div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-    </section>
+    </div>
+</section>
 
-    <!-- FEATURES SECTION -->
-    <section class="features-section" id="features">
-      <div class="container">
+<!-- ═══════════════════════════════════════════════════════════════════════════ -->
+<!-- FEATURES SECTION -->
+<!-- ═══════════════════════════════════════════════════════════════════════════ -->
+<section class="features-section" id="features">
+    <div class="container">
         <div class="section-header">
-          <div class="section-badge">Features</div>
-          <h2>Smart Agriculture Solutions</h2>
-          <p>Everything you need to protect and optimize your crop health</p>
+            <div class="section-badge" data-translate="features_badge">Features</div>
+            <h2 class="section-title" data-translate="features_title">Smart Agriculture Solutions</h2>
+            <p class="section-subtitle" data-translate="features_subtitle">
+                Everything you need to protect and optimize your crop health
+            </p>
         </div>
 
         <div class="features-grid">
-          <div class="feature-card">
-            <div class="feature-icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="28"
-                height="28"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
-                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-              </svg>
+            <!-- Feature 1: AI Disease Detection -->
+            <div class="feature-card featured" onclick="openFeature('detect')">
+                <div class="feature-badge" data-translate="most_popular">Most Popular</div>
+                <div class="feature-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                        <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                        <line x1="12" x2="12" y1="19" y2="22"/>
+                    </svg>
+                </div>
+                <h3 class="feature-title" data-translate="feature2_title">AI Disease Detection</h3>
+                <p class="feature-description" data-translate="feature2_desc">
+                    Advanced deep learning models trained on thousands of crop disease images for accurate diagnosis.
+                </p>
+                <div class="feature-arrow">→</div>
             </div>
-            <h3>Secure Authentication</h3>
-            <p>
-              User authentication with encrypted data storage and secure session
-              management.
-            </p>
-          </div>
 
-          <div class="feature-card featured">
-            <div class="featured-badge">Most Popular</div>
-            <div class="feature-icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="28"
-                height="28"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path
-                  d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2z"
-                />
-              </svg>
+            <!-- Feature 2: Analytics Dashboard -->
+            <div class="feature-card" onclick="openFeature('dashboard')">
+                <div class="feature-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="20" x2="18" y2="10"/>
+                        <line x1="12" y1="20" x2="12" y2="4"/>
+                        <line x1="6" y1="20" x2="6" y2="14"/>
+                    </svg>
+                </div>
+                <h3 class="feature-title" data-translate="feature4_title">Analytics Dashboard</h3>
+                <p class="feature-description" data-translate="feature4_desc">
+                    Track disease detection history, risk trends, and crop health insights over time.
+                </p>
+                <div class="feature-arrow">→</div>
             </div>
-            <h3>AI Disease Detection</h3>
-            <p>
-              Advanced deep learning models trained on thousands of plant
-              disease images for accurate diagnosis.
-            </p>
-          </div>
 
-          <div class="feature-card">
-            <div class="feature-icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="28"
-                height="28"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path
-                  d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"
-                />
-              </svg>
+            <!-- Feature 3: Weather Integration -->
+            <div class="feature-card" onclick="openWeatherFeature()">
+                <div class="feature-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>
+                    </svg>
+                </div>
+                <h3 class="feature-title" data-translate="feature5_title">Weather Integration</h3>
+                <p class="feature-description" data-translate="feature5_desc">
+                    Real-time weather data combined with AI predictions for environmental risk assessment.
+                </p>
+                <div class="feature-arrow">→</div>
             </div>
-            <h3>Treatment Recommendations</h3>
-            <p>
-              Get personalized, actionable treatment plans and prevention
-              strategies for detected diseases.
-            </p>
-          </div>
 
-          <div class="feature-card">
-            <div class="feature-icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="28"
-                height="28"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M3 3v18h18" />
-                <path d="m19 9-5 5-4-4-3 3" />
-              </svg>
+            <!-- Feature 4: AI Chatbot Support -->
+            <div class="feature-card" onclick="openFeature('chatbot')">
+                <div class="feature-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                    </svg>
+                </div>
+                <h3 class="feature-title" data-translate="feature6_title">AI Chatbot Support</h3>
+                <p class="feature-description" data-translate="feature6_desc">
+                    24/7 intelligent farming assistant for crop advice, disease queries, and agricultural guidance.
+                </p>
+                <div class="feature-arrow">→</div>
             </div>
-            <h3>Analytics Dashboard</h3>
-            <p>
-              Track disease detection history, risk trends, and crop health
-              insights over time.
-            </p>
-          </div>
 
-          <div class="feature-card" onclick="openWeatherFeature()"">
-            <div class="feature-icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="28"
-                height="28"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" />
-              </svg>
+            <!-- Feature 5: Treatment Recommendations -->
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 3v18h18"/>
+                        <path d="m19 9-5 5-4-4-3 3"/>
+                    </svg>
+                </div>
+                <h3 class="feature-title" data-translate="feature3_title">Treatment Recommendations</h3>
+                <p class="feature-description" data-translate="feature3_desc">
+                    Get personalized, actionable treatment plans and prevention strategies for detected diseases.
+                </p>
             </div>
-            <h3>Weather Integration</h3>
-            <p>
-              Real-time weather data combined with AI predictions for
-              environmental risk assessment.
-            </p>
-          </div>
 
-          <div class="feature-card">
-            <div class="feature-icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="28"
-                height="28"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path
-                  d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
-                />
-              </svg>
+            <!-- Feature 6: Secure Authentication -->
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                    </svg>
+                </div>
+                <h3 class="feature-title" data-translate="feature1_title">Secure Authentication</h3>
+                <p class="feature-description" data-translate="feature1_desc">
+                    User authentication with encrypted data storage and secure session management.
+                </p>
             </div>
-            <h3>AI Chatbot Support</h3>
-            <p>
-              24/7 intelligent farming assistant for crop advice, disease
-              queries, and agricultural guidance.
-            </p>
-          </div>
         </div>
-      </div>
-    </section>
+    </div>
+</section>
 
-    <!-- HOW IT WORKS -->
-    <section class="how-it-works-section">
-      <div class="container">
+<!-- ═══════════════════════════════════════════════════════════════════════════ -->
+<!-- HOW IT WORKS SECTION -->
+<!-- ═══════════════════════════════════════════════════════════════════════════ -->
+<section class="process-section">
+    <div class="container">
         <div class="section-header">
-          <div class="section-badge">Process</div>
-          <h2>How It Works</h2>
-          <p>Simple 4-step process to protect your crops</p>
+            <div class="section-badge" data-translate="process_badge">Process</div>
+            <h2 class="section-title" data-translate="process_title">How It Works</h2>
+            <p class="section-subtitle" data-translate="process_subtitle">
+                Simple 4-step process to protect your crops
+            </p>
         </div>
 
-        <div class="steps-grid">
-          <div class="step-card">
-            <div class="step-number">01</div>
-            <div class="step-icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path
-                  d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"
-                />
-                <circle cx="12" cy="13" r="3" />
-              </svg>
+        <div class="process-grid">
+            <div class="process-step">
+                <div class="step-number">1</div>
+                <div class="step-icon">📸</div>
+                <h3 class="step-title" data-translate="step1_title">Upload Image</h3>
+                <p class="step-description" data-translate="step1_desc">
+                    Select your crop type and upload a clear photo of the affected leaf
+                </p>
             </div>
-            <h3>Upload Image</h3>
-            <p>
-              Select your fruit type and upload a clear photo of the affected
-              leaf
-            </p>
-          </div>
 
-          <div class="step-card">
-            <div class="step-number">02</div>
-            <div class="step-icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path
-                  d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2z"
-                />
-              </svg>
+            <div class="process-step">
+                <div class="step-number">2</div>
+                <div class="step-icon">🤖</div>
+                <h3 class="step-title" data-translate="step2_title">AI Analysis</h3>
+                <p class="step-description" data-translate="step2_desc">
+                    Our deep learning model analyzes the image and identifies potential diseases
+                </p>
             </div>
-            <h3>AI Analysis</h3>
-            <p>
-              Our deep learning model analyzes the image and identifies
-              potential diseases
-            </p>
-          </div>
 
-          <div class="step-card">
-            <div class="step-number">03</div>
-            <div class="step-icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-              </svg>
+            <div class="process-step">
+                <div class="step-number">3</div>
+                <div class="step-icon">⚠️</div>
+                <h3 class="step-title" data-translate="step3_title">Risk Assessment</h3>
+                <p class="step-description" data-translate="step3_desc">
+                    Get confidence scores and risk levels based on weather and AI predictions
+                </p>
             </div>
-            <h3>Risk Assessment</h3>
-            <p>
-              Get confidence scores and risk levels based on weather and AI
-              predictions
-            </p>
-          </div>
 
-          <div class="step-card">
-            <div class="step-number">04</div>
-            <div class="step-icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path
-                  d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"
-                />
-              </svg>
+            <div class="process-step">
+                <div class="step-number">4</div>
+                <div class="step-icon">💊</div>
+                <h3 class="step-title" data-translate="step4_title">Get Solutions</h3>
+                <p class="step-description" data-translate="step4_desc">
+                    Receive detailed treatment advice and prevention strategies for your crops
+                </p>
             </div>
-            <h3>Get Solutions</h3>
-            <p>
-              Receive detailed treatment advice and prevention strategies for
-              your crops
-            </p>
-          </div>
         </div>
-      </div>
-    </section>
+    </div>
+</section>
 
-    <!-- CTA SECTION -->
-    <section class="cta-section">
-      <div class="container">
+<!-- ═══════════════════════════════════════════════════════════════════════════ -->
+<!-- CTA SECTION -->
+<!-- ═══════════════════════════════════════════════════════════════════════════ -->
+<section class="cta-section">
+    <div class="container">
         <div class="cta-card">
-          <div class="cta-content">
-            <h2>Ready to Protect Your Crops?</h2>
-            <p>
-              Start detecting diseases and get treatment recommendations today
-            </p>
-            <div class="cta-actions">
-              <a href="auth.html" class="btn-cta-primary">
-                <span>Get Started Free</span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <line x1="5" y1="12" x2="19" y2="12" />
-                  <polyline points="12 5 19 12 12 19" />
-                </svg>
-              </a>
-              <a href="detect.html" class="btn-cta-secondary">Try Detection</a>
+            <div class="cta-content">
+                <h2 class="cta-title" data-translate="cta_title">Ready to Protect Your Crops?</h2>
+                <p class="cta-subtitle" data-translate="cta_subtitle">
+                    Start detecting diseases and get treatment recommendations today
+                </p>
+                <div class="cta-actions">
+                    <a href="auth.html" class="btn-primary">
+                        <span data-translate="cta_primary">Get Started Free</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                            <polyline points="12 5 19 12 12 19"/>
+                        </svg>
+                    </a>
+                    <a href="detect.html" class="btn-secondary">
+                        <span data-translate="cta_secondary">Try Detection</span>
+                    </a>
+                </div>
             </div>
-          </div>
-          <div class="cta-decoration">
-            <div class="decoration-orb"></div>
-            <div class="decoration-orb"></div>
-            <div class="decoration-orb"></div>
-          </div>
         </div>
-      </div>
-    </section>
+    </div>
+</section>
 
-    <!-- FOOTER -->
-    <footer class="footer">
-      <div class="container">
+<!-- ═══════════════════════════════════════════════════════════════════════════ -->
+<!-- FOOTER -->
+<!-- ═══════════════════════════════════════════════════════════════════════════ -->
+<footer class="footer">
+    <div class="container">
         <div class="footer-content">
-          <div class="footer-brand">
-            <div class="brand">
-              <div class="brand-icon">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="M12 2L2 7l10 5 10-5-10-5z" />
-                  <path d="M2 17l10 5 10-5" />
-                  <path d="M2 12l10 5 10-5" />
-                </svg>
-              </div>
-              <span>AgroAid</span>
+            <div class="footer-brand">
+                <div class="brand-icon">🌿</div>
+                <span>AgroAid</span>
             </div>
-            <p>AI-powered fruit disease detection for smarter farming</p>
-          </div>
-          <div class="footer-copyright">
-            <p>&copy; 2026 AgroAid. All rights reserved.</p>
-          </div>
+            <p class="footer-tagline" data-translate="footer_tagline">
+                AI-powered crop disease detection for smarter farming
+            </p>
+            <p class="footer-copyright" data-translate="footer_copyright">
+                © 2026 AgroAid. All rights reserved.
+            </p>
         </div>
-      </div>
-    </footer>
+    </div>
+</footer>
 
-    <!-- FLOATING AI CHATBOT -->
-    <div class="chatbot-container" id="chatbotContainer">
-      <button class="chatbot-button" id="chatbotButton">
-        <svg
-          class="chat-icon"
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path
-            d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
-          />
+<!-- ═══════════════════════════════════════════════════════════════════════════ -->
+<!-- CHATBOT -->
+<!-- ═══════════════════════════════════════════════════════════════════════════ -->
+<div class="chatbot-container" id="chatbotContainer">
+    <button class="chatbot-button" id="chatbotButton">
+        <svg class="chat-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
         </svg>
-        <svg
-          class="close-icon"
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path d="M18 6 6 18" />
-          <path d="m6 6 12 12" />
+        <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
         </svg>
-      </button>
+    </button>
 
-      <div class="chatbot-window" id="chatbotWindow">
+    <div class="chatbot-window" id="chatbotWindow">
         <div class="chatbot-header">
-          <div class="chatbot-header-info">
-            <div class="chatbot-avatar">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path
-                  d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2z"
-                />
-              </svg>
+            <div class="chatbot-header-info">
+                <div class="chatbot-avatar">🌿</div>
+                <div>
+                    <h4 data-translate="chatbot_title">AgroAid Assistant</h4>
+                    <span class="status-online" data-translate="chatbot_status">Online</span>
+                </div>
             </div>
-            <div>
-              <h4>AgroAid Assistant</h4>
-              <span class="status-online">Online</span>
-            </div>
-          </div>
-          <button class="chatbot-minimize" id="minimizeChat">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M18 6 6 18" />
-              <path d="m6 6 12 12" />
-            </svg>
-          </button>
+            <button class="chatbot-minimize" id="minimizeChat">✕</button>
         </div>
 
         <div class="chatbot-messages" id="chatbotMessages">
-          <div class="message bot-message">
-            <div class="message-avatar">🌿</div>
-            <div class="message-content">
-              <p>
-                Hello! I'm your AgroAid Assistant. How can I help you with your
-                crops today?
-              </p>
+            <div class="message bot-message">
+                <div class="message-avatar">🌿</div>
+                <div class="message-content">
+                    <p data-translate="chatbot_welcome">Hello! I'm your AgroAid Assistant. How can I help you with your crops today?</p>
+                </div>
             </div>
-          </div>
         </div>
 
         <div class="chatbot-input-container">
-          <button
-            class="voice-input-btn"
-            id="voiceInputBtn"
-            title="Voice Input"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" />
-              <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
-              <line x1="12" x2="12" y1="19" y2="22" />
-            </svg>
-          </button>
-          <input
-            type="text"
-            id="chatInput"
-            class="chatbot-input"
-            placeholder="Type your question..."
-          />
-          <button class="chatbot-send" id="sendMessage">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="m22 2-7 20-4-9-9-4Z" />
-              <path d="M22 2 11 13" />
-            </svg>
-          </button>
+            <button class="voice-input-btn" id="voiceInputBtn" title="Voice Input">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                    <path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/>
+                </svg>
+            </button>
+            <input type="text" id="chatInput" class="chatbot-input" placeholder="Type your question..." data-translate-placeholder="chatbot_placeholder">
+            <button class="chatbot-send" id="sendMessage">➤</button>
         </div>
 
         <div class="quick-questions">
-          <button
-            class="quick-btn"
-            onclick="sendQuickQuestion('What diseases can you detect?')"
-          >
-            What diseases can you detect?
-          </button>
-          <button
-            class="quick-btn"
-            onclick="sendQuickQuestion('How to prevent crop diseases?')"
-          >
-            How to prevent crop diseases?
-          </button>
-          <button
-            class="quick-btn"
-            onclick="sendQuickQuestion('Best fertilizers for fruits?')"
-          >
-            Best fertilizers for fruits?
-          </button>
+            <button class="quick-btn" data-translate="quick_q1" onclick="sendQuickQuestion('What potato diseases can you detect?')">What potato diseases can you detect?</button>
+            <button class="quick-btn" data-translate="quick_q2" onclick="sendQuickQuestion('How to prevent potato diseases?')">How to prevent potato diseases?</button>
+            <button class="quick-btn" data-translate="quick_q3" onclick="sendQuickQuestion('Best fertilizers for potatoes?')">Best fertilizers for potatoes?</button>
         </div>
-      </div>
     </div>
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/translate.js"></script>
-    <script src="js/chatbot.js"></script>
-  </body>
+<!-- ═══════════════════════════════════════════════════════════════════════════ -->
+<!-- SCRIPTS -->
+<!-- ═══════════════════════════════════════════════════════════════════════════ -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/main.js"></script>
+<script src="js/chatbot.js"></script>
+<script src="js/translate.js"></script>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════ -->
+<!-- BIRD ANIMATION SCRIPT -->
+<!-- ═══════════════════════════════════════════════════════════════════════════ -->
+<script>
+(function () {
+    const svg = document.getElementById('bird-canvas');
+    const ns = 'http://www.w3.org/2000/svg';
+
+    const NUM_BIRDS = 8;
+    const birds = [];
+
+    for (let i = 0; i < NUM_BIRDS; i++) {
+        const path = document.createElementNS(ns, 'path');
+        path.setAttribute('fill', 'none');
+        path.setAttribute('stroke', 'rgba(255,255,255,0.4)');
+        path.setAttribute('stroke-linecap', 'round');
+        svg.appendChild(path);
+
+        const span = 14 + Math.random() * 18;
+        const strokeW = 1.4 + Math.random() * 0.8;
+        path.setAttribute('stroke-width', strokeW);
+
+        birds.push({
+            el: path,
+            span,
+            x: Math.random() * window.innerWidth,
+            y: 60 + Math.random() * (window.innerHeight * 0.5),
+            vx: 0.5 + Math.random() * 0.8,
+            vy: (Math.random() - 0.5) * 0.3,
+            phase: Math.random() * Math.PI * 2,
+            freq: 0.035 + Math.random() * 0.025,
+        });
+    }
+
+    let frame = 0;
+    function animate() {
+        frame++;
+        const W = window.innerWidth;
+        const H = window.innerHeight;
+
+        birds.forEach(function (b) {
+            b.x += b.vx;
+            b.y += b.vy + Math.sin(frame * 0.004 + b.phase) * 0.18;
+
+            if (b.x > W + 60) {
+                b.x = -60;
+                b.y = 60 + Math.random() * H * 0.5;
+            }
+
+            const flap = Math.sin(frame * b.freq + b.phase);
+            const dip = flap * b.span * 0.38;
+
+            const cx = b.x, cy = b.y, s = b.span;
+            b.el.setAttribute('d',
+                `M ${cx - s} ${cy + dip}
+                 Q ${cx - s * 0.5} ${cy - s * 0.35} ${cx} ${cy}
+                 Q ${cx + s * 0.5} ${cy - s * 0.35} ${cx + s} ${cy + dip}`
+            );
+        });
+
+        requestAnimationFrame(animate);
+    }
+    animate();
+})();
+</script>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════ -->
+<!-- FEATURE CARD NAVIGATION WITH AUTH PROTECTION -->
+<!-- ═══════════════════════════════════════════════════════════════════════════ -->
+<script>
+function openFeature(target) {
+    const token = localStorage.getItem("token");
+    
+    if (!token) {
+        showGlassToast("⚠️ Please login first to access this feature.");
+        setTimeout(() => {
+            window.location.href = "auth.html";
+        }, 1500);
+        return;
+    }
+    
+    if (target === "detect") {
+        window.location.href = "detect.html";
+    } else if (target === "dashboard") {
+        window.location.href = "dashboard.html";
+    } else if (target === "chatbot") {
+        const chatbotButton = document.getElementById("chatbotButton");
+        const chatbotWindow = document.getElementById("chatbotWindow");
+        if (chatbotButton && chatbotWindow) {
+            chatbotButton.classList.add("active");
+            chatbotWindow.classList.add("active");
+            chatbotWindow.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+    }
+}
+
+function showGlassToast(message) {
+    const existingToast = document.querySelector('.glass-toast');
+    if (existingToast) existingToast.remove();
+    
+    const toast = document.createElement('div');
+    toast.className = 'glass-toast';
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    
+    setTimeout(() => toast.classList.add('show'), 10);
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
+}
+</script>
+
+</body>
 </html>
