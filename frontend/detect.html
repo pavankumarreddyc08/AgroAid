@@ -2,22 +2,19 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Detect Disease - AgroAid</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
+    <title>Detect Disease - AgroAid Pro</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/detect.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/detect.css" />
   </head>
 
   <body>
-<!-- BIRD ANIMATION -->
-<svg id="bird-canvas" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:visible;"></svg>
-<script>
-(function(){const svg=document.getElementById("bird-canvas");const ns="http://www.w3.org/2000/svg";const birds=[];for(let i=0;i<7;i++){const p=document.createElementNS(ns,"path");p.setAttribute("fill","none");p.setAttribute("stroke","rgba(255,255,255,0.4)");p.setAttribute("stroke-linecap","round");p.setAttribute("stroke-width",(1.4+Math.random()*0.8).toFixed(2));svg.appendChild(p);birds.push({el:p,span:14+Math.random()*18,x:Math.random()*window.innerWidth,y:60+Math.random()*(window.innerHeight*0.5),vx:0.5+Math.random()*0.8,vy:(Math.random()-0.5)*0.3,phase:Math.random()*Math.PI*2,freq:0.035+Math.random()*0.025});}let frame=0;function animate(){frame++;birds.forEach(function(b){b.x+=b.vx;b.y+=b.vy+Math.sin(frame*0.004+b.phase)*0.18;if(b.x>window.innerWidth+60){b.x=-60;b.y=60+Math.random()*window.innerHeight*0.5;}const dip=Math.sin(frame*b.freq+b.phase)*b.span*0.38;b.el.setAttribute("d","M "+(b.x-b.span)+" "+(b.y+dip)+" Q "+(b.x-b.span*0.5)+" "+(b.y-b.span*0.35)+" "+b.x+" "+b.y+" Q "+(b.x+b.span*0.5)+" "+(b.y-b.span*0.35)+" "+(b.x+b.span)+" "+(b.y+dip));});requestAnimationFrame(animate);}animate();})();
-</script>
-<!-- BIRD ANIMATION -->
-    <!-- GLASS NAVBAR -->
+
+    <!-- BIRD ANIMATION CANVAS -->
+    <svg id="bird-canvas" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"></svg>
+
+    <!-- NAVIGATION -->
     <nav class="glass-navbar fixed-top">
       <div class="container">
         <div class="nav-content">
@@ -31,13 +28,13 @@
           </button>
 
           <div class="nav-menu" id="navMenu">
-            <a class="nav-link" href="index.html"><span data-translate="nav_home">Home</span></a>
-            <a class="nav-link active" href="detect.html"><span data-translate="nav_detect">Detect</span></a>
-            <a class="nav-link" href="dashboard.html" id="dashboardNav" style="display: none"><span data-translate="nav_dashboard">Dashboard</span></a>
+            <a class="nav-link" href="index.html"><span data-i18n="nav_home">Home</span></a>
+            <a class="nav-link active" href="detect.html"><span data-i18n="nav_detect">Detect</span></a>
+            <a class="nav-link" href="dashboard.html" id="dashboardNav" style="display: none"><span data-i18n="nav_dashboard">Dashboard</span></a>
 
             <div class="nav-auth" id="authArea">
               <a class="btn-glass" href="auth.html">
-                <span data-translate="nav_login">Login</span>
+                <span data-i18n="nav_login">Login</span>
               </a>
             </div>
 
@@ -47,12 +44,12 @@
               </button>
               <div class="language-dropdown" id="languageDropdown">
                 <a class="dropdown-item" onclick="changeLanguage('en')">English</a>
-                <a class="dropdown-item" onclick="changeLanguage('hi')">Hindi</a>
-                <a class="dropdown-item" onclick="changeLanguage('te')">Telugu</a>
-                <a class="dropdown-item" onclick="changeLanguage('kn')">Kannada</a>
-                <a class="dropdown-item" onclick="changeLanguage('ta')">Tamil</a>
-                <a class="dropdown-item" onclick="changeLanguage('mr')">Marathi</a>
-                <a class="dropdown-item" onclick="changeLanguage('bn')">Bengali</a>
+                <a class="dropdown-item" onclick="changeLanguage('hi')">हिंदी (Hindi)</a>
+                <a class="dropdown-item" onclick="changeLanguage('te')">తెలుగు (Telugu)</a>
+                <a class="dropdown-item" onclick="changeLanguage('kn')">ಕನ್ನಡ (Kannada)</a>
+                <a class="dropdown-item" onclick="changeLanguage('ta')">தமிழ் (Tamil)</a>
+                <a class="dropdown-item" onclick="changeLanguage('mr')">मराठी (Marathi)</a>
+                <a class="dropdown-item" onclick="changeLanguage('bn')">বাংলা (Bengali)</a>
               </div>
             </div>
           </div>
@@ -60,40 +57,44 @@
       </div>
     </nav>
 
-    <!-- MAIN SECTION -->
+    <!-- DETECT SECTION -->
     <section class="detect-section">
       <div class="container">
-        
+
         <!-- Page Header -->
         <div class="detect-header">
           <div class="detect-badge">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2z"/>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+              <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
             </svg>
-            <span>AI Detection</span>
+            <span>AI-Powered</span>
           </div>
-          <h1 data-translate="detect_title">Crop Disease Detection</h1>
-          <p data-translate="detect_subtitle">Select your crop and upload a leaf image for instant AI-powered disease detection</p>
+
+          <h1 data-i18n="detect_title">Crop Disease Detection</h1>
+          <p data-i18n="detect_subtitle">
+            Select your crop and upload/capture a leaf image for instant AI-powered disease detection
+          </p>
         </div>
 
         <!-- CROP SELECTOR -->
         <div class="crop-selector-section">
-          <h3 data-translate="select_crop">Select Your Crop</h3>
+          <h3 data-i18n="select_crop">Select Your Crop</h3>
+          
           <div class="crop-grid">
-            
-            <!-- Potato - AVAILABLE -->
-            <div class="crop-card available" data-crop="potato" onclick="selectCrop('potato')">
+            <!-- Potato - Available -->
+            <div class="crop-card available selected" data-crop="potato" onclick="selectCrop('potato')">
               <div class="crop-icon">🥔</div>
               <div class="crop-name">Potato</div>
               <div class="crop-status available-status">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <polyline points="20 6 9 17 4 12"/>
                 </svg>
-                Available
+                <span>Available</span>
               </div>
             </div>
 
-            <!-- Tomato - COMING SOON -->
+            <!-- Tomato - Coming Soon -->
             <div class="crop-card coming-soon" onclick="showComingSoon('Tomato')">
               <div class="crop-icon">🍅</div>
               <div class="crop-name">Tomato</div>
@@ -102,11 +103,11 @@
                   <circle cx="12" cy="12" r="10"/>
                   <polyline points="12 6 12 12 16 14"/>
                 </svg>
-                Coming Soon
+                <span>Coming Soon</span>
               </div>
             </div>
 
-            <!-- Onion - COMING SOON -->
+            <!-- Onion - Coming Soon -->
             <div class="crop-card coming-soon" onclick="showComingSoon('Onion')">
               <div class="crop-icon">🧅</div>
               <div class="crop-name">Onion</div>
@@ -115,14 +116,13 @@
                   <circle cx="12" cy="12" r="10"/>
                   <polyline points="12 6 12 12 16 14"/>
                 </svg>
-                Coming Soon
+                <span>Coming Soon</span>
               </div>
             </div>
-
           </div>
 
           <!-- Selected Crop Display -->
-          <div id="selectedCropDisplay" class="selected-crop-display">
+          <div class="selected-crop-display" id="selectedCropDisplay" style="display:flex;">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <polyline points="20 6 9 17 4 12"/>
             </svg>
@@ -132,181 +132,256 @@
 
         <!-- DETECTION CARD -->
         <div class="detect-card">
-          
-          <!-- Upload Section -->
-          <div class="upload-section" id="uploadSection">
-            <div class="upload-box" id="uploadBox">
-              <div class="upload-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                  <polyline points="17 8 12 3 7 8" />
-                  <line x1="12" y1="3" x2="12" y2="15" />
-                </svg>
-              </div>
-              <h3 data-translate="upload_title">Upload Leaf Image</h3>
-              <p data-translate="upload_subtitle">Click to browse or drag and drop your image here</p>
-              <input type="file" id="imageInput" accept="image/*" style="display: none"/>
-              <button class="btn-upload" onclick="document.getElementById('imageInput').click()">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+
+          <!-- Upload/Camera Section -->
+          <div class="upload-section">
+            
+            <!-- OPTION SELECTOR: Upload or Camera -->
+            <div class="input-mode-selector">
+              <button class="mode-btn active" data-mode="upload" onclick="switchMode('upload')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
                   <polyline points="17 8 12 3 7 8"/>
-                  <line x1="12" y1="3" x2="12" y2="15"/>
+                  <line x1="12" x2="12" y1="3" y2="15"/>
                 </svg>
-                <span data-translate="browse_btn">Browse Files</span>
+                <span data-i18n="upload_mode">Upload Photo</span>
+              </button>
+              <button class="mode-btn" data-mode="camera" onclick="switchMode('camera')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                  <circle cx="12" cy="13" r="4"/>
+                </svg>
+                <span data-i18n="camera_mode">Take Photo</span>
               </button>
             </div>
 
-            <!-- Preview -->
+            <!-- UPLOAD BOX -->
+            <div class="upload-box" id="uploadBox" onclick="document.getElementById('imageInput').click()">
+              <div class="upload-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="17 8 12 3 7 8"/>
+                  <line x1="12" x2="12" y1="3" y2="15"/>
+                </svg>
+              </div>
+              <h3 data-i18n="upload_title">Upload Leaf Image</h3>
+              <p data-i18n="upload_subtitle">Click to browse or drag and drop</p>
+              <button type="button" class="btn-upload">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="17 8 12 3 7 8"/>
+                  <line x1="12" x2="12" y1="3" y2="15"/>
+                </svg>
+                <span data-i18n="browse_btn">Browse Files</span>
+              </button>
+            </div>
+
+            <!-- CAMERA BOX -->
+            <div class="camera-box" id="cameraBox" style="display:none;">
+              <video id="cameraVideo" autoplay playsinline></video>
+              <canvas id="cameraCanvas" style="display:none;"></canvas>
+              
+              <div class="camera-controls">
+                <button type="button" class="btn-camera-capture" onclick="capturePhoto()">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                  </svg>
+                  <span data-i18n="capture_btn">Capture</span>
+                </button>
+                <button type="button" class="btn-camera-switch" onclick="switchCamera()">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="23 4 23 10 17 10"/>
+                    <polyline points="1 20 1 14 7 14"/>
+                    <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+                  </svg>
+                  <span data-i18n="switch_camera">Switch</span>
+                </button>
+              </div>
+            </div>
+
+            <input type="file" id="imageInput" accept="image/*" style="display: none" />
+
+            <!-- Preview Container -->
             <div class="preview-container" id="previewContainer">
               <div class="preview-image-wrapper">
                 <img id="previewImage" alt="Preview" />
               </div>
               <div class="preview-actions">
-                <button class="btn-remove" onclick="removeImage()">
+                <button type="button" class="btn-remove" onclick="removeImage()">
                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polyline points="3 6 5 6 21 6"/>
-                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                    <path d="M3 6h18"/>
+                    <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/>
+                    <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
                   </svg>
-                  <span data-translate="remove_btn">Remove</span>
+                  <span data-i18n="remove_btn">Remove</span>
                 </button>
-                <button class="btn-detect" onclick="detectDisease()">
+                <button type="button" class="btn-detect" onclick="detectDisease()">
                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2z"/>
+                    <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                    <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
                   </svg>
-                  <span data-translate="detect_btn">Detect Disease</span>
+                  <span data-i18n="detect_btn">Detect Disease</span>
                 </button>
               </div>
             </div>
           </div>
 
-          <!-- Loading -->
+          <!-- Loading State -->
           <div class="loading" id="loading">
             <div class="spinner-container">
               <div class="spinner"></div>
             </div>
-            <p data-translate="analyzing">Analyzing image...</p>
+            <p data-i18n="analyzing">Analyzing image...</p>
           </div>
 
-          <!-- Results -->
+          <!-- RESULT SECTION -->
           <div class="result-section" id="resultSection">
             <div class="result-card">
+              
               <div class="result-header">
                 <div class="result-icon">
                   <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-                    <polyline points="22 4 12 14.01 9 11.01" />
+                    <polyline points="20 6 9 17 4 12"/>
                   </svg>
                 </div>
-                <h3 data-translate="detection_result">Detection Result</h3>
+                <h3 data-i18n="detection_result">Detection Result</h3>
               </div>
 
               <div class="result-details">
+                
+                <!-- Disease Name -->
                 <div class="result-item">
-                  <label data-translate="disease_label">Disease Detected</label>
-                  <div class="disease-name" id="diseaseName">-</div>
+                  <label data-i18n="disease_label">Disease:</label>
+                  <div class="disease-name" id="diseaseName">Loading...</div>
                 </div>
 
+                <!-- Confidence -->
                 <div class="result-item">
-                  <label data-translate="confidence_label">Confidence Level</label>
+                  <label data-i18n="confidence_label">Confidence:</label>
                   <div class="confidence-display">
                     <div class="confidence-bar-container">
                       <div class="confidence-bar" id="confidenceBar"></div>
                     </div>
-                    <strong class="confidence-text" id="confidenceText">0%</strong>
+                    <span class="confidence-text" id="confidenceText">0%</span>
                   </div>
                 </div>
 
+                <!-- Risk Level -->
                 <div class="result-item">
-                  <label data-translate="risk_label">Risk Assessment</label>
+                  <label data-i18n="risk_label">Risk Level:</label>
                   <div class="risk-badge-wrapper">
-                    <span class="risk-badge" id="riskLevel">-</span>
+                    <div class="risk-badge" id="riskLevel">Low Risk</div>
                   </div>
                 </div>
+
               </div>
 
+              <!-- Treatment Section -->
               <div class="treatment-section">
-                <h4 data-translate="treatment_label">Recommended Treatment</h4>
+                <h4 data-i18n="treatment_label">Recommended Treatment:</h4>
                 <p id="treatmentText">Apply recommended treatment and monitor crop health regularly.</p>
               </div>
 
+              <!-- Actions -->
               <div class="result-actions">
-                <button class="btn-new-scan" onclick="newScan()">
+                <button type="button" class="btn-new-scan" onclick="newScan()">
                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <polyline points="23 4 23 10 17 10"/>
                     <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
                   </svg>
-                  <span data-translate="new_scan_btn">New Scan</span>
+                  <span data-i18n="new_scan_btn">New Scan</span>
                 </button>
-                <button class="btn-save" onclick="saveToDashboard()">
+                <button type="button" class="btn-save" onclick="saveToDashboard()">
                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
                     <polyline points="17 21 17 13 7 13 7 21"/>
                     <polyline points="7 3 7 8 15 8"/>
                   </svg>
-                  <span data-translate="save_btn">Save to Dashboard</span>
+                  <span data-i18n="save_btn">Save to Dashboard</span>
                 </button>
               </div>
+
             </div>
           </div>
+
         </div>
+
       </div>
     </section>
 
-    <!-- FLOATING AI CHATBOT -->
-    <div class="chatbot-container" id="chatbotContainer">
-      <button class="chatbot-button" id="chatbotButton">
-        <svg class="chat-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-        </svg>
-        <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
-        </svg>
-      </button>
-
-      <div class="chatbot-window" id="chatbotWindow">
-        <div class="chatbot-header">
-          <div class="chatbot-header-info">
-            <div class="chatbot-avatar">🌿</div>
-            <div>
-              <h4 data-translate="chatbot_title">AgroAid Assistant</h4>
-              <span class="status-online" data-translate="chatbot_status">Online</span>
-            </div>
-          </div>
-          <button class="chatbot-minimize" id="minimizeChat">✕</button>
-        </div>
-
-        <div class="chatbot-messages" id="chatbotMessages">
-          <div class="message bot-message">
-            <div class="message-avatar">🌿</div>
-            <div class="message-content">
-              <p data-translate="chatbot_welcome">Hello! I'm your AgroAid Assistant. How can I help you with your crops today?</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="chatbot-input-container">
-          <button class="voice-input-btn" id="voiceInputBtn" title="Voice Input">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
-              <path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/>
-            </svg>
-          </button>
-          <input type="text" id="chatInput" class="chatbot-input" placeholder="Type your question..." data-translate-placeholder="chatbot_placeholder"/>
-          <button id="sendMessage" class="chatbot-send">➤</button>
-        </div>
-
-        <div class="quick-questions">
-          <button class="quick-btn" data-translate="quick_q1" onclick="sendQuickQuestion('What diseases can you detect?')">What diseases can you detect?</button>
-          <button class="quick-btn" data-translate="quick_q2" onclick="sendQuickQuestion('How to prevent crop diseases?')">How to prevent crop diseases?</button>
-          <button class="quick-btn" data-translate="quick_q3" onclick="sendQuickQuestion('Best fertilizers?')">Best fertilizers?</button>
-        </div>
-      </div>
-    </div>
-
+    <!-- SCRIPTS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.11.0/dist/tf.min.js"></script>
+    <script src="js/core/languageManager.js"></script>
+    <script src="js/core/voiceManager.js"></script>
+    <script src="js/core/offlineManager.js"></script>
+    <script src="js/core/pwaManager.js"></script>
     <script src="js/main.js"></script>
-    <script src="js/detect.js"></script>
-    <script src="js/translate.js"></script>
+    <script src="js/detect_with_camera.js"></script>
     <script src="js/chatbot.js"></script>
+
+    <!-- Bird Animation -->
+    <script>
+    (function () {
+        const svg = document.getElementById('bird-canvas');
+        const ns = 'http://www.w3.org/2000/svg';
+        const NUM_BIRDS = 7;
+        const birds = [];
+
+        for (let i = 0; i < NUM_BIRDS; i++) {
+            const path = document.createElementNS(ns, 'path');
+            path.setAttribute('fill', 'none');
+            path.setAttribute('stroke', 'rgba(255,255,255,0.38)');
+            path.setAttribute('stroke-linecap', 'round');
+            svg.appendChild(path);
+
+            const span = 13 + Math.random() * 17;
+            const strokeW = 1.3 + Math.random() * 0.7;
+            path.setAttribute('stroke-width', strokeW);
+
+            birds.push({
+                el: path,
+                span,
+                x: Math.random() * window.innerWidth,
+                y: 60 + Math.random() * (window.innerHeight * 0.45),
+                vx: 0.45 + Math.random() * 0.75,
+                vy: (Math.random() - 0.5) * 0.28,
+                phase: Math.random() * Math.PI * 2,
+                freq: 0.032 + Math.random() * 0.023,
+            });
+        }
+
+        let frame = 0;
+        function animate() {
+            frame++;
+            const W = window.innerWidth;
+            const H = window.innerHeight;
+
+            birds.forEach(function (b) {
+                b.x += b.vx;
+                b.y += b.vy + Math.sin(frame * 0.0035 + b.phase) * 0.16;
+
+                if (b.x > W + 60) {
+                    b.x = -60;
+                    b.y = 60 + Math.random() * H * 0.45;
+                }
+
+                const flap = Math.sin(frame * b.freq + b.phase);
+                const dip = flap * b.span * 0.36;
+
+                const cx = b.x, cy = b.y, s = b.span;
+                b.el.setAttribute('d',
+                    `M ${cx - s} ${cy + dip}
+                     Q ${cx - s * 0.5} ${cy - s * 0.33} ${cx} ${cy}
+                     Q ${cx + s * 0.5} ${cy - s * 0.33} ${cx + s} ${cy + dip}`
+                );
+            });
+
+            requestAnimationFrame(animate);
+        }
+        animate();
+    })();
+    </script>
+
   </body>
 </html>

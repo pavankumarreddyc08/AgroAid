@@ -695,3 +695,204 @@
     flex-direction: column;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Camera Feature Styles - Add to detect.css
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Mode Selector (Upload / Camera) */
+.input-mode-selector {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 32px;
+    justify-content: center;
+}
+
+.mode-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 32px;
+    border-radius: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.08);
+    color: white;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex: 1;
+    max-width: 250px;
+    justify-content: center;
+}
+
+.mode-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px);
+}
+
+.mode-btn.active {
+    background: rgba(16, 185, 129, 0.25);
+    border-color: #10b981;
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+}
+
+.mode-btn svg {
+    flex-shrink: 0;
+}
+
+/* Camera Box */
+.camera-box {
+    position: relative;
+    border-radius: 28px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    aspect-ratio: 4/3;
+}
+
+#cameraVideo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Camera Controls */
+.camera-controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 32px;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.btn-camera-capture {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 36px;
+    border-radius: 50px;
+    border: 3px solid white;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    color: white;
+    font-weight: 700;
+    font-size: 1.125rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.btn-camera-capture:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+}
+
+.btn-camera-capture:active {
+    transform: scale(0.98);
+}
+
+.btn-camera-capture svg {
+    width: 32px;
+    height: 32px;
+    fill: white;
+    stroke: none;
+}
+
+.btn-camera-switch {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    border-radius: 50px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    color: white;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-camera-switch:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: white;
+    transform: rotate(180deg);
+}
+
+/* Camera Loading Indicator */
+.camera-box.loading::after {
+    content: '📷 Starting camera...';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 1.125rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+    .input-mode-selector {
+        flex-direction: column;
+    }
+    
+    .mode-btn {
+        max-width: 100%;
+        width: 100%;
+    }
+    
+    .camera-controls {
+        padding: 20px;
+        flex-direction: column;
+    }
+    
+    .btn-camera-capture {
+        padding: 16px 32px;
+        font-size: 1rem;
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .btn-camera-switch {
+        padding: 10px 16px;
+        font-size: 0.875rem;
+    }
+    
+    .camera-box {
+        aspect-ratio: 3/4;
+    }
+}
+
+@media (max-width: 480px) {
+    .camera-controls {
+        padding: 16px;
+    }
+    
+    .btn-camera-capture {
+        padding: 14px 24px;
+    }
+}
+
+/* Landscape Mode for Mobile */
+@media (orientation: landscape) and (max-height: 500px) {
+    .camera-box {
+        aspect-ratio: 16/9;
+    }
+    
+    .camera-controls {
+        flex-direction: row;
+        padding: 16px 24px;
+    }
+}
